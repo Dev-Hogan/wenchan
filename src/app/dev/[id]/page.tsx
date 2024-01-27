@@ -1,5 +1,7 @@
 async function getData(id: string | number) {
-  const data = await await fetch(`${process.env.API_URL}/dev/data/${id}`, { cache: 'no-store' })
+  console.log(id);
+  
+  const data = await fetch(`${process.env.API_URL}/dev/data/${id}`, { cache: 'no-store' })
   return data.json()
 }
 
