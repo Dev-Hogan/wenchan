@@ -14,9 +14,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
     <>
       <div
         className={cn(
-          'border-input flex h-9 w-full flex-1 items-center space-x-2 rounded-md border bg-[#e7e7e7] px-3 py-1 text-sm shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50',
-          Focus === true ? 'border-[#837f7f]' : '',
-          'transition-colors',
+          'border-input bg-light2 flex h-9 w-full flex-1 items-center space-x-2 rounded-[8px] border px-3 py-1 text-sm shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50',
+          Focus === true ? 'border-primary bg-transparent' : '',
+          'group transition-colors hover:border-primary hover:bg-transparent',
           className
         )}
       >
@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
         <input
           type={type}
           className={cn(
-            'placeholder:text-muted-foreground min-w-[20px] flex-1 bg-[#e7e7e7] focus:outline-none',
+            'placeholder:text-light4 bg-light2 min-w-[20px] flex-1 caret-primary transition-colors focus:bg-transparent focus:outline-none group-hover:bg-transparent group-focus:bg-transparent',
             inputClassName
           )}
           ref={ref}

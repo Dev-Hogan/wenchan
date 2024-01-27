@@ -44,8 +44,8 @@ export function Nav({ links, isCollapsed }: NavProps) {
               href={link.href || '#'}
               onClick={() => setActiveIndex(link.title)}
               className={cn(
-                activeIndex === link.title ? 'bg-[#eaeaea]' : '',
-                'flex flex-1 items-center rounded-md py-[8px] pl-[8px] hover:bg-[#eaeaea] transition-colors'
+                activeIndex === link.title ? 'bg-light2' : '',
+                'flex flex-1 items-center rounded-md py-[8px] pl-[8px] hover:bg-light2 transition-colors'
               )}
             >
               <link.icon className="w-4 h-4 mr-2" />

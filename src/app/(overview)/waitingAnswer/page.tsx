@@ -1,9 +1,9 @@
 import { Head } from '@/components'
-export default function All() {
+export default function WaitingAnswer() {
   return (
     <main>
       <Head></Head>
-      All
+      WaitingAnswer
     </main>
   )
 }

@@ -1,5 +1,5 @@
 'use client'
-import { Input, Nav, TooltipProvider, type NavProps } from '@/components'
+import { Input, Nav, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, type NavProps } from '@/components'
 import '@/style/globals.css'
 
 import { AArrowDownIcon, PlusCircle, Search } from 'lucide-react'
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <div className="flex h-[100vh] flex-1 ">
           <TooltipProvider>
-            <div className="h-full w-[260px] space-y-[12px] border-r bg-[#fafafa] px-[16px]">
+            <div className="h-full w-[260px] space-y-[12px] border-r bg-light1 px-[16px]">
               <div className="space-y-[8px]">
                 <div className="relative h-[78px]">
                   <Input placeholder="搜索" prefix={<Search size={16} />} className="absolute bottom-[2px]"></Input>
@@ -108,12 +108,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
               <div className="flex flex-1 items-center justify-between pr-[12px] font-[12px]">
                 <div className="font-[12px] text-[#666666]">分类</div>
-                <PlusCircle className="cursor-pointer" size={16}></PlusCircle>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className='hover:bg-light2 w-[24px] h-[24px] rounded-[5px] flex flex-col items-center justify-center transition-colors' >
+                      <PlusCircle className="cursor-pointer" size={16}></PlusCircle>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-white text-light6">
+                    <div className="text-[13px] font-medium">新分类</div>
+                  </TooltipContent>
+                </Tooltip>
               </div>
               <Nav links={tags} isCollapsed={false}></Nav>
             </div>
           </TooltipProvider>
-          <div className="flex-1">{children}</div>
+          <div className="flex flex-col flex-1">{children}</div>
         </div>
       </body>
     </html>
