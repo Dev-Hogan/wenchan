@@ -1,8 +1,8 @@
 'use client'
 import { ArticleCard, Head, PageContainer } from '@/components'
-import { cn } from '@/utils'
+import { cn } from '@/utils/utils'
 import { useLocalStorageState } from 'ahooks'
-import { articles } from './data'
+import { articles } from '../../data'
 const tags: { name: string; href: string }[] = [
   {
     name: '所有内容',
@@ -23,10 +23,10 @@ const tags: { name: string; href: string }[] = [
 ]
 export default function All() {
   const [activeTag, setActiveTag] = useLocalStorageState('tag-name', {
-    defaultValue: '',
+    defaultValue: ''
   })
   return (
-    <main className="flex flex-col flex-1 s-full">
+    <main className="s-full flex flex-1 flex-col">
       <Head></Head>
       <PageContainer>
         <div className="relative h-full">
