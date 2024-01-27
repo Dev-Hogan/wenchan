@@ -23,7 +23,7 @@ const tags: { name: string; href: string }[] = [
 ]
 export default function All() {
   const [activeTag, setActiveTag] = useLocalStorageState('tag-name', {
-    defaultValue: ()=>localStorage.getItem('tag-name'),
+    defaultValue: '',
   })
   return (
     <main className="flex flex-col flex-1 s-full">
