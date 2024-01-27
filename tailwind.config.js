@@ -45,6 +45,7 @@ module.exports = {
       colors: {
         light1: '#FAFAFA',
         light2: '#EAEAEA',
+        light4: '#999999',
         primary: '#FFAC0A',
         t15: '#FFF9EC'
       },

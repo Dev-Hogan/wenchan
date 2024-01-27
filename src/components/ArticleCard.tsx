@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { cn } from '@/utils'
+import { cn } from '@/utils/utils'
 import Link from 'next/link'
 
 export type ArticleCardProps = {
@@ -23,7 +23,7 @@ export function ArticleCard({
   links?: Links
 }) {
   return (
-    <Accordion type="multiple"  className={cn('h-full w-full space-y-m ', className)}>
+    <Accordion type="multiple" className={cn('h-full w-full space-y-m ', className)}>
       {articles.map((a, i) => {
         return (
           <AccordionItem

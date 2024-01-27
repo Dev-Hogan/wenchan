@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 const links: NavProps['links'] = [
   {
     title: '全部',
-    href: '/all',
+    href: '/',
     icon: AArrowDownIcon,
     variant: 'default' as 'default' | 'ghost'
   },
