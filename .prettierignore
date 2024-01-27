@@ -2,4 +2,6 @@ dist
 node_modules 
 .eslintignore 
 .prettierignore
+src/components/ui
+src/components/plate-ui
 public
