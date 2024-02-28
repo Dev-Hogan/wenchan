@@ -8,12 +8,19 @@ const router = createRouter({
     {
       path: '/',
       name: Routes.home,
-      component: HomeView
-    },
-    {
-      path: '/dev',
-      name: Routes.dev,
-      component: () => import('@/modules/Dev.vue')
+      component: HomeView,
+      children: [
+        {
+          path: '/',
+          name: Routes.all,
+          component: () => import('@/modules/all/All.vue')
+        },
+        {
+          path: '/dev',
+          name: Routes.dev,
+          component: () => import('@/modules/Dev.vue')
+        }
+      ]
     },
     {
       path: '/:catchAll(.*)',

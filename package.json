@@ -29,6 +29,7 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "@vueuse/core": "^10.9.0",
     "ant-design-vue": "4.x",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.49.0",

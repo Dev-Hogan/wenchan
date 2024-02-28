@@ -1,5 +1,9 @@
 <template>
-    <ConfigProvider>
+    <ConfigProvider :theme="{
+        token: {
+            colorPrimary: '#FFAC0A'
+        }
+    }">
         <slot></slot>
     </ConfigProvider>
 </template>
