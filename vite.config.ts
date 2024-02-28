@@ -20,7 +20,7 @@ export default defineConfig({
       dts: 'src/auto-imports.d.ts'
     }),
     AutoImportComponents({
-      dirs: ['src/fyComponents', 'src/components'],
+      dirs: ['src/components'],
       extensions: ['vue'],
       deep: true,
       dts: 'src/components.d.ts'
