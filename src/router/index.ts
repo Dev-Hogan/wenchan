@@ -16,7 +16,7 @@ const router = createRouter({
           component: () => import('@/modules/all/All.vue')
         },
         {
-          path: '/dev',
+          path: 'dev',
           name: Routes.dev,
           component: () => import('@/modules/Dev.vue')
         }

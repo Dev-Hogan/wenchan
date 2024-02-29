@@ -19,6 +19,8 @@ const currentRoute = router.currentRoute
 withDefaults(
     defineProps<{ menus?: Menu[] }>(), { menus: undefined }
 )
+// console.log(router.getRoutes());
+
 
 function navigator(menu: Menu) {
     if (menu.name === currentRoute.value.name) {
