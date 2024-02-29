@@ -1,5 +1,5 @@
 <template>
-        <component class="w-9 h-9" :is="iconMap[icon]"></component>
+    <component class="w-9 h-9" :is="iconMap[icon]"></component>
 </template>
 
 <script setup lang="ts">
@@ -17,10 +17,4 @@ const iconMap: Record<string, any> = {
 }
 
 </script>
-<style lang="scss">
-.a {
-    .b {
-        display: block;
-    }
-}
-</style>
+
