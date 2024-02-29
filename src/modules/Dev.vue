@@ -5,6 +5,8 @@
     <br />
     <p>编辑器</p>
     <editor-content :editor="editor" />
+    <br />
+    <div @click="test.setA">测试状态管理{{ test.a }}</div>
   </div>
 </template>
 
@@ -12,6 +14,7 @@
 import { useThemeModeStore } from '@/stores'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import { useTest } from '@/stores/test'
 
 const themeModeStore = useThemeModeStore()
 const themeMode = computed(() => themeModeStore.themeMode)
@@ -37,4 +40,6 @@ const editor = useEditor({
     })
   ]
 })
+
+const test = useTest()
 </script>
