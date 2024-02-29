@@ -2,7 +2,13 @@ export enum Routes {
   dev = 'dev',
   pageNotFound = 'pageNotFound',
   home = 'home',
-  all = 'all'
+
+  all = 'all',
+  focus = 'focus',
+  waitingAnswer = 'waitingAnswer',
+  randomLook = 'randomLook',
+  tags = 'tags',
+  wastebasket = 'wastebasket'
 }
 
 export enum ThemeMode {

@@ -1,4 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+
+const spacing = {
+  1: '2px',
+  2: '4px',
+  3: '6px',
+  4: '8px',
+  5: '10px',
+  6: '12px',
+  7: '14px',
+  8: '16px',
+  9: '18px'
+}
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -30,19 +42,10 @@ export default {
         masked: 'rgb(var(--color-masked) / <alpha-value>)'
       },
       spacing: {
-        1: '2px',
-        2: '4px',
-        3: '6px',
-        4: '8px',
-        5: '10px',
-        6: '12px',
-        7: '14px',
-        8: '16px',
-        9: '18px'
+        ...spacing
       },
       borderRadius: {
-        s: '4px',
-        m: '8px'
+        ...spacing
       },
       fontSize: {
         s: '11px',

@@ -5,19 +5,20 @@
     </NtConfigProvide>
     <div @click="geDevTool"
       class="absolute bottom-12 right-12 border rounded-full w-10 h-10 flex items-center justify-center cursor-pointer">
-      {{ isDev ? 'dev' : 'home' }}</div>
+      {{ isDev ? 'dev' : 'all' }}</div>
   </main>
 </template>
 <script setup lang="ts">
 import router from '@/router';
-import { Routes } from '@/models'
-const theme = localStorage.getItem('theme')
-if (theme === 'light') {
-  document.documentElement.classList.remove('dark')
-  document.documentElement.classList.add('light')
+import { Routes, ThemeMode } from '@/models'
+import { THEME_KEY } from '@/const';
+const theme = localStorage.getItem(THEME_KEY) || ThemeMode.light
+if (theme === ThemeMode.light) {
+  document.documentElement.classList.remove(ThemeMode.dark)
+  document.documentElement.classList.add(ThemeMode.light)
 } else {
-  document.documentElement.classList.remove('light')
-  document.documentElement.classList.add('dark')
+  document.documentElement.classList.remove(ThemeMode.light)
+  document.documentElement.classList.add(ThemeMode.dark)
 }
 
 const isDev = ref(false)
@@ -28,7 +29,7 @@ function geDevTool() {
     router.push({ name: Routes.dev })
   } else {
     isDev.value = true
-    router.push({ name: Routes.home })
+    router.push({ name: Routes.all })
   }
 }
 </script>
