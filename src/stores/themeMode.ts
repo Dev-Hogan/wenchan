@@ -1,11 +1,7 @@
-import { defineStore } from 'pinia'
-import {
-  useLocalStorage,
-  type RemovableRef // 此处引入是为了解决pnpm使用useLocalStorage类型报错问题
-} from '@vueuse/core'
-type ThemeMode = 'light' | 'dark'
-export const useThemeModeStore = defineStore('themeMode', () => {
-  const themeMode: RemovableRef<string> = useLocalStorage<ThemeMode>('theme', 'light')
+import { createGlobalState, useStorage, type RemovableRef } from '@vueuse/core'
+import { ThemeMode } from '@/models'
+export const useThemMode = createGlobalState(() => {
+  const themeMode: RemovableRef<ThemeMode> = useStorage<ThemeMode>('theme', ThemeMode.light)
   function setThemeMode(mode: ThemeMode) {
     themeMode.value = mode
   }
