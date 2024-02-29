@@ -12,7 +12,6 @@ declare module 'vue' {
     NtIcon: typeof import('./components/NtIcon.vue')['default']
     NtMenus: typeof import('./components/NtMenus.vue')['default']
     NtMenusTitle: typeof import('./components/NtMenusTitle.vue')['default']
-    NtNav: typeof import('./components/NtNav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

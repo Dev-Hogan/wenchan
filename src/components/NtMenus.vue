@@ -4,7 +4,9 @@
             , menu.name === currentRoute.name ? 'bg-light-2' : 'bg-transparent',
             'cursor-pointer hover:bg-light-2',
             'transition-colors']" @click="navigator(menu)">
-            <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon>
+            <div class="w-[30px] h-[30px] bg-[url('@/assets/icon/add-tag.svg')] bg-center bg-no-repeat"></div>
+
+            <!-- <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon> -->
             <div class="text-[13px] text-light-7 font-medium">
                 {{ menu.title }}
             </div>

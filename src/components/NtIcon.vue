@@ -9,7 +9,7 @@ withDefaults(
 )
 function createIcon(name: string) {
     return () => h('i', {
-        class: `w-[30px] h-[30px] bg-[url('@/assets/icon/${name}.svg')] bg-center bg-no-repeat`
+        class: `w-[30px] h-[30px] bg-center bg-no-repeat`
     })
 }
 const iconMap: Record<string, any> = {

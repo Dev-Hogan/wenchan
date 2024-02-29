@@ -5,8 +5,8 @@
             <NtMenus :menus="menus"></NtMenus>
             <NtMenusTitle title="分类">
                 <template #append>
-                    <!-- <div class="w-[30px] h-[30px] bg-[url('@/assets/icon/add-tag.svg')] bg-center bg-no-repeat"></div> -->
-                    <NtIcon icon="add-tag"></NtIcon>
+                    <div class="w-[30px] h-[30px] bg-[url('@/assets/icon/add-tag.svg')] bg-center bg-no-repeat"></div>
+                    <!-- <NtIcon icon="add-tag"></NtIcon> -->
                 </template>
             </NtMenusTitle>
             <NtMenus :menus="menus"></NtMenus>
