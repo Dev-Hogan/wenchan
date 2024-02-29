@@ -5,7 +5,7 @@
     </NtConfigProvide>
     <div @click="geDevTool"
       class="absolute bottom-12 right-12 border rounded-full w-10 h-10 flex items-center justify-center cursor-pointer">
-      {{ isDev ? 'dev' : 'all' }}</div>
+      dev </div>
   </main>
 </template>
 <script setup lang="ts">
@@ -21,15 +21,12 @@ if (theme === ThemeMode.light) {
   document.documentElement.classList.add(ThemeMode.dark)
 }
 
-const isDev = ref(false)
 function geDevTool() {
   const currentRouter = router.currentRoute.value.name
   if (currentRouter !== Routes.dev) {
-    isDev.value = false
     router.push({ name: Routes.dev })
   } else {
-    isDev.value = true
-    router.push({ name: Routes.all })
+   console.warn('Already in dev page')
   }
 }
 </script>
