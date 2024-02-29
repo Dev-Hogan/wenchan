@@ -7,9 +7,8 @@
 </template>
 <script setup lang="ts">
 
-const theme = localStorage.getItem('theme')
+const theme = localStorage.getItem('theme')||'light'
 if (theme === 'light') {
-
   document.documentElement.classList.remove('dark')
   document.documentElement.classList.add('light')
 } else {
