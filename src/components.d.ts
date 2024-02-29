@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     NtConfigProvide: typeof import('./components/NtConfigProvide.vue')['default']
+    NtEditor: typeof import('./components/NtEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
