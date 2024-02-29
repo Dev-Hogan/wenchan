@@ -9,7 +9,10 @@ const spacing = {
   6: '12px',
   7: '14px',
   8: '16px',
-  9: '18px'
+  9: '18px',
+  10: '20px',
+  11: '22px',
+  12: '24px',
 }
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],

@@ -1,0 +1,36 @@
+@mixin images($images) {
+    @each $image in $images {
+        @include image($image);
+    }
+}
+
+@mixin image($image) {
+    $name: map-get($image, name);
+    $pathName: map-get($image, pathName);
+    $pathName: $name !default;
+    $size: map-get($image, size);
+    $size: (0, 0) !default;
+    $backgroundSize: map-get($image, backgroundSize);
+    $backgroundSize: cover !default;
+    $suffix: map-get($image, suffix);
+    $suffix: '.png' !default;
+    $width: nth($size, 1);
+    $height: nth($size, 2);
+
+    $prefix: '@/assets/image/';
+    $url: url($prefix + $pathName + $suffix);
+    $multiSize: map-get($image, multiSize);
+    $multiSize: false !default;
+    $urlx2: if($multiSize, url($prefix + $pathName + '@2x' + $suffix), $url);
+    .image-#{$name} {
+        background: $url no-repeat;
+        background-size: $backgroundSize;
+        width: $width;
+        height: $height;
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 1.1) {
+        .image-#{$name} {
+            background-image: $urlx2;
+        }
+    }
+}

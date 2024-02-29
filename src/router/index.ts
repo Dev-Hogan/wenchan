@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/Home.vue'
 import { Routes } from '@/models'
 
 const router = createRouter({
@@ -11,7 +11,7 @@ const router = createRouter({
       component: HomeView,
       children: [
         {
-          path: '/',
+          path: 'all',
           name: Routes.all,
           component: () => import('@/modules/all/All.vue')
         },

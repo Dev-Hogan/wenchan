@@ -2,10 +2,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './image/index.scss';
 
 @layer base {
   :root {
     font-size: 13px;
+    font-family:
+      Inter,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      sans-serif;
   }
   .light {
     --color-theme: 255 172 10;
