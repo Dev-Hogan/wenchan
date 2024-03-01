@@ -6,10 +6,10 @@
 //   }
 // }
 
-// declare module 'vue-router' {
-//   interface RouteMeta {
-//     breadcrumb?: {
-//       title?: string
-//     }
-//   }
-// }
+declare module 'vue-router' {
+  interface RouteMeta {
+    breadcrumb?: {
+      title?: string
+    }
+  }
+}

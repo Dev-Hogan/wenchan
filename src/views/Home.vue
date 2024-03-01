@@ -8,7 +8,7 @@
                     <NtIcon icon="addTag"></NtIcon>
                 </template>
             </NtMenusTitle>
-            <NtMenus :menus="menus"></NtMenus>
+            <NtMenus :menus="category" type="category"></NtMenus>
         </aside>
         <main class="flex-1 overflow-auto">
             <RouterView></RouterView>
@@ -17,5 +17,5 @@
 </template>
 
 <script setup lang="ts">
-import { menus } from '@/mock';
+import { menus, category } from '@/mock';
 </script>

@@ -7,7 +7,6 @@
     <editor-content :editor="editor" />
     <br />
     <h1 class="text-[20px]">图标库</h1>
-    <NtIcon icon="addTag"></NtIcon>
     <section class="flex gap-4 flex-wrap max-w-[1000px]">
       <div v-for="icon in icons" :key="icon" class="px-2 py-2">
         <div>{{ icon }}</div>
@@ -49,5 +48,5 @@ const editor = useEditor({
   ]
 })
 
-const icons = Object.keys(iconMap) as Icon[]
+const icons = Object.keys(iconMap).sort() as Icon[]
 </script>

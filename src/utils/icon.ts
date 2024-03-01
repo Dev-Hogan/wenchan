@@ -1,5 +1,6 @@
 import addTag from '$/add-tag.svg'
 import addQuestion from '$/add-question.svg'
+import allQuestion from '$/all-question.svg'
 import all from '$/all.svg'
 import answer from '$/answer.svg'
 import arrowBottom from '$/arrow-bottom.svg'
@@ -76,5 +77,6 @@ export const iconMap: IconMap = {
   trash: trash,
   unfocus: unfocus,
   random: random,
-  sort2: sort2
+  sort2: sort2,
+  allQuestion: allQuestion
 }

@@ -1,12 +1,12 @@
 <template>
     <menu>
-        <li v-for="menu in menus" :key="menu.id" :class="['flex  h-[34px] items-center space-x-3 mx-6 my-1 py-3 px-4 rounded-3'
-            , menu.name === currentRoute.name ? 'bg-light-2' : 'bg-transparent',
+        <li v-for="menu in menus" :key="menu.id" :class="['flex  h-[34px] items-center space-x-3 mx-6 my-1 py-3 px-4 rounded-3',
+            // isCategory ? ($route.params.categoryId || 0) === menu.id ? 'bg-light-2' : 'bg-transparent' : menu.name === currentRoute.name ? 'bg-light-2' : 'bg-transparent',
+            activeMenuClass(menu),
             'cursor-pointer hover:bg-light-2',
             'transition-colors']" @click="navigator(menu)">
-            <div class="w-[30px] h-[30px] bg-[url('@/assets/icon/add-tag.svg')] bg-center bg-no-repeat"></div>
 
-            <!-- <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon> -->
+            <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon>
             <div class="text-[13px] text-light-7 font-medium">
                 {{ menu.title }}
             </div>
@@ -15,29 +15,66 @@
 </template>
 
 <script setup lang="ts">
-import { menus } from '@/mock';
-import { Menu } from '@/models';
+import { Menu, Routes } from '@/models';
 import router from '@/router';
 const currentRoute = router.currentRoute
-withDefaults(
-    defineProps<{ menus?: Menu[] }>(), { menus: undefined }
+const props = withDefaults(
+    defineProps<{ menus?: Menu[]; type?: 'menu' | 'category' }>(), { menus: undefined, type: 'menu' }
 )
 
-const firstRoute = router.getRoutes().find(r => r.name === currentRoute.value.name)
-if (firstRoute && firstRoute?.children.length > 0 && menus[0].name === firstRoute.children[0].name) {
-    router.replace({ name: firstRoute.children[0].name })
+const isCategory = props.type === 'category'
+if (!isCategory) {
+
+    // 实际上只针对home处理即可
+    if (currentRoute.value.name === Routes.home) {
+        router.replace({ name: Routes.all })
+    }
 }
-console.log('firstRoute', firstRoute);
+
+
+function activeMenuClass(menu: Menu) {
+
+    if (isCategory) {
+        return (+currentRoute.value.params.categoryId || 0) === menu.id ? 'bg-light-2' : ''
+    } else {
+        return menu.name === currentRoute.value.name ? 'bg-light-2' : ''
+    }
+}
+
+
 
 function navigator(menu: Menu) {
+    if (!isCategory) {
+        handleMenuNavigator(menu)
+    } else {
+        handleCategoryNavigator(menu)
+
+    }
+}
+
+function handleMenuNavigator(menu: Menu) {
     if (menu.name === currentRoute.value.name) {
         console.warn('Already on this page')
-        return
     } else {
         try {
             router.push({ name: menu.name })
         } catch (error) {
             alert(`【${menu.title}】页面尚未配置`)
+        }
+    }
+}
+
+function handleCategoryNavigator(category: Menu) {
+
+    if (category.id) {
+        if ((+currentRoute.value.params.categoryId || 0) === category.id) {
+            console.warn('Already on this page')
+        } else {
+
+            router.push({
+                name: Routes.category,
+                params: { categoryId: category.id }
+            })
         }
     }
 }

@@ -1,3 +1,5 @@
+import { category } from "@/mock";
+
 export enum Routes {
   dev = 'dev',
   pageNotFound = 'pageNotFound',
@@ -8,7 +10,9 @@ export enum Routes {
   waitingAnswer = 'waitingAnswer',
   randomLook = 'randomLook',
   tags = 'tags',
-  wastebasket = 'wastebasket'
+  wastebasket = 'wastebasket',
+
+  category = 'category',
 }
 
 export enum ThemeMode {
