@@ -6,6 +6,7 @@
     <p>编辑器</p>
     <editor-content :editor="editor" />
     <br />
+    <div>icon <AddTAg></AddTAg></div>
   </div>
 </template>
 
@@ -13,7 +14,8 @@
 import { useThemMode } from '@/stores'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import { ThemeMode } from '@/models';
+import { ThemeMode } from '@/models'
+import AddTAg from '@/assets/icon/add-tag.svg'
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -39,5 +41,4 @@ const editor = useEditor({
     })
   ]
 })
-
 </script>
