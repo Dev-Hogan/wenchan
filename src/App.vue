@@ -1,5 +1,5 @@
 <template>
-  <main class="w-full h-screen relative">
+  <main class="w-full h-screen relative overflow-hidden">
     <NtConfigProvide>
       <RouterView />
     </NtConfigProvide>
@@ -26,7 +26,7 @@ function geDevTool() {
   if (currentRouter !== Routes.dev) {
     router.push({ name: Routes.dev })
   } else {
-   console.warn('Already in dev page')
+    console.warn('Already in dev page')
   }
 }
 </script>

@@ -53,7 +53,7 @@ export default {
       fontSize: {
         s: '11px',
         m: '13px'
-      }
+      },
     }
   },
   plugins: []

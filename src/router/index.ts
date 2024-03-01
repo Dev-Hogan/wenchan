@@ -13,7 +13,7 @@ const router = createRouter({
         {
           path: 'all',
           name: Routes.all,
-          component: () => import('@/modules/all/All.vue')
+          component: () => import('@/modules/All.vue')
         },
         {
           path: 'dev',

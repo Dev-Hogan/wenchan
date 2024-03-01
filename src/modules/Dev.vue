@@ -1,12 +1,19 @@
 <template>
-  <div>
-    <div>开发工具</div>
+  <div class="overflow-auto">
+    <div class="text-[28px]">开发工具</div>
     <button class="border" @click="toggleTheme">点击切换主题{{ themeMode }}</button>
     <br />
-    <p>编辑器</p>
+    <p class="text-[20px]">编辑器</p>
     <editor-content :editor="editor" />
     <br />
-    <div>icon <AddTAg></AddTAg></div>
+    <h1 class="text-[20px]">图标库</h1>
+    <NtIcon icon="addTag"></NtIcon>
+    <section class="flex gap-4 flex-wrap max-w-[1000px]">
+      <div v-for="icon in icons" :key="icon" class="px-2 py-2">
+        <div>{{ icon }}</div>
+        <NtIcon :icon="icon"></NtIcon>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -14,8 +21,8 @@
 import { useThemMode } from '@/stores'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import { ThemeMode } from '@/models'
-import AddTAg from '@/assets/icon/add-tag.svg'
+import { ThemeMode, Icon } from '@/models'
+import { iconMap } from '@/utils';
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -41,4 +48,6 @@ const editor = useEditor({
     })
   ]
 })
+
+const icons = Object.keys(iconMap) as Icon[]
 </script>
