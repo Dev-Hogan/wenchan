@@ -20,6 +20,9 @@
       'Helvetica Neue',
       sans-serif;
   }
+  h1 {
+    @apply text-[20px];
+  }
   .light {
     --color-theme: 255 172 10;
     --color-theme-10: 255 253 250;
@@ -70,7 +73,7 @@
     --color-delete: 210 59 59;
     --color-iconsel: 34 34 34;
     --color-masked: 26 26 26;
-     --color-background:0 0 0;
+    --color-background:0 0 0;
     
   }
 }

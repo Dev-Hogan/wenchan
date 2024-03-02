@@ -12,7 +12,7 @@ const spacing = {
   9: '18px',
   10: '20px',
   11: '22px',
-  12: '24px',
+  12: '24px'
 }
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -36,14 +36,12 @@ export default {
         'light-7': 'rgb(var(--color-light-7) / <alpha-value>)',
 
         base: 'rgb(var(--color-base) / <alpha-value>)',
-        // white: 'rgb(var(--color-white) / <alpha-value>)',
-        // black: 'rgb(var(--color-black) / <alpha-value>)',
         link: 'rgb(var(--color-link) / <alpha-value>)',
         tag: 'rgb(var(--color-tag) / <alpha-value>)',
         delete: 'rgb(var(--color-delete) / <alpha-value>)',
         iconsel: 'rgb(var(--color-iconsel) / <alpha-value>)',
         masked: 'rgb(var(--color-masked) / <alpha-value>)',
-        default: 'rgb(var(--color-background) / <alpha-value>)',
+        default: 'rgb(var(--color-background) / <alpha-value>)'
       },
       spacing: {
         ...spacing
@@ -51,6 +49,7 @@ export default {
       borderRadius: {
         ...spacing
       },
+
       fontSize: {
         s: '11px',
         m: '13px'
