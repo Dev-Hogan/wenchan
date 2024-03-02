@@ -10,7 +10,7 @@
             </NtMenusTitle>
             <NtMenus :menus="category" type="category"></NtMenus>
         </aside>
-        <main class="flex-1 overflow-auto">
+        <main class="flex-1 overflow-auto bg-default text-light-7">
             <RouterView></RouterView>
         </main>
     </div>
