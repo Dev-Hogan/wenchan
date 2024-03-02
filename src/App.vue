@@ -8,6 +8,7 @@
       dev </div>
   </main>
 </template>
+
 <script setup lang="ts">
 import router from '@/router';
 import { Routes, ThemeMode } from '@/models'
@@ -24,10 +25,13 @@ if (theme === ThemeMode.light) {
 function geDevTool() {
   const currentRouter = router.currentRoute.value.name
   if (currentRouter !== Routes.dev) {
-    router.push({ name: Routes.dev })
+    router.push({
+      name: Routes.dev, query: {
+        title: '开发工具'
+      }
+    })
   } else {
     console.warn('Already in dev page')
   }
 }
 </script>
-
