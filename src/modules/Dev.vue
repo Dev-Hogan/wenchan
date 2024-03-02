@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto">
+  <div class="overflow-auto ">
     <h1>开发工具</h1>
     <button class="border" @click="toggleTheme">点击切换主题{{ themeMode }}</button>
     <br />
@@ -30,12 +30,12 @@
 
     <HighLight></HighLight>
     <NtInput hight-light></NtInput>
-    <NtHeader title="内容">
+    <!-- <NtHeader title="header">
       <template #right>
         <div>👉</div>
         <div>👉</div>
       </template>
-    </NtHeader>
+    </NtHeader> -->
 
   </div>
 </template>

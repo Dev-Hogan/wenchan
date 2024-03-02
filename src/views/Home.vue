@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full h-full">
-        <aside class="w-[225px] pt-[48px] pb-[54px] bg-light flex flex-col">
+        <aside class="w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col">
             <NtInput class="mx-6 bg-light-2" placeholder="搜索">
                 <template #prefix>
                     <NtIcon icon="search"></NtIcon>
@@ -22,7 +22,7 @@
                 <NtIcon icon="setting2"></NtIcon>
             </div>
         </aside>
-        <main class="flex-1 overflow-auto bg-default text-light-7">
+        <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
             <NtHeader :title="`${query.title}`"></NtHeader>
             <NtContent>
                 <RouterView></RouterView>

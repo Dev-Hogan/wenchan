@@ -1,4 +1,4 @@
-import type Scrollbar from './FyScrollbar.vue'
+import type Scrollbar from './NtScrollbar.vue'
 import { buildProps, definePropType } from './props'
 import type { ExtractPropTypes, StyleValue } from 'vue'
 

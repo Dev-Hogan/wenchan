@@ -1,5 +1,6 @@
 <template>
-    <header class="flex items-center justify-between px-[28px]  pt-[20px]">
+    <header
+        class="fixed top-0 right-0 left-[--aside-width] flex-1 flex items-center justify-between px-[28px] bg-default pt-[20px]">
         <div class="text-light-7 text-[28px] font-semibold">{{ title }}</div>
         <div class="flex items-center justify-center space-x-8 [&>svg]:cursor-pointer">
             <slot name="right">
