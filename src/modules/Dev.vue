@@ -8,7 +8,7 @@
     <br />
     <h1 class="text-[20px]">图标库</h1>
     <section class="flex gap-4 flex-wrap max-w-[1000px]">
-      <div v-for="icon in icons" :key="icon" class="px-2 py-2">
+      <div v-for="icon in icons" :key="icon" class="px-2 py-2 cursor-pointer" @click="copyIcon(icon)">
         <div>{{ icon }}</div>
         <NtIcon :icon="icon"></NtIcon>
       </div>
@@ -22,6 +22,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { ThemeMode, Icon } from '@/models'
 import { iconMap } from '@/utils';
+import { message } from 'ant-design-vue';
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -49,4 +50,9 @@ const editor = useEditor({
 })
 
 const icons = Object.keys(iconMap).sort() as Icon[]
+function copyIcon(icon: Icon) {
+  navigator.clipboard.writeText(`<NtIcon :icon="${icon}"></NtIcon>`).then(() => {
+    message.success('复制icon成功')
+  })
+}
 </script>

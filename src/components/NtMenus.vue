@@ -1,7 +1,6 @@
 <template>
     <menu>
         <li v-for="menu in menus" :key="menu.id" :class="['flex  h-[34px] items-center space-x-3 mx-6 my-1 py-3 px-4 rounded-3',
-            // isCategory ? ($route.params.categoryId || 0) === menu.id ? 'bg-light-2' : 'bg-transparent' : menu.name === currentRoute.name ? 'bg-light-2' : 'bg-transparent',
             activeMenuClass(menu),
             'cursor-pointer hover:bg-light-2',
             'transition-colors']" @click="navigator(menu)">
@@ -17,6 +16,7 @@
 <script setup lang="ts">
 import { Menu, Routes } from '@/models';
 import router from '@/router';
+import { message } from 'ant-design-vue';
 const currentRoute = router.currentRoute
 const props = withDefaults(
     defineProps<{ menus?: Menu[]; type?: 'menu' | 'category' }>(), { menus: undefined, type: 'menu' }
@@ -59,7 +59,7 @@ function handleMenuNavigator(menu: Menu) {
         try {
             router.push({ name: menu.name })
         } catch (error) {
-            alert(`【${menu.title}】页面尚未配置`)
+            message.warn(`【${menu.title}】页面尚未配置`)
         }
     }
 }
