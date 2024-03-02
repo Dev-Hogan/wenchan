@@ -23,7 +23,7 @@
             </div>
         </aside>
         <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
-            <NtHeader :title="`${query.title}`"></NtHeader>
+            <NtHeader :title="`${query.title||''}`"></NtHeader>
             <NtContent>
                 <RouterView></RouterView>
             </NtContent>
