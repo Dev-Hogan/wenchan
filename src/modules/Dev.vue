@@ -22,7 +22,20 @@
     </NtInput>
     <div>{{ inputValue }}</div>
     <br>
+    <Dialog>
+    </Dialog>
+    <NtButton type="primary" @click="dialogOpen = true">点击弹窗</NtButton>
+    <NtDialog title="false" v-model:open="dialogOpen">
+      123</NtDialog>
 
+    <HighLight></HighLight>
+    <NtInput hight-light></NtInput>
+    <NtHeader title="内容">
+      <template #right>
+        <div>👉</div>
+        <div>👉</div>
+      </template>
+    </NtHeader>
 
   </div>
 </template>
@@ -34,6 +47,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { Icon, ThemeMode } from '@/models'
 import { iconMap } from '@/utils';
 import { message } from 'ant-design-vue';
+import { Dialog } from '@/components/NtDialog2';
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -69,4 +83,6 @@ function copyIcon(icon: Icon) {
 
 const inputValue = ref<string>('123')
 
+
+const dialogOpen = ref<boolean>(false)
 </script>

@@ -27,7 +27,11 @@ if (!isCategory) {
 
     // 实际上只针对home处理即可
     if (currentRoute.value.name === Routes.home) {
-        router.replace({ name: Routes.all })
+        router.replace({
+            name: Routes.all, query: {
+                title: props!.menus![0].title,
+            }
+        })
     }
 }
 
@@ -57,7 +61,12 @@ function handleMenuNavigator(menu: Menu) {
         console.warn('Already on this page')
     } else {
         try {
-            router.push({ name: menu.name })
+            router.push({
+                name: menu.name,
+                query: {
+                    title: menu.title,
+                }
+            })
         } catch (error) {
             message.warn(`【${menu.title}】页面尚未配置`)
         }
@@ -73,7 +82,10 @@ function handleCategoryNavigator(category: Menu) {
 
             router.push({
                 name: Routes.category,
-                params: { categoryId: category.id }
+                params: { categoryId: category.id },
+                query: {
+                    title: category.title,
+                }
             })
         }
     }

@@ -11,7 +11,7 @@
             <NtMenusTitle title="分类">
 
                 <template #append>
-                    <NtIcon icon="addTag"></NtIcon>
+                    <NtIcon icon="addTag" class="cursor-pointer" @click="categoryOpen = true"></NtIcon>
                 </template>
             </NtMenusTitle>
             <NtScrollbar>
@@ -23,13 +23,22 @@
             </div>
         </aside>
         <main class="flex-1 overflow-auto bg-default text-light-7">
-            <RouterView></RouterView>
+            <NtHeader :title="`${query.title}`"></NtHeader>
+            <NtContent>
+                <RouterView></RouterView>
+            </NtContent>
         </main>
+        <!-- 新增分类弹窗 -->
+        <EditCategoryDialog v-model:open="categoryOpen"></EditCategoryDialog>
     </div>
 </template>
 
 <script setup lang="ts">
 import { menus, category } from '@/mock';
+const categoryOpen = ref<boolean>(false)
+import router from '@/router';
+const currentRouter = router.currentRoute
+const query = computed(() => currentRouter.value.query)
 </script>
 
 <!-- <style scoped>

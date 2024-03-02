@@ -54,7 +54,7 @@ export const category: Category[] = [
     id: 4
   },
   {
-    title: '剪辑技巧',
+    title: '厨艺',
     icon: 'ask2',
     id: 5
   },
