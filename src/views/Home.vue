@@ -23,10 +23,10 @@
             </div>
         </aside>
         <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
-            <NtHeader :title="`${query.title||''}`"></NtHeader>
+            <!-- <NtHeader :title="`${query.title||''}`"></NtHeader>
             <NtContent>
-                <RouterView></RouterView>
-            </NtContent>
+            </NtContent> -->
+            <RouterView></RouterView>
         </main>
         <!-- 新增分类弹窗 -->
         <EditCategoryDialog v-model:open="categoryOpen"></EditCategoryDialog>
@@ -36,9 +36,9 @@
 <script setup lang="ts">
 import { menus, category } from '@/mock';
 const categoryOpen = ref<boolean>(false)
-import router from '@/router';
-const currentRouter = router.currentRoute
-const query = computed(() => currentRouter.value.query)
+// import router from '@/router';
+// const currentRouter = router.currentRoute
+// const query = computed(() => currentRouter.value.query)
 </script>
 
 <!-- <style scoped>
