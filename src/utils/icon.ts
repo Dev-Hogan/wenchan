@@ -38,6 +38,7 @@ import tag from '$/tag.svg'
 import trash from '$/trash.svg'
 import unfocus from '$/unfocus.svg'
 import { IconMap } from '@/models'
+import bold from '$/bold.svg'
 
 export const iconMap: IconMap = {
   addTag: addTag,
@@ -78,5 +79,6 @@ export const iconMap: IconMap = {
   unfocus: unfocus,
   random: random,
   sort2: sort2,
-  allQuestion: allQuestion
+  allQuestion: allQuestion,
+  bold: bold
 }

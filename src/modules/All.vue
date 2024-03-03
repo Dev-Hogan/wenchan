@@ -14,6 +14,6 @@
 
 <script setup lang="ts">
 
-const text = ref('输入文字')
+const text = ref('<h1>输入文字</h1>')
 
 </script>

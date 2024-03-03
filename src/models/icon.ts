@@ -38,5 +38,6 @@ export type Icon =
   | 'unfocus'
   | 'random'
   | 'allQuestion'
+  | 'bold'
 
 export type IconMap = Partial<Record<Icon, string>>
