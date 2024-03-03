@@ -6,7 +6,7 @@
         }">
             {{ i }}</NtTag>
     </NtHeader>
-    <NtContent class="mt-[120px]">
+    <NtContent class="!mt-[120px]">
         <NtEditorContent v-model="text"></NtEditorContent>
         <div>{{ text }}</div>
     </NtContent>
