@@ -82,8 +82,6 @@ const editor = useEditor({
 const icons = Object.keys(iconMap).sort() as Icon[]
 function copyIcon(icon: Icon) {
   try {
-    console.log(navigator, navigator.clipboard);
-
     navigator.clipboard.writeText(`<NtIcon icon="${icon}"></NtIcon>`).then(() => {
       message.success('复制icon成功')
     })
