@@ -7,9 +7,9 @@ steps:
 - name: test-build  
   image: node  
   commands:  
-    - npm install  
+    - pnpm install  
     # - npm run test  
-    - npm run build 
+    - pnpm build 
     - pwd                     # 打印当前工作目录  
     - ls -lha /drone/src/    # 列出/drone/src/下的内容  
     # - ls -lha /drone/src/frontend/  # 列出frontend目录内容
