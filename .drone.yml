@@ -5,11 +5,12 @@ name: default
   
 steps:  
 - name: test-build  
-  image: node  
+  image: node:21-alpine3.18  
   commands:
-    - npm install  
+    - npm install -g pnpm
+    - pnpm install  
     # - npm run test  
-    - npm build 
+    - pnpm build 
   volumes:  
   - name: dist  
     path: /drone/src/dist  
