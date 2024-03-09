@@ -80,9 +80,17 @@ const editor = useEditor({
 
 const icons = Object.keys(iconMap).sort() as Icon[]
 function copyIcon(icon: Icon) {
-  navigator.clipboard.writeText(`<NtIcon icon="${icon}"></NtIcon>`).then(() => {
-    message.success('复制icon成功')
-  })
+  try {
+
+    navigator.clipboard.writeText(`<NtIcon icon="${icon}"></NtIcon>`).then(() => {
+      message.success('复制icon成功')
+    })
+  } catch (e) {
+    console.log(navigator);
+
+    console.log(e);
+
+  }
 }
 
 const inputValue = ref<string>('123')
