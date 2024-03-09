@@ -52,6 +52,7 @@ import { Icon, ThemeMode } from '@/models'
 import { iconMap } from '@/utils';
 import { message } from 'ant-design-vue';
 import { Dialog } from '@/components/NtDialog2';
+import { useClipboard } from '@vueuse/core'
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -81,14 +82,16 @@ const editor = useEditor({
 const icons = Object.keys(iconMap).sort() as Icon[]
 function copyIcon(icon: Icon) {
   try {
+    console.log(navigator, navigator.clipboard);
 
     navigator.clipboard.writeText(`<NtIcon icon="${icon}"></NtIcon>`).then(() => {
       message.success('复制icon成功')
     })
   } catch (e) {
-    console.log(navigator);
+    // console.log(navigator);
+    console.log(e, 'http没有复制api');
+    console.log(`<NtIcon icon="${icon}"></NtIcon>`);
 
-    console.log(e);
 
   }
 }
