@@ -11,6 +11,6 @@
 <script setup lang="ts">
 const open = defineModel<boolean>('open')
 const tagName = ref<string>('新增分类名称')
-const range = document.createRange();
-const clientRect = range.getBoundingClientRect();
+// const range = document.createRange();
+// const clientRect = range.getBoundingClientRect();
 </script>

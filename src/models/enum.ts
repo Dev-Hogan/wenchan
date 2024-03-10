@@ -1,4 +1,4 @@
-import { category } from "@/mock";
+// import { category } from "@/mock";
 
 export enum Routes {
   dev = 'dev',
