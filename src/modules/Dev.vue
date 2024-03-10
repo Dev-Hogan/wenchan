@@ -39,6 +39,8 @@
     <HighLight></HighLight>
     <NtInput hight-light></NtInput>
     <div>流水线测试12</div>
+    <NtButton @click="getUserName" type="primary">获取username</NtButton>
+    <p>{{ userName }}</p>
   </NtContent>
 
 
@@ -52,7 +54,7 @@ import { Icon, ThemeMode } from '@/models'
 import { iconMap } from '@/utils';
 import { message } from 'ant-design-vue';
 import { Dialog } from '@/components/NtDialog2';
-import { useClipboard } from '@vueuse/core'
+import { supabase } from "@/api";
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -98,4 +100,20 @@ const inputValue = ref<string>('123')
 
 
 const dialogOpen = ref<boolean>(false)
+
+
+const userName = ref<string[]>(['username'])
+async function getUserName() {
+
+  let { data: user, error } = await supabase
+    .from('user')
+    .select('name')
+  if (error) {
+    console.log(error);
+
+  } else {
+
+    userName.value = user?.map(d => d.name)||[]
+  }
+}
 </script>
