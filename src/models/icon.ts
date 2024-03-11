@@ -39,5 +39,11 @@ export type Icon =
   | 'random'
   | 'allQuestion'
   | 'bold'
+  | 'li'
+  | 'picture'
+  | 'numbering'
+  | 'linkTag'
+  | 'fullScreen2'
+  | 'publish'
 
 export type IconMap = Partial<Record<Icon, string>>

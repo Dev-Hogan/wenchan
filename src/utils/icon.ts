@@ -39,6 +39,12 @@ import trash from '$/trash.svg'
 import unfocus from '$/unfocus.svg'
 import { IconMap } from '@/models'
 import bold from '$/bold.svg'
+import li from '$/li.svg'
+import picture from '$/picture.svg'
+import numbering from '$/numbering.svg'
+import linkTag from '$/linkTag.svg'
+import fullScreen2 from '$/fullScreen2.svg'
+import publish from '$/publish.svg'
 
 export const iconMap: IconMap = {
   addTag: addTag,
@@ -80,5 +86,11 @@ export const iconMap: IconMap = {
   random: random,
   sort2: sort2,
   allQuestion: allQuestion,
-  bold: bold
+  bold: bold,
+  li: li,
+  picture: picture,
+  numbering: numbering,
+  linkTag: linkTag,
+  fullScreen2: fullScreen2,
+  publish: publish
 }
