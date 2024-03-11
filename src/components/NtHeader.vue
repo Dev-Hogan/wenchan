@@ -1,5 +1,6 @@
 <template>
-    <header class="z-10 fixed top-0 right-0 left-[--aside-width] px-[28px] bg-default pt-[20px]">
+    <header :class="['z-10 fixed top-0 right-0 px-[28px] bg-default pt-[20px] left-0']"
+        :style="{ left: sidebarWidth + 'px' }">
 
         <div class=" flex-1 flex items-center justify-between ">
             <div class="text-light-7 text-[28px] font-semibold">{{ title }}</div>
@@ -19,6 +20,7 @@
 </template>
 
 <script setup lang="ts">
+import { sidebarWidth } from "@/utils";
 withDefaults(
     defineProps<{
         title?: string

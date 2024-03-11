@@ -51,6 +51,16 @@
     </div>
     <div>返回结果</div>
     <pre>{{ severData }}</pre>
+    <br>
+    <div class="container" ref="container">
+      <div class="sidebar" :style="{ width: sidebarWidth + 'px' }">
+        <!-- 侧边栏内容 -->
+        <div class="resizer" @mousedown="startResize"></div>
+      </div>
+      <div class="main-content">
+        <!-- 主内容区域 -->
+      </div>
+    </div>
   </NtContent>
 
 
@@ -130,7 +140,6 @@ async function getUserName() {
 const severData = ref()
 const formString = ref<string>('user')
 const select = ref<string>()
-type InsertType = Record<string, any>[]
 
 async function get() {
   let { data, error } = await supabase
@@ -144,4 +153,73 @@ async function get() {
   }
 }
 
+
+
+
+const container = ref<HTMLElement | null>(null);
+const sidebarWidth = ref(200);
+let isResizing = false;
+let startX = 0;
+let startWidth = 0;
+
+function startResize(event: MouseEvent) {
+  isResizing = true;
+  startX = event.clientX;
+  startWidth = sidebarWidth.value;
+  document.addEventListener('mousemove', resize);
+  document.addEventListener('mouseup', stopResize);
+}
+
+function resize(event: MouseEvent) {
+  if (!isResizing) return;
+  const diffX = event.clientX - startX;
+  const newWidth = startWidth + diffX;
+  sidebarWidth.value = Math.max(50, newWidth); // 设置最小宽度为50px  
+}
+
+function stopResize() {
+  isResizing = false;
+  document.removeEventListener('mousemove', resize);
+  document.removeEventListener('mouseup', stopResize);
+}
+
+onMounted(() => {
+  if (container.value) {
+    container.value.addEventListener('mouseleave', stopResize);
+  }
+});
+
+onUnmounted(() => {
+  if (container.value) {
+    container.value.removeEventListener('mouseleave', stopResize);
+  }
+});  
+
 </script>
+<style scoped>
+.container {
+  display: flex;
+}
+
+.sidebar {
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: auto;
+}
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  cursor: col-resize;
+  background-color: #ccc;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: red;
+}
+</style>
