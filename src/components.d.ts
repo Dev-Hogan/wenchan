@@ -20,6 +20,7 @@ declare module 'vue' {
     NtIcon: typeof import('./components/NtIcon.vue')['default']
     NtIconButton: typeof import('./components/NtIconButton.vue')['default']
     NtInput: typeof import('./components/NtInput.vue')['default']
+    NtLinkButton: typeof import('./components/NtLinkButton.vue')['default']
     NtMenus: typeof import('./components/NtMenus.vue')['default']
     NtMenusTitle: typeof import('./components/NtMenusTitle.vue')['default']
     NtScrollbar: typeof import('./components/scrollbar/src/NtScrollbar.vue')['default']

@@ -61,6 +61,8 @@
         <!-- 主内容区域 -->
       </div>
     </div>
+    <br>
+    <div class="editor">test style</div>
   </NtContent>
 
 
@@ -193,7 +195,7 @@ onUnmounted(() => {
   if (container.value) {
     container.value.removeEventListener('mouseleave', stopResize);
   }
-});  
+});
 
 </script>
 <style scoped>
@@ -221,5 +223,11 @@ onUnmounted(() => {
   flex: 1;
   padding: 20px;
   background-color: red;
+}
+</style>
+<style lang="postcss" scoped>
+.editor {
+  @apply min-h-[200px] border font-medium focus:outline-none hover:bg-theme;
+
 }
 </style>

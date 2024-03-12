@@ -53,6 +53,9 @@ export default {
       fontSize: {
         s: '11px',
         m: '13px'
+      },
+      dropShadow: {
+        editorFocused: 'box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03)'
       }
     }
   },

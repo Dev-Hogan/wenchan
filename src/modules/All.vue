@@ -7,7 +7,16 @@
             {{ i }}</NtTag>
     </NtHeader>
     <NtContent class="!mt-[120px]">
-        <NtEditorContent v-model="text"></NtEditorContent>
+        <NtEditorContent v-model="text">
+            <template #linkTags>
+                <NtIconButton icon="link" class="px-3 py-2 bg-light rounded-2 text-[12px] text-tag font-medium">
+                    基础知识
+                </NtIconButton>
+                <NtIconButton icon="link" class="px-3 py-2 bg-light rounded-2 text-[12px] text-tag font-medium">
+                    UI相关
+                </NtIconButton>
+            </template>
+        </NtEditorContent>
         <div>{{ text }}</div>
     </NtContent>
 </template>

@@ -1,7 +1,10 @@
 <template>
-    <div class="relative">
+    <div class="relative editor">
         <editor-content :editor="editor">
         </editor-content>
+        <div v-if="$slots.linkTags" class="flex h-[37px] space-x-5">
+            <slot name="linkTags"></slot>
+        </div>
         <NtIconButton class="absolute top-[10px] right-[24px]" icon="more"></NtIconButton>
         <menu class="flex flex-1 h-[54px] w-full absolute bottom-0 left-0  px-[18px] justify-between items-center">
             <div class="flex">
@@ -26,7 +29,7 @@ import { EditorContent, Editor } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { Placeholder } from "@tiptap/extension-placeholder";
 const modelValue = defineModel<string>()
-modelValue.value = '<h1>输入问题内容</h1><p class="text-pla">写自己的答案</p>'
+modelValue.value = '<h1>输入问题内容</h1><p>写自己的答案</p>'
 
 
 const editor = shallowRef<Editor>()
@@ -45,7 +48,7 @@ onMounted(() => {
         })],
         editorProps: {
             attributes: {
-                class: 'border-theme bg-theme-10 border focus:outline-none min-h-[150px] px-[---editor-px] pt-[12.5px] pb-[54px] line-light-[25px] rounded-4 text-light-7 [&>h1]:font-medium [&>h1]:mb-[12.5px] [&>h1]:text-[18px] [&>p]:text-[14px] [&>ul]:list-disc [&>ol]:list-decimal [&>ul]:ml-[18px] [&>ol]:ml-[14px]'
+                class: 'mb-[20px] focus:outline-none [&>h1]:font-medium [&>h1]:mb-[12.5px] [&>h1]:text-[18px] [&>p]:text-[14px] [&>ul]:list-disc [&>ol]:list-decimal [&>ul]:ml-[18px] [&>ol]:ml-[14px]'
 
             }
         },
@@ -60,15 +63,10 @@ onMounted(() => {
             // this.$emit('update:modelValue', this.editor.getJSON())
         },
     })
+
 })
 onBeforeUnmount(() => {
     editor.value?.destroy()
 })
+
 </script>
-
-<style scoped>
-.editor {
-    @apply font-medium;
-
-}
-</style>

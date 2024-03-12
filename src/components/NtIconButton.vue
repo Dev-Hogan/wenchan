@@ -1,6 +1,7 @@
 <template>
-    <NtButton class="min-h-0 min-w-0 !px-0 !py-0">
+    <NtButton class="min-h-0 min-w-0 !px-0 !py-0 flex items-center">
         <NtIcon :icon="icon"></NtIcon>
+        <slot></slot>
     </NtButton>
 </template>
 
