@@ -11,7 +11,7 @@
             <NtMenus :menus="menus"></NtMenus>
             <NtMenusTitle title="分类">
                 <template #append>
-                    <NtIcon icon="addTag" class="cursor-pointer" @click="categoryOpen = true"></NtIcon>
+                    <NtIconButton icon="addTag" @click="categoryOpen = true"></NtIconButton>
                 </template>
             </NtMenusTitle>
             <NtScrollbar>
@@ -19,7 +19,7 @@
             </NtScrollbar>
 
             <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0 ">
-                <NtIcon icon="setting2"></NtIcon>
+                <NtIconButton icon="setting2"></NtIconButton>
             </div>
             <div @mousedown="startResize" @mouseup="stopResize"
                 class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0 mousedown:bg-theme-40">
