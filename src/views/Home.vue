@@ -1,75 +1,78 @@
 <template>
-    <div class="flex w-full h-full">
-        <aside :style="{ width: sidebarWidth + 'px' }
-            " class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col">
-            <NtInput class="mx-6 bg-light-2" placeholder="搜索">
-                <template #prefix>
-                    <NtIcon icon="search"></NtIcon>
-                </template>
-            </NtInput>
-            <NtMenusTitle title="概览"></NtMenusTitle>
-            <NtMenus :menus="menus"></NtMenus>
-            <NtMenusTitle title="分类">
+  <div class="flex w-full h-full">
+    <aside
+      :style="{ width: sidebarWidth + 'px' }"
+      class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col"
+    >
+      <NtInput class="mx-6 bg-light-2" placeholder="搜索">
+        <template #prefix>
+          <NtIcon icon="search"></NtIcon>
+        </template>
+      </NtInput>
+      <NtMenusTitle title="概览"></NtMenusTitle>
+      <NtMenus :menus="menus"></NtMenus>
+      <NtMenusTitle title="分类">
+        <template #append>
+          <NtIcon icon="addTag" class="cursor-pointer" @click="categoryOpen = true"></NtIcon>
+        </template>
+      </NtMenusTitle>
+      <NtScrollbar>
+        <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category"></NtMenus>
+      </NtScrollbar>
 
-                <template #append>
-                    <NtIcon icon="addTag" class="cursor-pointer" @click="categoryOpen = true"></NtIcon>
-                </template>
-            </NtMenusTitle>
-            <NtScrollbar>
-                <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category"></NtMenus>
-            </NtScrollbar>
-
-            <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0">
-                <NtIcon icon="setting2"></NtIcon>
-            </div>
-            <div @mousedown="startResize" @mouseup="stopResize"
-                class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0"></div>
-        </aside>
-        <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
-            <!-- <NtHeader :title="`${query.title||''}`"></NtHeader>
+      <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0">
+        <NtIcon icon="setting2"></NtIcon>
+      </div>
+      <div
+        @mousedown="startResize"
+        @mouseup="stopResize"
+        class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0"
+      ></div>
+    </aside>
+    <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
+      <!-- <NtHeader :title="`${query.title||''}`"></NtHeader>
             <NtContent>
             </NtContent> -->
-            <RouterView></RouterView>
-        </main>
-        <!-- 新增分类弹窗 -->
-        <EditCategoryDialog v-model:open="categoryOpen"></EditCategoryDialog>
-    </div>
+      <RouterView></RouterView>
+    </main>
+    <!-- 新增分类弹窗 -->
+    <EditCategoryDialog v-model:open="categoryOpen"></EditCategoryDialog>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { menus, category } from '@/mock';
-import { sidebarWidth } from "@/utils";
+import { menus, category } from '@/mock'
+import { sidebarWidth } from '@/utils'
 const categoryOpen = ref<boolean>(false)
 
-
-let isResizing = false;
-let startX = 0;
-let startWidth = 0;
+let isResizing = false
+let startX = 0
+let startWidth = 0
 
 function startResize(event: MouseEvent) {
-    isResizing = true;
-    startX = event.clientX;
-    startWidth = sidebarWidth.value;
-    document.addEventListener('mousemove', resize)
-    document.addEventListener('mouseup', stopResize);
+  isResizing = true
+  startX = event.clientX
+  startWidth = sidebarWidth.value
+  document.addEventListener('mousemove', resize)
+  document.addEventListener('mouseup', stopResize)
 }
 
 function resize(event: MouseEvent) {
-    if (!isResizing) return;
-    const diffX = event.clientX - startX;
-    const newWidth = startWidth + diffX;
-    sidebarWidth.value = Math.max(170, newWidth); // 设置最小宽度为50px 
-    if (newWidth >= 350) {
-        sidebarWidth.value = 350
-    }
+  if (!isResizing) return
+  const diffX = event.clientX - startX
+  const newWidth = startWidth + diffX
+  sidebarWidth.value = Math.max(170, newWidth) // 设置最小宽度为50px
+  if (newWidth >= 350) {
+    sidebarWidth.value = 350
+  }
 }
 
 function stopResize() {
-    isResizing = false;
-    document.removeEventListener('mousemove', resize);
-    document.removeEventListener('mouseup', stopResize);
+  isResizing = false
+  document.removeEventListener('mousemove', resize)
+  document.removeEventListener('mouseup', stopResize)
 }
-
+window.addEventListener('mouseup', stopResize)
 </script>
 
 <!-- <style scoped>
