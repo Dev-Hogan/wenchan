@@ -17,7 +17,7 @@
                 </NtIconButton>
             </template>
         </NtEditorContent>
-        <div>{{ text }}</div>
+        <code>{{ text }}</code>
     </NtContent>
 </template>
 
