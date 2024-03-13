@@ -13,7 +13,7 @@ steps:
     - pnpm config set registry https://registry.npmmirror.com/
     - pnpm install  
     - pnpm lint  
-    - pnpm build 
+    - pnpm build-only 
   volumes:  
   - name: dist  
     path: /drone/src/dist  
