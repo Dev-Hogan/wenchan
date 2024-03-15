@@ -15,7 +15,26 @@
                 </template>
             </NtMenusTitle>
             <NtScrollbar>
-                <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category"></NtMenus>
+                <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category">
+                    <template #append="{ menu }">
+                        <NtDropdown :options="[{
+            name: '重命名',
+            icon: 'edit',
+            iconClass: 'stroke-theme'
+        }, {
+            name: '导出PDF',
+        }, {
+            name: '删除分类',
+        }]">
+                            <template #default="{ isOpen }">
+                                <NtIconButton icon="more"
+                                    :class="['group-hover:opacity-100 opacity-0', isOpen ? 'opacity-100' : 'opacity-0']"
+                                    @click="handleCategory(menu)">
+                                </NtIconButton>
+                            </template>
+                        </NtDropdown>
+                    </template>
+                </NtMenus>
             </NtScrollbar>
 
             <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0 ">
@@ -36,6 +55,7 @@
 <script setup lang="ts">
 import { menus, category } from '@/mock'
 import { sidebarWidth } from '@/utils'
+import { Menu } from "@/models";
 const categoryOpen = ref<boolean>(false)
 
 let isResizing = false
@@ -66,6 +86,13 @@ function stopResize() {
     document.removeEventListener('mouseup', stopResize)
 }
 window.addEventListener('mouseup', stopResize)
+
+function handleCategory(menu: Menu) {
+    if (menu.id) {
+        console.log(menu.id);
+
+    }
+}
 </script>
 
 <!-- <style scoped>

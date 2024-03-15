@@ -1,14 +1,28 @@
 <template>
     <menu>
-        <li v-for="menu in menus" :key="menu.id" :class="['flex  h-[34px] items-center space-x-3 mx-6 my-1 py-3 px-4 rounded-3',
+        <li v-for="menu in menus" :key="menu.id" :class="['flex  h-[34px] items-center  mx-6 my-1 py-3 px-4 rounded-3 justify-between',
             activeMenuClass(menu),
             'cursor-pointer hover:bg-light-2',
-            'transition-colors']" @click="navigator(menu)">
+            isHover ? 'bg-light-2' : '',
+            'transition-colors group']" @click="navigator(menu)">
+            <div class="flex items-center">
 
-            <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon>
-            <div class="text-[13px] text-light-7 font-medium">
-                {{ menu.title }}
+                <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon>
+                <div class="text-[13px] text-light-7 font-medium">
+                    {{ menu.title }}
+                </div>
             </div>
+
+            <div v-if="$slots.append">
+
+                <slot name="append" v-bind="{
+            menu,
+            id: menu.id,
+            isHover
+        }">
+                </slot>
+            </div>
+
         </li>
     </menu>
 </template>
@@ -90,5 +104,8 @@ function handleCategoryNavigator(category: Menu) {
         }
     }
 }
+
+
+const isHover = ref(false)
 
 </script>

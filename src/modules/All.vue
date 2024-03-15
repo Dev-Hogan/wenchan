@@ -1,10 +1,10 @@
 <template>
     <NtHeader title="全部">
-        <NtTag v-for="i in 4" :key="i" :value="i" @activated="d => {
+        <NtTag v-for="tag in tagList" :key="tag.id" :value="tag.id" @activated="d => {
             console.log(d, '激活');
 
         }">
-            {{ i }}</NtTag>
+            {{ tag.name }}</NtTag>
     </NtHeader>
     <NtContent class="!mt-[120px]">
         <NtEditorContent v-model="text">
@@ -24,5 +24,23 @@
 <script setup lang="ts">
 
 const text = ref('')
+type Tag = {
+    link?: string
+    name?: string
+    id?: number
+}
+const tagList = ref<Tag[]>([{
+    name: '所有内容',
+    id: Math.random()
+},
+{
+    name: '基础知识',
+    id: Math.random()
+},
+{
+    name: '进阶内容',
+    id: Math.random()
+},
+])
 
 </script>

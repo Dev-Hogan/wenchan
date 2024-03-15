@@ -14,6 +14,7 @@ declare module 'vue' {
     NtConfigProvide: typeof import('./components/NtConfigProvide.vue')['default']
     NtContent: typeof import('./components/Loyout/NtContent.vue')['default']
     NtDialog: typeof import('./components/dialog/NtDialog.vue')['default']
+    NtDropdown: typeof import('./components/NtDropdown.vue')['default']
     NtEditor: typeof import('./components/NtEditor.vue')['default']
     NtEditorContent: typeof import('./components/NtEditorContent.vue')['default']
     NtHeader: typeof import('./components/NtHeader.vue')['default']
