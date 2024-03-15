@@ -45,6 +45,7 @@ import numbering from '$/numbering.svg'
 import linkTag from '$/linkTag.svg'
 import fullScreen2 from '$/fullScreen2.svg'
 import publish from '$/publish.svg'
+import pdf from '$/pdf.svg'
 
 export const iconMap: IconMap = {
   addTag: addTag,
@@ -92,5 +93,6 @@ export const iconMap: IconMap = {
   numbering: numbering,
   linkTag: linkTag,
   fullScreen2: fullScreen2,
-  publish: publish
+  publish: publish,
+  pdf: pdf
 }

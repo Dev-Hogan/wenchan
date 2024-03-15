@@ -5,7 +5,7 @@
             'cursor-pointer hover:bg-light-2',
             isHover ? 'bg-light-2' : '',
             'transition-colors group']" @click="navigator(menu)">
-            <div class="flex items-center">
+            <div class="flex items-center space-x-1">
 
                 <NtIcon class="text-light-4" :icon="menu.icon"></NtIcon>
                 <div class="text-[13px] text-light-7 font-medium">

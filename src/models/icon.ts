@@ -45,5 +45,6 @@ export type Icon =
   | 'linkTag'
   | 'fullScreen2'
   | 'publish'
+  | 'pdf'
 
 export type IconMap = Partial<Record<Icon, string>>

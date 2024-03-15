@@ -20,11 +20,17 @@
                         <NtDropdown :options="[{
             name: '重命名',
             icon: 'edit',
-            iconClass: 'stroke-theme'
+            iconClass: 'stroke-theme',
+            split: true
         }, {
             name: '导出PDF',
+            iconClass: 'stroke-theme',
+            icon: 'pdf'
         }, {
             name: '删除分类',
+            iconClass: 'stroke-theme',
+            icon: 'trash',
+            split: true
         }]">
                             <template #default="{ isOpen }">
                                 <NtIconButton icon="more"
