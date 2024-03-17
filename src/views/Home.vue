@@ -1,7 +1,7 @@
 <template>
     <div class="flex w-full h-full">
         <aside :style="{ width: sidebarWidth + 'px' }"
-            class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col">
+            class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col border-r-[1px]">
             <NtInput class="mx-6 bg-light-2" placeholder="搜索">
                 <template #prefix>
                     <NtIcon icon="search"></NtIcon>
