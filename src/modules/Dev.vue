@@ -63,6 +63,13 @@
     </div>
     <br>
     <div class="editor">test style</div>
+    <br>
+    <Tooltip @open-change="d => {
+      console.log('触发tooltip', d);
+
+    }">
+      asdf
+    </Tooltip>
   </NtContent>
 
 
@@ -77,6 +84,7 @@ import { iconMap } from '@/utils';
 import { message } from 'ant-design-vue';
 import { Dialog } from '@/components/NtDialog2';
 import { supabase } from "@/api";
+import { Tooltip } from 'ant-design-vue';
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)

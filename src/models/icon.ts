@@ -46,5 +46,6 @@ export type Icon =
   | 'fullScreen2'
   | 'publish'
   | 'pdf'
+  | 'DownOutlined'
 
 export type IconMap = Partial<Record<Icon, string>>

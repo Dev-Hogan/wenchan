@@ -9,11 +9,15 @@
             </NtInput>
             <NtMenusTitle title="概览"></NtMenusTitle>
             <NtMenus :menus="menus"></NtMenus>
+
             <NtMenusTitle title="分类">
                 <template #append>
-                    <NtIconButton icon="addTag" @click="categoryOpen = true"></NtIconButton>
+                    <NtTooltip title="新分类">
+                        <NtIconButton icon="addTag" @click="categoryOpen = true"></NtIconButton>
+                    </NtTooltip>
                 </template>
             </NtMenusTitle>
+
             <NtScrollbar>
                 <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category">
                     <template #append="{ menu }">
@@ -21,7 +25,11 @@
             name: '重命名',
             icon: 'edit',
             iconClass: 'stroke-theme',
-            split: true
+            split: true,
+            action: () => {
+                categoryOpen = true
+                categoryId = menu.id
+            }
         }, {
             name: '导出PDF',
             iconClass: 'stroke-theme',
@@ -44,7 +52,32 @@
             </NtScrollbar>
 
             <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0 ">
-                <NtIconButton icon="setting2"></NtIconButton>
+                <NtDropdown overlayClass="p-11 flex flex-1 flex-col">
+                    <template #overlay>
+                        <div class="space-y-3 font-medium">
+                            <div class="border-b">
+
+                                <div class="flex items-center justify-between cursor-pointer min-h-[36px]" v-for="(item, i) in [{
+            name: '数据统计',
+            icon: 'arrowRight'
+        }, {
+            name: '数据统计',
+            icon: 'arrowRight'
+        }]" :key="i">
+                                    <div>{{ item.name }}</div>
+                                    <NtIcon v-if="item.icon" :icon="item.icon as Icon"></NtIcon>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </template>
+                    <template #overlayAppend>
+                        <div>退出登录</div>
+                    </template>
+                    <NtIconButton icon="setting2"></NtIconButton>
+                </NtDropdown>
+
             </div>
             <div @mousedown="startResize" @mouseup="stopResize"
                 class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0 mousedown:bg-theme-40">
@@ -54,15 +87,16 @@
             <RouterView></RouterView>
         </main>
         <!-- 新增分类弹窗 -->
-        <EditCategoryDialog v-model:open="categoryOpen"></EditCategoryDialog>
+        <EditCategoryDialog v-model:open="categoryOpen" v-model:id="categoryId"></EditCategoryDialog>
     </div>
 </template>
 
 <script setup lang="ts">
 import { menus, category } from '@/mock'
 import { sidebarWidth } from '@/utils'
-import { Menu } from "@/models";
+import { Menu, Icon } from "@/models";
 const categoryOpen = ref<boolean>(false)
+const categoryId = ref<number>()
 
 let isResizing = false
 let startX = 0
@@ -99,6 +133,7 @@ function handleCategory(menu: Menu) {
 
     }
 }
+
 </script>
 
 <!-- <style scoped>

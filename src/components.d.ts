@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Bar: typeof import('./components/scrollbar/src/bar.vue')['default']
     EditCategoryDialog: typeof import('./components/dialog/EditCategoryDialog.vue')['default']
+    EditSettingDialog: typeof import('./components/dialog/EditSettingDialog.vue')['default']
     HighLight: typeof import('./components/HighLight.vue')['default']
     NtButton: typeof import('./components/NtButton.vue')['default']
     NtConfigProvide: typeof import('./components/NtConfigProvide.vue')['default']
@@ -25,7 +26,9 @@ declare module 'vue' {
     NtMenus: typeof import('./components/NtMenus.vue')['default']
     NtMenusTitle: typeof import('./components/NtMenusTitle.vue')['default']
     NtScrollbar: typeof import('./components/scrollbar/src/NtScrollbar.vue')['default']
+    NtSplit: typeof import('./components/NtSplit.vue')['default']
     NtTag: typeof import('./components/NtTag.vue')['default']
+    NtTooltip: typeof import('./components/NtTooltip.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Thumb: typeof import('./components/scrollbar/src/thumb.vue')['default']
