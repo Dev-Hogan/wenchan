@@ -1,5 +1,5 @@
 <template>
-    <div :class="['editor overflow-hidden', isFullscreen ? 'bg-theme-10' : '']" ref="el">
+    <div tabindex="0" :class="['editor overflow-hidden', isFullscreen ? 'bg-theme-10' : '']" ref="el">
         <editor-content :editor="editor" :class="[isFullscreen ? 'mt-[46px] content' : '']">
         </editor-content>
         <NtIconButton class="absolute top-[10px] right-[24px]" icon="more"></NtIconButton>
@@ -34,6 +34,11 @@ import { Placeholder } from "@tiptap/extension-placeholder";
 import { useFullscreen } from "@vueuse/core";
 const modelValue = defineModel<string>()
 modelValue.value = '<h1>输入问题内容</h1><p>写自己的答案</p>'
+
+withDefaults(
+    defineProps<{ isFocus?: boolean }>(
+    ), { isFocus: false }
+)
 
 
 const editor = shallowRef<Editor>()

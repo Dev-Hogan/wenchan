@@ -1,6 +1,6 @@
 <template>
     <section class="flex flex-col mx-auto w-[--banner-width] mt-[62px] overflow-auto">
-        <NtScrollbar>
+        <NtScrollbar class="mx-[28px]">
             <slot></slot>
 
         </NtScrollbar>
