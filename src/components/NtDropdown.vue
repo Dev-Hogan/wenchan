@@ -1,7 +1,7 @@
 <template>
     <Dropdown @open-change="d => {
         isOpen = d
-    }">
+    }" :trigger="[trigger]">
         <template #default>
             <div v-if="$slots.default">
 
@@ -55,16 +55,20 @@ type Option = {
     iconClass?: string
     split?: boolean
     action?: (item?: Option) => any
+
 }
+type Trigger = 'click' | 'hover' | 'contextmenu'
 withDefaults(
     defineProps<{
         options?: Option[]
         radius?: number
         overlayClass?: string
+        trigger?: Trigger
     }>(), {
     options: () => [],
     radius: 10,
-    overlayClass: ''
+    overlayClass: '',
+    trigger: 'hover'
 }
 )
 const isOpen = ref(false)

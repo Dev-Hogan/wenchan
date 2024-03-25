@@ -76,19 +76,18 @@
     --color-background: 0 0 0;
   }
   .editor {
-    @apply border-theme bg-theme-10 border max-w-[750px] min-h-[150px] px-[---editor-px] pt-[12.5px] pb-[54px]  rounded-4 text-light-7  focus-within:drop-shadow-[0_4px_12px_0_rgba(0,0,0,0.03)];
+    @apply bg-default max-w-[750px] min-h-[150px] px-[---editor-px] pt-[12.5px] pb-[54px]  rounded-4 text-light-7 focus-within:bg-theme-10  focus-within:drop-shadow-[0_4px_12px_0_rgba(0,0,0,0.03)];
     @apply leading-[25px];
   }
   .editor-tag {
     @apply pb-[91px];
   }
   /* svg{ */
-    /* fill:currentColor; */
-    /* @apply stroke-[100px]; */
-    /* stroke:currentColor; */
+  /* fill:currentColor; */
+  /* @apply stroke-[100px]; */
+  /* stroke:currentColor; */
   /* } */
   .shadow2 {
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03);
-
   }
 }

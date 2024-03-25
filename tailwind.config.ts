@@ -55,7 +55,7 @@ export default {
         m: '13px'
       },
       dropShadow: {
-        editorFocused: 'box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03)'
+        card: '0px 4px 2px 0px rgba(0, 0, 0, 0.07)'
       }
     }
   },

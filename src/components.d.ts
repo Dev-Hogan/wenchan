@@ -12,6 +12,7 @@ declare module 'vue' {
     EditSettingDialog: typeof import('./components/dialog/EditSettingDialog.vue')['default']
     HighLight: typeof import('./components/HighLight.vue')['default']
     NtButton: typeof import('./components/NtButton.vue')['default']
+    NtCard: typeof import('./components/NtCard.vue')['default']
     NtConfigProvide: typeof import('./components/NtConfigProvide.vue')['default']
     NtContent: typeof import('./components/Loyout/NtContent.vue')['default']
     NtDialog: typeof import('./components/dialog/NtDialog.vue')['default']
