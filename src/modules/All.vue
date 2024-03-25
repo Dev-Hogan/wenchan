@@ -26,7 +26,7 @@
             </NtDropdown>
         </NtTag>
     </NtHeader>
-    <NtContent class="!mt-[120px]">
+    <NtContent class="!mt-[120px]" content-class="space-y-5">
         <NtCard v-for="i in 5" :key="i"></NtCard>
     </NtContent>
 </template>
