@@ -16,6 +16,16 @@ const router = createRouter({
           component: () => import('@/modules/All.vue')
         },
         {
+          path: 'focus',
+          name: Routes.focus,
+          component: () => import('@/modules/Focus.vue')
+        },
+        {
+          path: 'randomLook',
+          name: Routes.randomLook,
+          component: () => import('@/modules/RandomLook.vue')
+        },
+        {
           path: 'dev',
           name: Routes.dev,
           component: () => import('@/modules/Dev.vue')
