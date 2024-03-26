@@ -1,5 +1,5 @@
 <template>
-    <div tabindex="0" :class="['editor overflow-hidden', isFullscreen ? 'bg-theme-10' : '']" ref="el">
+    <div :class="['editor overflow-hidden', isFullscreen ? 'bg-theme-10' : '']" ref="el">
         <editor-content :editor="editor" :class="[isFullscreen ? 'mt-[46px] content' : '']">
         </editor-content>
         <NtIconButton class="absolute top-[10px] right-[24px]" icon="more"></NtIconButton>
@@ -47,7 +47,18 @@ const el = ref<HTMLElement | null>(null)
 
 const { isFullscreen, toggle } = useFullscreen(el)
 
-const emit = defineEmits(['push'])
+const emit = defineEmits(['push', 'fullscreen'])
+const fullscreen = () => {
+    toggle()
+    emit('fullscreen', isFullscreen.value)
+
+}
+
+defineExpose(
+    {
+        fullscreen
+    }
+)
 
 onMounted(() => {
     editor.value = new Editor({
