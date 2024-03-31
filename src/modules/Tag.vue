@@ -14,7 +14,7 @@
     </NtHeader>
     <NtContent>
         <div class="flex flex-wrap gap-5 mt-[33px]">
-            <NtButton :class="['border bg-light space-x-2', item.isSelected ? '[&>span]:text-white bg-theme' : '']"
+            <NtButton :class="['border rounded-3 bg-light space-x-2', item.isSelected ? '[&>span]:text-white bg-theme' : '']"
                 v-for="item in tags" :key="item.id" @click="select(item)">
                 <span class="text-light-6">{{
                     item.name }}</span><span class="text-light-5 text-[12px]">{{
