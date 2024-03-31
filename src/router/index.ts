@@ -26,6 +26,11 @@ const router = createRouter({
           component: () => import('@/modules/RandomLook.vue')
         },
         {
+          path: 'tags',
+          name: Routes.tags,
+          component: () => import('@/modules/Tag.vue')
+        },
+        {
           path: 'dev',
           name: Routes.dev,
           component: () => import('@/modules/Dev.vue')
