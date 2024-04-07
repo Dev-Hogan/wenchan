@@ -61,9 +61,12 @@
             name: '数据统计',
             icon: 'arrowRight'
         }, {
-            name: '数据统计',
-            icon: 'arrowRight'
-        }]" :key="i">
+            name: '设置',
+            icon: 'arrowRight',
+            action: () => {
+                $router.push({ name: Routes.settings })
+            }
+        }]" :key="i" @click="item?.action?.()">
                                     <div>{{ item.name }}</div>
                                     <NtIcon v-if="item.icon" :icon="item.icon as Icon"></NtIcon>
                                 </div>
@@ -94,7 +97,7 @@
 <script setup lang="ts">
 import { menus, category } from '@/mock'
 import { sidebarWidth } from '@/utils'
-import { Menu, Icon } from "@/models";
+import { Menu, Icon, Routes } from "@/models";
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
 

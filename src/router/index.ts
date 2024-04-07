@@ -31,6 +31,11 @@ const router = createRouter({
           component: () => import('@/modules/Tag.vue')
         },
         {
+          path: 'setting',
+          name: Routes.settings,
+          component: () => import('@/modules/Setting.vue')
+        },
+        {
           path: 'dev',
           name: Routes.dev,
           component: () => import('@/modules/Dev.vue')

@@ -99,7 +99,7 @@ function handleRename() {
 
 function handelGo2tag() {
     if (selectKeys.value.length >= 2 || selectKeys.value.length === 0) {
-        message.warn('无法前往复数标签')
+        message.warn('无法前往标签')
         return
     }
 }

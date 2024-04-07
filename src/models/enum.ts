@@ -13,9 +13,15 @@ export enum Routes {
   wastebasket = 'wastebasket',
 
   category = 'category',
+
+  settings = 'settings'
 }
 
 export enum ThemeMode {
   light = 'light',
   dark = 'dark'
+}
+
+export enum ThemeColor {
+  light = '#FFAC0A'
 }
