@@ -53,9 +53,6 @@ export default {
       fontSize: {
         s: '11px',
         m: '13px'
-      },
-      dropShadow: {
-        card: '0px 4px 2px 0px rgba(0, 0, 0, 0.07)'
       }
     }
   },

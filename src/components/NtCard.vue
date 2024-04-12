@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
 </script>
 <style scoped>
 ._common-card {
-    @apply border border-transparent hover:border-light-2 hover:shadow-sm hover:drop-shadow-card py-[12px] pl-12 pr-6 rounded-4;
+    @apply border border-transparent hover:border-light-2 hover:shadow-[0_4px_2px_0_rgba(0,0,0,0.07)] py-[12px] pl-12 pr-6 rounded-4;
     @apply relative focus-within:border-theme focus:bg-theme-10 focus-within:bg-theme-10 transition-colors;
 }
 </style>
