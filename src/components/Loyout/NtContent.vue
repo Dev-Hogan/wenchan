@@ -1,12 +1,18 @@
 <template>
-  <section class="flex flex-col mx-auto w-[--banner-width] mt-[62px] overflow-auto">
-    <NtScrollbar
+  <section
+    :class="[
+      'flex flex-col flex-1 mx-auto w-[--banner-width] mt-[62px] overflow-auto',
+      contentClass
+    ]"
+  >
+    <!-- <NtScrollbar
       class="flex flex-col"
       :wrap-class="'flex flex-1 flex-col'"
       :view-class="[contentClass, 'flex flex-1 flex-col']"
     >
       <slot></slot>
-    </NtScrollbar>
+    </NtScrollbar> -->
+    <slot></slot>
   </section>
 </template>
 

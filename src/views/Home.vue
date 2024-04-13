@@ -109,7 +109,13 @@
       ></div>
     </aside>
     <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
-      <RouterView></RouterView>
+      <NtScrollbar
+        class="flex-1"
+        :wrap-class="'flex flex-1 flex-col'"
+        :view-class="['flex flex-1 flex-col']"
+      >
+        <RouterView></RouterView>
+      </NtScrollbar>
     </main>
     <!-- 新增分类弹窗 -->
     <EditCategoryDialog v-model:open="categoryOpen" v-model:id="categoryId"></EditCategoryDialog>

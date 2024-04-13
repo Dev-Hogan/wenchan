@@ -1,6 +1,6 @@
 <template>
   <NtHeader title="设置"></NtHeader>
-  <NtContent contentClass="justify-between">
+  <NtContent contentClass="flex flex-1 justify-between">
     <div class="space-y-[40px]">
       <div class="flex items-center space-x-12">
         <NtAvatar class="w-[80px] h-[80px]">
