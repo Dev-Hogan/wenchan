@@ -19,7 +19,7 @@ export function formatNumber(val: number | string, precision?: number) {
     }
     ret = negative + int
     if (decimal) {
-      decimal = `,${decimal}`
+      decimal = `.${decimal}`
       ret += decimal
     }
   }

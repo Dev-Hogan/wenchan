@@ -35,6 +35,7 @@ declare module 'vue' {
     NtTooltip: typeof import('./components/NtTooltip.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Test: typeof import('./components/test/Test.vue')['default']
     Thumb: typeof import('./components/scrollbar/src/thumb.vue')['default']
   }
 }

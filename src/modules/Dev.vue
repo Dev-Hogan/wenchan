@@ -74,6 +74,8 @@
     >
       asdf
     </Tooltip>
+    12
+    <NtTest></NtTest>
   </NtContent>
 </template>
 
