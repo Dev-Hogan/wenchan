@@ -30,6 +30,7 @@ declare module 'vue' {
     NtProgress: typeof import('./components/NtProgress.vue')['default']
     NtScrollbar: typeof import('./components/scrollbar/src/NtScrollbar.vue')['default']
     NtSplit: typeof import('./components/NtSplit.vue')['default']
+    NtStatistic: typeof import('./components/NtStatistic.vue')['default']
     NtTag: typeof import('./components/NtTag.vue')['default']
     NtTooltip: typeof import('./components/NtTooltip.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
