@@ -8,12 +8,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Bar: typeof import('./components/scrollbar/src/bar.vue')['default']
+    Chart: typeof import('./components/NtChart/Chart.vue')['default']
     EditCategoryDialog: typeof import('./components/dialog/EditCategoryDialog.vue')['default']
     EditSettingDialog: typeof import('./components/dialog/EditSettingDialog.vue')['default']
     HighLight: typeof import('./components/HighLight.vue')['default']
     NtAvatar: typeof import('./components/NtAvatar.vue')['default']
     NtButton: typeof import('./components/NtButton.vue')['default']
     NtCard: typeof import('./components/NtCard.vue')['default']
+    NtChart: typeof import('./components/NtChart/NtChart.vue')['default']
     NtConfigProvide: typeof import('./components/NtConfigProvide.vue')['default']
     NtContent: typeof import('./components/Loyout/NtContent.vue')['default']
     NtDialog: typeof import('./components/dialog/NtDialog.vue')['default']

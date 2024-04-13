@@ -6,9 +6,9 @@ type Option = {
 export const useTest = ({ count }: Option) => {
   const NtTest = defineComponent({
     name: 'Test',
-    setup() {
-      return <Test count={count}></Test>
+    render() {
+      return h(Test, { count })
     }
   })
-  return NtTest
+  return { NtTest }
 }

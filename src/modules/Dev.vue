@@ -76,6 +76,8 @@
     </Tooltip>
     12
     <NtTest></NtTest>
+
+    <NtChart></NtChart>
   </NtContent>
 </template>
 
@@ -89,6 +91,30 @@ import { message } from 'ant-design-vue'
 import { Dialog } from '@/components/NtDialog2'
 import { supabase } from '@/api'
 import { Tooltip } from 'ant-design-vue'
+import { useTest } from '@/components/test'
+import { useEcharts } from '@/components/NtChart'
+
+const { NtTest } = useTest({ count: 12 })
+const { NtChart } = useEcharts({
+  height: 400,
+  width: 600,
+  option: {
+    title: {
+      text: '测试'
+    },
+    xAxis: {
+      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    },
+    yAxis: {},
+    series: [
+      {
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }
+    ]
+  }
+})
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
