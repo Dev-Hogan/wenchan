@@ -31,19 +31,24 @@ const router = createRouter({
           component: () => import('@/modules/Tag.vue')
         },
         {
+          path: 'category/:categoryId',
+          name: Routes.category,
+          component: () => import('@/modules/Category.vue')
+        },
+        {
           path: 'setting',
           name: Routes.settings,
           component: () => import('@/modules/Setting.vue')
         },
         {
+          path: 'statistic',
+          name: Routes.statistic,
+          component: () => import('@/modules/Statistics.vue')
+        },
+        {
           path: 'dev',
           name: Routes.dev,
           component: () => import('@/modules/Dev.vue')
-        },
-        {
-          path: 'category/:categoryId',
-          name: Routes.category,
-          component: () => import('@/modules/Category.vue')
         }
       ]
     },

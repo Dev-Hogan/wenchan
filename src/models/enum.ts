@@ -14,7 +14,8 @@ export enum Routes {
 
   category = 'category',
 
-  settings = 'settings'
+  settings = 'settings',
+  statistic = 'statistic'
 }
 
 export enum ThemeMode {

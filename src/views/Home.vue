@@ -1,103 +1,125 @@
 <template>
-    <div class="flex w-full h-full">
-        <aside :style="{ width: sidebarWidth + 'px' }"
-            class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col border-r-[1px]">
-            <NtInput class="mx-6 bg-light-2" placeholder="搜索">
-                <template #prefix>
-                    <NtIcon icon="search"></NtIcon>
-                </template>
-            </NtInput>
-            <NtMenusTitle title="概览"></NtMenusTitle>
-            <NtMenus :menus="menus"></NtMenus>
+  <div class="flex w-full h-full">
+    <aside
+      :style="{ width: sidebarWidth + 'px' }"
+      class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col border-r-[1px]"
+    >
+      <NtInput class="mx-6 bg-light-2" placeholder="搜索">
+        <template #prefix>
+          <NtIcon icon="search"></NtIcon>
+        </template>
+      </NtInput>
+      <NtMenusTitle title="概览"></NtMenusTitle>
+      <NtMenus :menus="menus"></NtMenus>
 
-            <NtMenusTitle title="分类">
-                <template #append>
-                    <NtTooltip title="新分类">
-                        <NtIconButton icon="addTag" @click="categoryOpen = true"></NtIconButton>
-                    </NtTooltip>
-                </template>
-            </NtMenusTitle>
+      <NtMenusTitle title="分类">
+        <template #append>
+          <NtTooltip title="新分类">
+            <NtIconButton icon="addTag" @click="categoryOpen = true"></NtIconButton>
+          </NtTooltip>
+        </template>
+      </NtMenusTitle>
 
-            <NtScrollbar>
-                <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category">
-                    <template #append="{ menu }">
-                        <NtDropdown :options="[{
-            name: '重命名',
-            icon: 'edit',
-            iconClass: 'stroke-theme',
-            split: true,
-            action: () => {
-                categoryOpen = true
-                categoryId = menu.id
-            }
-        }, {
-            name: '导出PDF',
-            iconClass: 'stroke-theme',
-            icon: 'pdf'
-        }, {
-            name: '删除分类',
-            iconClass: 'stroke-theme',
-            icon: 'trash',
-            split: true
-        }]">
-                            <template #default="{ isOpen }">
-                                <NtIconButton icon="more"
-                                    :class="['group-hover:opacity-100 opacity-0', isOpen ? 'opacity-100' : 'opacity-0']"
-                                    @click="handleCategory(menu)">
-                                </NtIconButton>
-                            </template>
-                        </NtDropdown>
-                    </template>
-                </NtMenus>
-            </NtScrollbar>
+      <NtScrollbar>
+        <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category">
+          <template #append="{ menu }">
+            <NtDropdown
+              :options="[
+                {
+                  name: '重命名',
+                  icon: 'edit',
+                  iconClass: 'stroke-theme',
+                  split: true,
+                  action: () => {
+                    categoryOpen = true
+                    categoryId = menu.id
+                  }
+                },
+                {
+                  name: '导出PDF',
+                  iconClass: 'stroke-theme',
+                  icon: 'pdf'
+                },
+                {
+                  name: '删除分类',
+                  iconClass: 'stroke-theme',
+                  icon: 'trash',
+                  split: true
+                }
+              ]"
+            >
+              <template #default="{ isOpen }">
+                <NtIconButton
+                  icon="more"
+                  :class="[
+                    'group-hover:opacity-100 opacity-0',
+                    isOpen ? 'opacity-100' : 'opacity-0'
+                  ]"
+                  @click="handleCategory(menu)"
+                >
+                </NtIconButton>
+              </template>
+            </NtDropdown>
+          </template>
+        </NtMenus>
+      </NtScrollbar>
 
-            <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0 ">
-                <NtDropdown overlayClass="p-11 flex flex-1 flex-col">
-                    <template #overlay>
-                        <div class="space-y-3 font-medium">
-                            <div class="border-b">
-
-                                <div class="flex items-center justify-between cursor-pointer min-h-[36px]" v-for="(item, i) in [{
-            name: '数据统计',
-            icon: 'arrowRight'
-        }, {
-            name: '设置',
-            icon: 'arrowRight',
-            action: () => {
-                $router.push({ name: Routes.settings })
-            }
-        }]" :key="i" @click="item?.action?.()">
-                                    <div>{{ item.name }}</div>
-                                    <NtIcon v-if="item.icon" :icon="item.icon as Icon"></NtIcon>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </template>
-                    <template #overlayAppend>
-                        <div>退出登录</div>
-                    </template>
-                    <NtIconButton icon="setting2"></NtIconButton>
-                </NtDropdown>
-
+      <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0">
+        <NtDropdown overlayClass="p-11 flex flex-1 flex-col">
+          <template #overlay>
+            <div class="space-y-3 font-medium">
+              <div class="border-b">
+                <div
+                  class="flex items-center justify-between cursor-pointer min-h-[36px]"
+                  v-for="(item, i) in [
+                    {
+                      name: '数据统计',
+                      icon: 'arrowRight',
+                      action: () => {
+                        $router.push({ name: Routes.statistic })
+                      }
+                    },
+                    {
+                      name: '设置',
+                      icon: 'arrowRight',
+                      action: () => {
+                        $router.push({ name: Routes.settings })
+                      }
+                    }
+                  ]"
+                  :key="i"
+                  @click="item?.action?.()"
+                >
+                  <div>{{ item.name }}</div>
+                  <NtIcon v-if="item.icon" :icon="item.icon as Icon"></NtIcon>
+                </div>
+              </div>
             </div>
-            <div @mousedown="startResize" @mouseup="stopResize"
-                class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0 mousedown:bg-theme-40">
-            </div>
-        </aside>
-        <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
-            <RouterView></RouterView>
-        </main>
-        <!-- 新增分类弹窗 -->
-        <EditCategoryDialog v-model:open="categoryOpen" v-model:id="categoryId"></EditCategoryDialog>
-    </div>
+          </template>
+          <template #overlayAppend>
+            <div>退出登录</div>
+          </template>
+          <NtIconButton icon="setting2"></NtIconButton>
+        </NtDropdown>
+      </div>
+      <div
+        @mousedown="startResize"
+        @mouseup="stopResize"
+        class="h-full w-2 cursor-col-resize bg-transparent absolute top-0 bottom-0 right-0 mousedown:bg-theme-40"
+      ></div>
+    </aside>
+    <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
+      <RouterView></RouterView>
+    </main>
+    <!-- 新增分类弹窗 -->
+    <EditCategoryDialog v-model:open="categoryOpen" v-model:id="categoryId"></EditCategoryDialog>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { menus, category } from '@/mock'
 import { sidebarWidth } from '@/utils'
-import { Menu, Icon, Routes } from "@/models";
+import { Menu, Icon, Routes } from '@/models'
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
 
@@ -106,37 +128,35 @@ let startX = 0
 let startWidth = 0
 
 function startResize(event: MouseEvent) {
-    isResizing = true
-    startX = event.clientX
-    startWidth = sidebarWidth.value
-    document.addEventListener('mousemove', resize)
-    document.addEventListener('mouseup', stopResize)
+  isResizing = true
+  startX = event.clientX
+  startWidth = sidebarWidth.value
+  document.addEventListener('mousemove', resize)
+  document.addEventListener('mouseup', stopResize)
 }
 
 function resize(event: MouseEvent) {
-    if (!isResizing) return
-    const diffX = event.clientX - startX
-    const newWidth = startWidth + diffX
-    sidebarWidth.value = Math.max(170, newWidth) // 设置最小宽度为50px
-    if (newWidth >= 350) {
-        sidebarWidth.value = 350
-    }
+  if (!isResizing) return
+  const diffX = event.clientX - startX
+  const newWidth = startWidth + diffX
+  sidebarWidth.value = Math.max(170, newWidth) // 设置最小宽度为50px
+  if (newWidth >= 350) {
+    sidebarWidth.value = 350
+  }
 }
 
 function stopResize() {
-    isResizing = false
-    document.removeEventListener('mousemove', resize)
-    document.removeEventListener('mouseup', stopResize)
+  isResizing = false
+  document.removeEventListener('mousemove', resize)
+  document.removeEventListener('mouseup', stopResize)
 }
 window.addEventListener('mouseup', stopResize)
 
 function handleCategory(menu: Menu) {
-    if (menu.id) {
-        console.log(menu.id);
-
-    }
+  if (menu.id) {
+    console.log(menu.id)
+  }
 }
-
 </script>
 
 <!-- <style scoped>

@@ -6,7 +6,6 @@
     </template>
   </NtHeader>
   <NtContent>
-
     <h1>开发工具</h1>
     <button class="border" @click="toggleTheme">点击切换主题{{ themeMode }}</button>
     <br />
@@ -15,7 +14,12 @@
     <br />
     <h1>图标库</h1>
     <section class="flex gap-4 flex-wrap max-w-[1000px]">
-      <div v-for="icon in icons" :key="icon" class="px-2 py-2 cursor-pointer" @click="copyIcon(icon)">
+      <div
+        v-for="icon in icons"
+        :key="icon"
+        class="px-2 py-2 cursor-pointer"
+        @click="copyIcon(icon)"
+      >
         <div>{{ icon }}</div>
         <NtIcon :icon="icon"></NtIcon>
       </div>
@@ -23,18 +27,15 @@
     <h1>组件</h1>
     <br />
     <NtInput v-model="inputValue">
-
       <template #prefix>
         <NtIcon icon="search"></NtIcon>
       </template>
     </NtInput>
     <div>{{ inputValue }}</div>
-    <br>
-    <Dialog>
-    </Dialog>
+    <br />
+    <Dialog> </Dialog>
     <NtButton type="primary" @click="dialogOpen = true">点击弹窗</NtButton>
-    <NtDialog title="false" v-model:open="dialogOpen">
-      123</NtDialog>
+    <NtDialog title="false" v-model:open="dialogOpen"> 123</NtDialog>
 
     <HighLight></HighLight>
     <NtInput hight-light></NtInput>
@@ -51,7 +52,7 @@
     </div>
     <div>返回结果</div>
     <pre>{{ severData }}</pre>
-    <br>
+    <br />
     <div class="container" ref="container">
       <div class="sidebar" :style="{ width: sidebarWidth + 'px' }">
         <!-- 侧边栏内容 -->
@@ -61,18 +62,19 @@
         <!-- 主内容区域 -->
       </div>
     </div>
-    <br>
+    <br />
     <div class="editor">test style</div>
-    <br>
-    <Tooltip @open-change="d => {
-      console.log('触发tooltip', d);
-
-    }">
+    <br />
+    <Tooltip
+      @open-change="
+        (d) => {
+          console.log('触发tooltip', d)
+        }
+      "
+    >
       asdf
     </Tooltip>
   </NtContent>
-
-
 </template>
 
 <script setup lang="ts">
@@ -80,11 +82,11 @@ import { useThemMode } from '@/stores'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { Icon, ThemeMode } from '@/models'
-import { iconMap } from '@/utils';
-import { message } from 'ant-design-vue';
-import { Dialog } from '@/components/NtDialog2';
-import { supabase } from "@/api";
-import { Tooltip } from 'ant-design-vue';
+import { iconMap } from '@/utils'
+import { message } from 'ant-design-vue'
+import { Dialog } from '@/components/NtDialog2'
+import { supabase } from '@/api'
+import { Tooltip } from 'ant-design-vue'
 
 const themeModeStore = useThemMode()
 const themeMode = computed(() => themeModeStore.themeMode.value)
@@ -119,31 +121,22 @@ function copyIcon(icon: Icon) {
     })
   } catch (e) {
     // console.log(navigator);
-    console.log(e, 'http没有复制api');
-    console.log(`<NtIcon icon="${icon}"></NtIcon>`);
-
-
+    console.log(e, 'http没有复制api')
+    console.log(`<NtIcon icon="${icon}"></NtIcon>`)
   }
 }
 
 const inputValue = ref<string>('123')
 
-
 const dialogOpen = ref<boolean>(false)
-
 
 const userName = ref<string[]>(['username'])
 async function getUserName() {
-
-  let { data: user, error } = await supabase
-    .from('user')
-    .select('name')
+  let { data: user, error } = await supabase.from('user').select('name')
   if (error) {
-    console.log(error);
-
+    console.log(error)
   } else {
-
-    userName.value = user?.map(d => d.name) || []
+    userName.value = user?.map((d) => d.name) || []
   }
 }
 
@@ -152,59 +145,52 @@ const formString = ref<string>('user')
 const select = ref<string>()
 
 async function get() {
-  let { data, error } = await supabase
-    .from(formString.value)
-    .select(select.value)
+  let { data, error } = await supabase.from(formString.value).select(select.value)
   if (error) {
-    console.log(error);
-
+    console.log(error)
   } else {
     severData.value = data
   }
 }
 
-
-
-
-const container = ref<HTMLElement | null>(null);
-const sidebarWidth = ref(200);
-let isResizing = false;
-let startX = 0;
-let startWidth = 0;
+const container = ref<HTMLElement | null>(null)
+const sidebarWidth = ref(200)
+let isResizing = false
+let startX = 0
+let startWidth = 0
 
 function startResize(event: MouseEvent) {
-  isResizing = true;
-  startX = event.clientX;
-  startWidth = sidebarWidth.value;
-  document.addEventListener('mousemove', resize);
-  document.addEventListener('mouseup', stopResize);
+  isResizing = true
+  startX = event.clientX
+  startWidth = sidebarWidth.value
+  document.addEventListener('mousemove', resize)
+  document.addEventListener('mouseup', stopResize)
 }
 
 function resize(event: MouseEvent) {
-  if (!isResizing) return;
-  const diffX = event.clientX - startX;
-  const newWidth = startWidth + diffX;
-  sidebarWidth.value = Math.max(50, newWidth); // 设置最小宽度为50px  
+  if (!isResizing) return
+  const diffX = event.clientX - startX
+  const newWidth = startWidth + diffX
+  sidebarWidth.value = Math.max(50, newWidth) // 设置最小宽度为50px
 }
 
 function stopResize() {
-  isResizing = false;
-  document.removeEventListener('mousemove', resize);
-  document.removeEventListener('mouseup', stopResize);
+  isResizing = false
+  document.removeEventListener('mousemove', resize)
+  document.removeEventListener('mouseup', stopResize)
 }
 
 onMounted(() => {
   if (container.value) {
-    container.value.addEventListener('mouseleave', stopResize);
+    container.value.addEventListener('mouseleave', stopResize)
   }
-});
+})
 
 onUnmounted(() => {
   if (container.value) {
-    container.value.removeEventListener('mouseleave', stopResize);
+    container.value.removeEventListener('mouseleave', stopResize)
   }
-});
-
+})
 </script>
 <style scoped>
 .container {
@@ -236,6 +222,5 @@ onUnmounted(() => {
 <style lang="postcss" scoped>
 .editor {
   @apply min-h-[200px] border font-medium focus:outline-none hover:bg-theme;
-
 }
 </style>

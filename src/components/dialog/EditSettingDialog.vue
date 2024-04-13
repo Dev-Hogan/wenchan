@@ -1,7 +1,5 @@
 <template>
-    <NtDialog>
-
-    </NtDialog>
+  <NtDialog> </NtDialog>
 </template>
 
 <script setup lang="ts">

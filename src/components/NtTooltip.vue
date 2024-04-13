@@ -1,27 +1,27 @@
 <template>
-    <Tooltip overlayClassName="tooltip" :title>
-
-        <template #default>
-            <slot name="default"></slot>
-        </template>
-    </Tooltip>
+  <Tooltip overlayClassName="tooltip" :title>
+    <template #default>
+      <slot name="default"></slot>
+    </template>
+  </Tooltip>
 </template>
 
 <script setup lang="ts">
-import { Tooltip } from 'ant-design-vue';
+import { Tooltip } from 'ant-design-vue'
 withDefaults(
-    defineProps<{
-        title?: string
-    }>(), {
+  defineProps<{
+    title?: string
+  }>(),
+  {
     title: ''
-}
+  }
 )
 </script>
 <style>
 .tooltip .ant-tooltip-inner {
-    @apply bg-default text-[13px] text-light-6 font-medium rounded-4 border-[0.5px];
+  @apply bg-default text-[13px] text-light-6 font-medium rounded-4 border-[0.5px];
 }
-.tooltip .ant-tooltip-arrow{
-    @apply opacity-0;
+.tooltip .ant-tooltip-arrow {
+  @apply opacity-0;
 }
 </style>

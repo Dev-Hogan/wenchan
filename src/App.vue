@@ -3,16 +3,19 @@
     <NtConfigProvide>
       <RouterView />
     </NtConfigProvide>
-    <div @click="geDevTool"
-      class="text-light-7 absolute bottom-12 right-12 border rounded-full w-14 h-14 flex items-center justify-center cursor-pointer">
-      dev </div>
+    <div
+      @click="geDevTool"
+      class="text-light-7 absolute bottom-12 right-12 border rounded-full w-14 h-14 flex items-center justify-center cursor-pointer"
+    >
+      dev
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import router from '@/router';
+import router from '@/router'
 import { Routes, ThemeMode } from '@/models'
-import { THEME_KEY } from '@/const';
+import { THEME_KEY } from '@/const'
 const theme = localStorage.getItem(THEME_KEY) || ThemeMode.light
 if (theme === ThemeMode.light) {
   document.documentElement.classList.remove(ThemeMode.dark)
@@ -26,7 +29,8 @@ function geDevTool() {
   const currentRouter = router.currentRoute.value.name
   if (currentRouter !== Routes.dev) {
     router.push({
-      name: Routes.dev, query: {
+      name: Routes.dev,
+      query: {
         title: '开发工具'
       }
     })
