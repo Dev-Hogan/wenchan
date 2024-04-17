@@ -64,7 +64,7 @@
       </div>
       <div class="space-y-8">
         <div class="font-medium">危险操作</div>
-        <NtButton class="_button !text-delete">导入备份</NtButton>
+        <NtButton class="_button !text-delete">退出登录</NtButton>
       </div>
     </div>
 

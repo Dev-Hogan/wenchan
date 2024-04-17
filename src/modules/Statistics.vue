@@ -1,6 +1,6 @@
 <template>
   <NtHeader title="数据统计" no-edit></NtHeader>
-  <NtContent content-class="space-y-20">
+  <NtContent content-class="space-y-20 mb-[24px]">
     <div class="flex space-x-3 [&>div]:flex-1">
       <NtStatistic
         v-for="item in statistics"
