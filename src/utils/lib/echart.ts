@@ -1,6 +1,6 @@
 import * as echarts from 'echarts/core'
 
-import { BarChart } from 'echarts/charts'
+import { BarChart, HeatmapChart } from 'echarts/charts'
 
 import {
   TitleComponent,
@@ -30,6 +30,7 @@ echarts.use([
   AriaComponent,
   ParallelComponent,
   BarChart,
+  HeatmapChart,
   SVGRenderer,
   RadarComponent,
   ToolboxComponent,

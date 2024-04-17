@@ -2,8 +2,8 @@
   <div
     ref="echartRef"
     :style="{
-      width: width + 'px',
-      height: height + 'px'
+      width: width,
+      height: height
     }"
   ></div>
 </template>
@@ -13,13 +13,13 @@ import echarts from '@/utils/lib/echart'
 import type { EChartsOption } from 'echarts'
 const props = withDefaults(
   defineProps<{
-    width?: number
-    height?: number
+    width?: string
+    height?: string
     option: EChartsOption
   }>(),
   {
-    width: 300,
-    height: 300
+    width: '100%',
+    height: '300px'
   }
 )
 
@@ -34,5 +34,9 @@ onMounted(() => {
   }
   // 绘制图表
   if (props.option) chartInstance.setOption(props.option)
+})
+
+onUnmounted(() => {
+  chartInstance?.dispose()
 })
 </script>

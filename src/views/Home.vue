@@ -65,10 +65,15 @@
       </NtScrollbar>
 
       <div class="h-[54px] pl-[18px] pt-[10px] pb-[14px] fixed bottom-0">
-        <NtDropdown overlayClass="p-11 flex flex-1 flex-col">
+        <NtDropdown :show-count="false" overlayClass="p-11 flex flex-1 flex-col">
           <template #overlay>
-            <div class="space-y-3 font-medium">
-              <div class="border-b">
+            <div class="!space-y-5 !py-7">
+              <TodayCharts></TodayCharts>
+              <div>
+                <div class="text-[10px] text-light-6">今天 2024/1/4</div>
+                <div class="text-[16px] text-theme font-semibold">1234字符</div>
+              </div>
+              <div class="space-y-3 font-medium">
                 <div
                   class="flex items-center justify-between cursor-pointer min-h-[36px]"
                   v-for="(item, i) in [
@@ -96,10 +101,12 @@
               </div>
             </div>
           </template>
-          <template #overlayAppend>
-            <div>退出登录</div>
-          </template>
-          <NtIconButton icon="setting2"></NtIconButton>
+          <div class="flex items-center space-x-3">
+            <NtAvatar class="w-[30px] h-[30px]">
+              <img :src="avatar" />
+            </NtAvatar>
+            <div class="text-[13px] font-medium">Haaozhang</div>
+          </div>
         </NtDropdown>
       </div>
       <div
@@ -124,8 +131,9 @@
 
 <script setup lang="ts">
 import { menus, category } from '@/mock'
-import { sidebarWidth } from '@/utils'
+import { sidebarWidth, useEcharts } from '@/utils'
 import { Menu, Icon, Routes } from '@/models'
+import avatar from '@/assets/avatar.png'
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
 
@@ -163,6 +171,47 @@ function handleCategory(menu: Menu) {
     console.log(menu.id)
   }
 }
+
+const { NtChart: TodayCharts } = useEcharts({
+  height: '63px',
+  option: {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    grid: {
+      left: 0,
+      right: 0,
+      bottom: 0,
+      top: '10px',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        axisTick: {
+          alignWithLabel: true
+        }
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'Direct',
+        type: 'bar',
+        barWidth: '60%',
+        data: [10, 52, 200, -10, 390, 330, 220]
+      }
+    ]
+  }
+})
 </script>
 
 <!-- <style scoped>

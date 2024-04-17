@@ -96,8 +96,7 @@ import { useEcharts } from '@/components/NtChart'
 
 const { NtTest } = useTest({ count: 12 })
 const { NtChart } = useEcharts({
-  height: 400,
-  width: 600,
+  height: '400px',
   option: {
     title: {
       text: '测试'
