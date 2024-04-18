@@ -3,7 +3,7 @@
     class="h-screen flex-1 flex flex-col justify-between items-center pb-[68px] pt-[110px] w-[360px] mx-auto"
   >
     <div class="space-y-[115px] text-center">
-      <div v-if="!isWrite">
+      <div v-if="!isRegister">
         <div class="text-[28px] font-semibold text-theme">问禅笔记</div>
         <div class="text-light-5 text-[14px]">通过问问题的方式来记录、学习、回顾知识</div>
       </div>
