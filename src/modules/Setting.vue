@@ -64,7 +64,7 @@
       </div>
       <div class="space-y-8">
         <div class="font-medium">危险操作</div>
-        <NtButton class="_button !text-delete">退出登录</NtButton>
+        <NtButton class="_button !text-delete" @click="logout">退出登录</NtButton>
       </div>
     </div>
 
@@ -81,6 +81,8 @@ import themeLight from '@/assets/theme-light.png'
 import themeDark from '@/assets/theme-dark.png'
 import themeSunny from '@/assets/theme-sunny.png'
 import themeSea from '@/assets/theme-sea.png'
+import { useRouter } from 'vue-router'
+import { Routes } from '@/models'
 const email = ref<string>('Wenchan@gmail.com')
 const themes = [
   {
@@ -104,6 +106,12 @@ const themes = [
     img: themeSea
   }
 ]
+const router = useRouter()
+function logout() {
+  router.push({
+    name: Routes.login
+  })
+}
 </script>
 <style scoped>
 ._button {

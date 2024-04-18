@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-light p-9">
+  <div class="flex flex-col bg-light p-9 rounded-4">
     <div v-if="title" :class="[titleClass ? titleClass : '','text-light-5 font-medium']">{{ title }}</div>
     <div :class="[numberClass ? numberClass : '','text-light-7 font-[860] text-[22px]']">{{ formatNumber(number) }}</div>
   </div>

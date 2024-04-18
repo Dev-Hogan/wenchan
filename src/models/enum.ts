@@ -4,6 +4,7 @@ export enum Routes {
   dev = 'dev',
   pageNotFound = 'pageNotFound',
   home = 'home',
+  login = 'login',
 
   all = 'all',
   focus = 'focus',

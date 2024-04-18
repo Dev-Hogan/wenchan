@@ -6,6 +6,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/login',
+      name: Routes.login,
+      component: () => import('@/views/Login.vue')
+    },
+    {
       path: '/',
       name: Routes.home,
       component: HomeView,
@@ -45,6 +50,7 @@ const router = createRouter({
           name: Routes.statistic,
           component: () => import('@/modules/Statistics.vue')
         },
+
         {
           path: 'dev',
           name: Routes.dev,
@@ -52,6 +58,7 @@ const router = createRouter({
         }
       ]
     },
+
     {
       path: '/:catchAll(.*)',
       name: Routes.pageNotFound,

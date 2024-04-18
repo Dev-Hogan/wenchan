@@ -13,6 +13,8 @@
       <slot name="prefix"></slot>
     </div>
     <input
+      :autocomplete="autoComplete"
+      :maxlength="maxLength"
       :placeholder="placeholder"
       v-model="modelValue"
       :class="['flex-1 outline-none bg-transparent', inputClass]"
@@ -30,11 +32,15 @@ withDefaults(
     placeholder?: string
     inputClass?: string
     hightLight?: boolean
+    autoComplete?: 'off'|'on'|'new-password'
+    maxLength?: number
   }>(),
   {
     placeholder: undefined,
     inputClass: undefined,
-    hightLight: false
+    hightLight: false,
+    autoComplete: 'on',
+    maxLength: undefined
   }
 )
 watchEffect(() => {
