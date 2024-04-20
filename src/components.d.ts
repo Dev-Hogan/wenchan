@@ -35,6 +35,7 @@ declare module 'vue' {
     NtStatistic: typeof import('./components/NtStatistic.vue')['default']
     NtTag: typeof import('./components/NtTag.vue')['default']
     NtTooltip: typeof import('./components/NtTooltip.vue')['default']
+    NtUpload: typeof import('./components/NtUpload.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Test: typeof import('./components/test/Test.vue')['default']

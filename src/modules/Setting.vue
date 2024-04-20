@@ -109,7 +109,10 @@ const themes = [
 const router = useRouter()
 function logout() {
   router.push({
-    name: Routes.login
+    name: Routes.login,
+    query: {
+      init: 1
+    }
   })
 }
 </script>

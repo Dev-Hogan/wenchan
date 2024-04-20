@@ -13,17 +13,24 @@
       <slot name="prefix"></slot>
     </div>
     <input
+      ref="inputRef"
       :autocomplete="autoComplete"
       :maxlength="maxLength"
       :placeholder="placeholder"
       v-model="modelValue"
       :class="['flex-1 outline-none bg-transparent', inputClass]"
       type="text"
+      @input="
+        (e) => {
+          emitInput(e as InputEvent)
+        }
+      "
     />
   </div>
 </template>
 
 <script setup lang="ts">
+// import { useDebounceFn } from '@vueuse/core'
 const isFocused = ref(false)
 const isInput = ref(false)
 const modelValue = defineModel<string>()
@@ -32,7 +39,7 @@ withDefaults(
     placeholder?: string
     inputClass?: string
     hightLight?: boolean
-    autoComplete?: 'off'|'on'|'new-password'
+    autoComplete?: 'off' | 'on' | 'new-password'
     maxLength?: number
   }>(),
   {
@@ -49,5 +56,32 @@ watchEffect(() => {
   } else {
     isInput.value = false
   }
+})
+
+const inputRef = ref<HTMLInputElement>()
+const focus = () => {
+  inputRef.value?.focus()
+}
+const blur = () => {
+  inputRef.value?.blur()
+}
+
+const emit = defineEmits<{
+  (e: 'input', val: string | undefined): void
+}>()
+const emitInput = (e: InputEvent) => {
+  if (e.isTrusted) {
+    if (e.data === null) {
+      emit('input', undefined)
+    } else {
+      emit('input', e.data)
+    }
+  }
+}
+// const dbEmitInput = useDebounceFn(emitInput, 100)
+
+defineExpose({
+  focus,
+  blur
 })
 </script>
