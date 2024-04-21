@@ -77,8 +77,13 @@
     </div>
     <div class="text-light-5 text-[12px] font-medium">
       点击登录即表示你同意我们的《用户协议》和《隐私政策》
-      <span @click="back">back</span>
     </div>
+    <NtIconButton
+      v-if="!step[0]"
+      icon="arrowLeft3"
+      @click="back"
+      class="absolute top-[30px] left-[30px]"
+    ></NtIconButton>
   </div>
 </template>
 
@@ -94,16 +99,20 @@ const isWriteName = computed(() => !!name.value)
 // 0、填邮箱 1、验证码 2、输入姓名
 const step = useSessionStorage('register-step', [true, false, false])
 const router = useRouter()
-// const cr = router.currentRoute.value.query?.init
-// if (cr) {
-//   step.value = [true, false, false]
-// }
 
 function back() {
-  const idx = step.value.findIndex((d) => d)
-  if (idx > 0) {
-    step.value[idx] = false
-    step.value[idx - 1] = true
+  // const idx = step.value.findIndex((d) => d)
+  // if (idx > 0) {
+  //   step.value[idx] = false
+  //   step.value[idx - 1] = true
+  // }
+  if (step.value[1]) {
+    step.value[1] = false
+    step.value[0] = true
+  } else if (step.value[2]) {
+    step.value[2] = false
+    step.value[1] = false
+    step.value[0] = true
   }
 }
 
@@ -117,15 +126,12 @@ const verificationCode = ref<string[]>([])
 const inputRefs = ref<InstanceType<typeof NtInput>[]>([])
 function updateCode(idx: number, value: string) {
   if (value && value.trim() !== '') {
-    // verificationCode.value[idx] = value
     // 聚焦
     if (idx === 6) {
       inputRefs.value![0]?.focus()
     } else {
       inputRefs.value![idx + 1]?.focus()
     }
-  } else {
-    // verificationCode.value[idx] = value
   }
 }
 function deleteCode(idx: number) {
@@ -138,7 +144,6 @@ watch(
   (val) => {
     nextTick(() => {
       val && inputRefs.value![0]?.focus()
-      // if (val === false) unWatchCode()
     })
   },
   {

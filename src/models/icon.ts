@@ -47,5 +47,6 @@ export type Icon =
   | 'publish'
   | 'pdf'
   | 'DownOutlined'
+  | 'arrowLeft3'
 
 export type IconMap = Partial<Record<Icon, string>>

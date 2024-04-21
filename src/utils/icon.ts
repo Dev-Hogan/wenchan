@@ -46,6 +46,7 @@ import linkTag from '$/linkTag.svg'
 import fullScreen2 from '$/fullScreen2.svg'
 import publish from '$/publish.svg'
 import pdf from '$/pdf.svg'
+import arrowLeft3 from '$/arrow-left3.svg'
 
 export const iconMap: IconMap = {
   addTag: addTag,
@@ -55,6 +56,7 @@ export const iconMap: IconMap = {
   arrowBottom: arrowBottom,
   arrowLeft: arrowLeft,
   arrowLeft2x: arrowLeft2x,
+  arrowLeft3: arrowLeft3,
   arrowRight: arrowRight,
   arrowTop: arrowTop,
   ask1: ask1,
