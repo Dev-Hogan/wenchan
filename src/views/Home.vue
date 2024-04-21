@@ -173,41 +173,84 @@ function handleCategory(menu: Menu) {
 }
 
 const { NtChart: TodayCharts } = useEcharts({
-  height: '63px',
+  height: '60px',
   option: {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
+        type: 'none'
+      },
+      formatter: (val: any) => {
+        const data = val?.[0]
+        return (
+          `<span class="text-[14px] text-light-6">${data?.name}<span>` +
+          '<br>' +
+          `<div class="text-theme text-[15px] font-semibold">${data?.value}字符</div>`
+        )
       }
     },
     grid: {
-      left: 0,
-      right: 0,
-      bottom: 0,
-      top: '10px',
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      top: 0,
       containLabel: true
     },
     xAxis: [
       {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        show: false,
+        data: ['2024/1/1', '2024/1/2', '2024/1/3', '2024/1/4', '2024/1/4', '2024/1/5', '2024/1/6'],
         axisTick: {
           alignWithLabel: true
+        },
+        axisLabel: {
+          show: false
         }
       }
     ],
     yAxis: [
       {
-        type: 'value'
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+        axisLabel: {
+          show: false
+        }
       }
     ],
     series: [
       {
-        name: 'Direct',
+        name: '字符',
         type: 'bar',
         barWidth: '60%',
-        data: [10, 52, 200, -10, 390, 330, 220]
+        data: [
+          10,
+          52,
+          200,
+          {
+            value: -10,
+            itemStyle: {
+              color: '#EAEAEA'
+            }
+          },
+          390,
+          330,
+          220
+        ],
+
+        emphasis: {
+          label: {},
+          itemStyle: {
+            color: '#FF800A'
+          }
+        },
+        itemStyle: {
+          borderRadius: 5
+        }
       }
     ]
   }

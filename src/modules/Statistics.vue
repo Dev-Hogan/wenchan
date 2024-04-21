@@ -65,36 +65,63 @@ const statistics = [
 ]
 
 const { NtChart: Records } = useEcharts({
+  height: '160px',
   option: {
-    title: {
-      top: 30,
-      left: 'center',
-      text: 'Daily Step Count'
+    tooltip: {
+      formatter: (val: any) => {
+        return (
+          `<span class="text-[14px] text-light-6">${val?.data?.[0]}<span>` +
+          '<br>' +
+          `<div class="text-theme text-[15px] font-semibold">${val?.data?.[1]}字符</div>`
+        )
+      }
     },
-    tooltip: {},
     visualMap: {
+      show: false,
       min: 0,
-      max: 10000,
+      max: 400,
       type: 'piecewise',
       orient: 'horizontal',
       left: 'center',
-      top: 65
+      top: 0,
+      pieces: [
+        // 自定义每一段的范围，以及每一段的文字
+        { gte: 150, color: '#FFAC0A' }, // 不指定 max，表示 max 为无限大（Infinity）。
+        { gte: 100, lte: 150, color: '#FFD990' },
+        { lte: 100, color: '#FAFAFA' }
+      ]
     },
+
     calendar: {
-      top: 120,
-      left: 30,
-      right: 30,
-      cellSize: ['auto', 13],
-      range: '2016',
-      itemStyle: {
-        borderWidth: 0.5
+      top: 50,
+      left: 0,
+      right: 0,
+      // bottom: 30,
+      cellSize: [15, 15],
+      monthLabel: {
+        nameMap: 'ZH'
       },
-      yearLabel: { show: false }
+      dayLabel: {
+        padding: 10
+      },
+      range: '2023',
+      itemStyle: {
+        borderWidth: 2,
+        borderColor: 'transparent'
+      },
+      splitLine: {
+        show: false
+      },
+      yearLabel: { show: true }
     },
+
     series: {
       type: 'heatmap',
       coordinateSystem: 'calendar',
-      data: getVirtualData('2016')
+      data: getVirtualData('2023'),
+      itemStyle: {
+        borderRadius: 4
+      }
     }
   }
 })
@@ -105,8 +132,8 @@ function getVirtualData(year: string) {
   const data: [string, number][] = []
   for (let time = date; time < end; time += dayTime) {
     data.push([
-      echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
-      Math.floor(Math.random() * 10000)
+      echarts.time.format(time, '{yyyy}/{MM}/{dd}', false),
+      Math.floor(Math.random() * 200)
     ])
   }
   return data
@@ -117,7 +144,15 @@ const { NtChart: Chats } = useEcharts({
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
+        type: 'none'
+      },
+      formatter: (val: any) => {
+        const data = val?.[0]
+        return (
+          `<span class="text-[14px] text-light-6">${data?.name}<span>` +
+          '<br>' +
+          `<div class="text-theme text-[15px] font-semibold">${data?.value}字符</div>`
+        )
       }
     },
     grid: {
@@ -129,23 +164,58 @@ const { NtChart: Chats } = useEcharts({
     xAxis: [
       {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        show: false,
+        data: ['2024/1/1', '2024/1/2', '2024/1/3', '2024/1/4', '2024/1/4', '2024/1/5', '2024/1/6'],
         axisTick: {
           alignWithLabel: true
+        },
+        axisLabel: {
+          show: false
         }
       }
     ],
     yAxis: [
       {
-        type: 'value'
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+        axisLabel: {
+          show: false
+        }
       }
     ],
     series: [
       {
-        name: 'Direct',
+        name: '字符',
         type: 'bar',
         barWidth: '60%',
-        data: [10, 52, 200, -10, 390, 330, 220]
+        data: [
+          10,
+          52,
+          200,
+          {
+            value: -10,
+            itemStyle: {
+              color: '#EAEAEA'
+            }
+          },
+          390,
+          330,
+          220
+        ],
+
+        emphasis: {
+          label: {},
+          itemStyle: {
+            color: '#FF800A'
+          }
+        },
+        itemStyle: {
+          borderRadius: 5
+        }
       }
     ]
   }
@@ -156,7 +226,15 @@ const { NtChart: Questions } = useEcharts({
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
+        type: 'none'
+      },
+      formatter: (val: any) => {
+        const data = val?.[0]
+        return (
+          `<span class="text-[14px] text-light-6">${data?.name}<span>` +
+          '<br>' +
+          `<div class="text-theme text-[15px] font-semibold">${data?.value}字符</div>`
+        )
       }
     },
     grid: {
@@ -168,23 +246,58 @@ const { NtChart: Questions } = useEcharts({
     xAxis: [
       {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        show: false,
+        data: ['2024/1/1', '2024/1/2', '2024/1/3', '2024/1/4', '2024/1/4', '2024/1/5', '2024/1/6'],
         axisTick: {
           alignWithLabel: true
+        },
+        axisLabel: {
+          show: false
         }
       }
     ],
     yAxis: [
       {
-        type: 'value'
+        type: 'value',
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+        axisLabel: {
+          show: false
+        }
       }
     ],
     series: [
       {
-        name: 'Direct',
+        name: '问题',
         type: 'bar',
         barWidth: '60%',
-        data: [10, 52, 200, -10, 390, 330, 220]
+        data: [
+          10,
+          52,
+          200,
+          {
+            value: -10,
+            itemStyle: {
+              color: '#EAEAEA'
+            }
+          },
+          390,
+          330,
+          220
+        ],
+
+        emphasis: {
+          label: {},
+          itemStyle: {
+            color: '#FF800A'
+          }
+        },
+        itemStyle: {
+          borderRadius: 5
+        }
       }
     ]
   }
