@@ -82,12 +82,4 @@
   .editor-tag {
     @apply pb-[91px];
   }
-  /* svg{ */
-  /* fill:currentColor; */
-  /* @apply stroke-[100px]; */
-  /* stroke:currentColor; */
-  /* } */
-  .shadow2 {
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03);
-  }
 }

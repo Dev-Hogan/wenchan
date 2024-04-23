@@ -48,5 +48,13 @@ export type Icon =
   | 'pdf'
   | 'DownOutlined'
   | 'arrowLeft3'
+  | 'link3'
+  | 'focusTheme'
+  | 'editTheme'
+  | 'linkTheme'
+  | 'fullscreen1Theme'
+  | 'shareTheme'
+  | 'trashTheme'
+  | 'tagTheme'
 
-export type IconMap = Partial<Record<Icon, string>>
+export type IconMap = Partial<Record<Icon, [string, boolean?]>>

@@ -55,7 +55,7 @@
         </slot>
         <slot v-if="showCount" name="overlayAppend">
           <div @click.stop class="p-3 text-light-4 text-[12px] space-x-2 px-6">
-            <span>卡片</span><span>:</span><span>775</span>
+            <span>卡片</span><span>:</span><span>{{ chars }}</span>
           </div>
         </slot>
       </div>
@@ -83,13 +83,15 @@ withDefaults(
     overlayClass?: string
     trigger?: Trigger
     showCount?: boolean
+    chars?: number
   }>(),
   {
     options: () => [],
     radius: 10,
     overlayClass: '',
     trigger: 'hover',
-    showCount: true
+    showCount: true,
+    chars: 0
   }
 )
 const isOpen = ref(false)

@@ -1,3 +1,4 @@
+import { IconMap } from '@/models'
 import addTag from '$/add-tag.svg'
 import addQuestion from '$/add-question.svg'
 import allQuestion from '$/all-question.svg'
@@ -37,7 +38,6 @@ import sort2 from '$/sort2.svg'
 import tag from '$/tag.svg'
 import trash from '$/trash.svg'
 import unfocus from '$/unfocus.svg'
-import { IconMap } from '@/models'
 import bold from '$/bold.svg'
 import li from '$/li.svg'
 import picture from '$/picture.svg'
@@ -47,54 +47,70 @@ import fullScreen2 from '$/fullScreen2.svg'
 import publish from '$/publish.svg'
 import pdf from '$/pdf.svg'
 import arrowLeft3 from '$/arrow-left3.svg'
+import link3 from '$/link3.svg'
+import focusTheme from '$/focusTheme.svg'
+import editTheme from '$/editTheme.svg'
+import linkTheme from '$/linkTheme.svg'
+import fullscreen1Theme from '$/fullscreen1Theme.svg'
+import shareTheme from '$/shareTheme.svg'
+import trashTheme from '$/trashTheme.svg'
+import tagTheme from '$/tagTheme.svg'
 
 export const iconMap: IconMap = {
-  addTag: addTag,
-  addQuestion: addQuestion,
-  all: all,
-  answer: answer,
-  arrowBottom: arrowBottom,
-  arrowLeft: arrowLeft,
-  arrowLeft2x: arrowLeft2x,
-  arrowLeft3: arrowLeft3,
-  arrowRight: arrowRight,
-  arrowTop: arrowTop,
-  ask1: ask1,
-  ask2: ask2,
-  ask3: ask3,
-  ask4: ask4,
-  checked: checked,
-  close: close,
-  collapse: collapse,
-  copy: copy,
-  edit: edit,
-  focus: focus,
-  focus2: focus2,
-  focus3: focus3,
-  focus4: focus4,
-  fullscreen1: fullscreen1,
-  quotation: quotation,
-  info: info,
-  link: link,
-  link2: link2,
-  more: more,
-  pdf2: pdf2,
-  search: search,
-  setting2: setting2,
-  share: share,
-  sort: sort,
-  tag: tag,
-  trash: trash,
-  unfocus: unfocus,
-  random: random,
-  sort2: sort2,
-  allQuestion: allQuestion,
-  bold: bold,
-  li: li,
-  picture: picture,
-  numbering: numbering,
-  linkTag: linkTag,
-  fullScreen2: fullScreen2,
-  publish: publish,
-  pdf: pdf
+  addTag: [addTag],
+  addQuestion: [addQuestion],
+  all: [all],
+  answer: [answer],
+  arrowBottom: [arrowBottom],
+  arrowLeft: [arrowLeft],
+  arrowLeft2x: [arrowLeft2x],
+  arrowLeft3: [arrowLeft3],
+  arrowRight: [arrowRight],
+  arrowTop: [arrowTop],
+  ask1: [ask1],
+  ask2: [ask2],
+  ask3: [ask3],
+  ask4: [ask4],
+  checked: [checked],
+  close: [close],
+  collapse: [collapse],
+  copy: [copy],
+  edit: [edit],
+  focus: [focus],
+  focus2: [focus2],
+  focus3: [focus3],
+  focus4: [focus4],
+  fullscreen1: [fullscreen1],
+  quotation: [quotation],
+  info: [info],
+  link: [link],
+  link2: [link2],
+  more: [more],
+  pdf2: [pdf2],
+  search: [search],
+  setting2: [setting2],
+  share: [share],
+  sort: [sort],
+  tag: [tag],
+  trash: [trash],
+  unfocus: [unfocus],
+  random: [random],
+  sort2: [sort2],
+  allQuestion: [allQuestion],
+  bold: [bold],
+  li: [li],
+  picture: [picture],
+  numbering: [numbering],
+  linkTag: [linkTag],
+  fullScreen2: [fullScreen2],
+  publish: [publish],
+  pdf: [pdf],
+  link3: [link3],
+  focusTheme: [focusTheme],
+  editTheme: [editTheme],
+  linkTheme: [linkTheme],
+  fullscreen1Theme: [fullscreen1Theme],
+  shareTheme: [shareTheme],
+  trashTheme: [trashTheme],
+  tagTheme: [tagTheme]
 }

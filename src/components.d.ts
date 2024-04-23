@@ -21,6 +21,8 @@ declare module 'vue' {
     NtDialog: typeof import('./components/dialog/NtDialog.vue')['default']
     NtDropdown: typeof import('./components/NtDropdown.vue')['default']
     NtEditor: typeof import('./components/NtEditor.vue')['default']
+    NtEditor2: typeof import('./components/NtEditor2.vue')['default']
+    NtEditorCard: typeof import('./components/NtEditorCard.vue')['default']
     NtEditorContent: typeof import('./components/NtEditorContent.vue')['default']
     NtHeader: typeof import('./components/NtHeader.vue')['default']
     NtIcon: typeof import('./components/NtIcon.vue')['default']

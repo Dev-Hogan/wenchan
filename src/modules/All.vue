@@ -15,19 +15,16 @@
         :options="[
           {
             name: '前往该标签',
-            icon: 'tag',
-            iconClass: 'stroke-theme',
+            icon: 'tagTheme',
             split: true
           },
           {
             name: '重命名',
-            icon: 'edit',
-            iconClass: 'stroke-theme'
+            icon: 'editTheme'
           },
           {
             name: '删除标签',
-            iconClass: 'stroke-theme',
-            icon: 'trash',
+            icon: 'trashTheme',
             split: true
           }
         ]"
@@ -37,7 +34,8 @@
     </NtTag>
   </NtHeader>
   <NtContent class="!mt-[120px]" content-class="space-y-5">
-    <NtCard v-for="i in 5" :key="i"></NtCard>
+    <!-- <NtCard v-for="i in 5" :key="i"></NtCard> -->
+    <NtEditorCard v-for="i in 5" :key="i"></NtEditorCard>
   </NtContent>
 </template>
 
