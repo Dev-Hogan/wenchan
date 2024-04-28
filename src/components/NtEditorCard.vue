@@ -1,12 +1,14 @@
 <template>
   <div
     :class="[
-      '_editor-card relative overflow-hidden transition-[height] duration-[2s] ease-linear',
+      '_editor-card relative overflow-hidden transition-[height] duration-[2s] ease-linear cursor-pointer',
       isEdit ? 'is-active max-h-[246px]' : 'max-h-[53px]'
     ]"
   >
     <div class="space-y-[9px]">
-      <NtEditor2 ref="editorRef" :model-value class="cursor-default"></NtEditor2>
+      <NtScrollbar class="max-h-[120px]">
+        <NtEditor2 ref="editorRef" :model-value class="cursor-default"></NtEditor2>
+      </NtScrollbar>
       <div class="flex space-x-2 absolute top-[4px] right-[20px]">
         <NtIconButton icon="link3" class="!text-light-3 text-[12px] font-medium">5</NtIconButton>
         <NtDropdown

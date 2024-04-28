@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import { categoryStore } from '@/service/controller/db'
 // const text = ref('')
 type Tag = {
   link?: string
@@ -60,4 +61,17 @@ const tagList = ref<Tag[]>([
     id: Math.random()
   }
 ])
+// const categoryEntity = {
+//   id: 1,
+//   name: '未定义'
+// }
+categoryStore.open().then(() => {
+  categoryStore.category.add({ name: '分类2' }).then((id) => {
+    console.log(id, '数据id')
+  })
+
+  categoryStore.category.get(1).then((val) => {
+    console.log(val, '值')
+  })
+})
 </script>
