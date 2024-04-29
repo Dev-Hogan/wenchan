@@ -83,3 +83,6 @@
     @apply pb-[91px];
   }
 }
+::selection {
+  @apply bg-theme-40;
+}

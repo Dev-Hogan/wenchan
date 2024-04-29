@@ -21,7 +21,7 @@
       </NtMenusTitle>
 
       <NtScrollbar>
-        <NtMenus class="overflow-auto scroll-bar" :menus="category" type="category">
+        <NtMenus class="overflow-auto scroll-bar" :menus="categorys" type="category">
           <template #append="{ menu }">
             <NtDropdown
               :options="[
@@ -125,14 +125,20 @@
       </NtScrollbar>
     </main>
     <!-- 新增分类弹窗 -->
-    <EditCategoryDialog v-model:open="categoryOpen" v-model:id="categoryId"></EditCategoryDialog>
+    <EditCategoryDialog
+      v-model:open="categoryOpen"
+      v-model:id="categoryId"
+      :when-save="getAllCategories"
+    ></EditCategoryDialog>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getAllStore } from '@/service/controller'
+import { Tables } from '@/service/model'
 import { menus, category } from '@/mock'
 import { sidebarWidth, useEcharts } from '@/utils'
-import { Menu, Icon, Routes } from '@/models'
+import { Menu, Icon, Routes, Category } from '@/models'
 import avatar from '@/assets/avatar.png'
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
@@ -171,6 +177,15 @@ function handleCategory(menu: Menu) {
     console.log(menu.id)
   }
 }
+const categorys = ref(category)
+
+async function getAllCategories() {
+  const ret = await getAllStore<Category>(Tables.category)
+  console.log(ret)
+  categorys.value = [...categorys.value, ...ret]
+  console.log(categorys.value)
+}
+getAllCategories()
 
 const { NtChart: TodayCharts } = useEcharts({
   height: '60px',

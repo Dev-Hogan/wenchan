@@ -14,6 +14,7 @@
     </div>
     <input
       ref="inputRef"
+      :autofocus="autoFocus"
       :autocomplete="autoComplete"
       :maxlength="maxLength"
       :placeholder="placeholder"
@@ -41,13 +42,15 @@ withDefaults(
     hightLight?: boolean
     autoComplete?: 'off' | 'on' | 'new-password'
     maxLength?: number
+    autoFocus?: boolean
   }>(),
   {
     placeholder: undefined,
     inputClass: undefined,
     hightLight: false,
     autoComplete: 'on',
-    maxLength: undefined
+    maxLength: undefined,
+    autoFocus: false
   }
 )
 watchEffect(() => {
