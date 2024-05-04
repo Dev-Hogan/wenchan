@@ -40,15 +40,12 @@
     <HighLight></HighLight>
     <NtInput hight-light></NtInput>
     <div>流水线测试12</div>
-    <NtButton @click="getUserName" type="primary">获取username全部</NtButton>
     <ul>
       <li v-for="(name, i) in userName" :key="i">{{ name }}</li>
     </ul>
     <div class="flex space-x-4">
       <NtInput v-model="formString" placeholder="from 必填"></NtInput>
       <NtInput v-model="select" placeholder="select"></NtInput>
-
-      <NtButton @click="get()">get</NtButton>
     </div>
     <div>返回结果</div>
     <pre>{{ severData }}</pre>
@@ -89,7 +86,6 @@ import { Icon, ThemeMode } from '@/models'
 import { iconMap } from '@/utils'
 import { message } from 'ant-design-vue'
 import { Dialog } from '@/components/NtDialog2'
-import { supabase } from '@/api'
 import { Tooltip } from 'ant-design-vue'
 import { useTest } from '@/components/test'
 import { useEcharts } from '@/components/NtChart'
@@ -158,27 +154,10 @@ const inputValue = ref<string>('123')
 const dialogOpen = ref<boolean>(false)
 
 const userName = ref<string[]>(['username'])
-async function getUserName() {
-  let { data: user, error } = await supabase.from('user').select('name')
-  if (error) {
-    console.log(error)
-  } else {
-    userName.value = user?.map((d) => d.name) || []
-  }
-}
 
 const severData = ref()
 const formString = ref<string>('user')
 const select = ref<string>()
-
-async function get() {
-  let { data, error } = await supabase.from(formString.value).select(select.value)
-  if (error) {
-    console.log(error)
-  } else {
-    severData.value = data
-  }
-}
 
 const container = ref<HTMLElement | null>(null)
 const sidebarWidth = ref(200)
