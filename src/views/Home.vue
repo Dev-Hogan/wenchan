@@ -27,24 +27,22 @@
               :options="[
                 {
                   name: '重命名',
-                  icon: 'edit',
-                  iconClass: 'stroke-theme',
+                  icon: 'editTheme',
                   split: true,
                   action: () => {
-                    categoryOpen = true
                     categoryId = menu.id
+                    categoryOpen = true
                   }
                 },
                 {
                   name: '导出PDF',
-                  iconClass: 'stroke-theme',
-                  icon: 'pdf'
+                  icon: 'pdf3'
                 },
                 {
                   name: '删除分类',
-                  iconClass: 'stroke-theme',
-                  icon: 'trash',
-                  split: true
+                  icon: 'trashTheme',
+                  split: true,
+                  action: () => menu.id && handleDeleteMuCategory(menu.id)
                 }
               ]"
             >
@@ -55,7 +53,6 @@
                     'group-hover:opacity-100 opacity-0',
                     isOpen ? 'opacity-100' : 'opacity-0'
                   ]"
-                  @click="handleCategory(menu)"
                 >
                 </NtIconButton>
               </template>
@@ -134,12 +131,14 @@
 </template>
 
 <script setup lang="ts">
-import { getAllStore } from '@/service/controller'
-import { Tables } from '@/service/model'
+import { getAllMuCategory, deleteMuCategory } from '@/api'
 import { menus, category } from '@/mock'
 import { sidebarWidth, useEcharts } from '@/utils'
-import { Menu, Icon, Routes, Category } from '@/models'
+import { Icon, Routes } from '@/models'
+import { message } from 'ant-design-vue'
+import router from '@/router'
 import avatar from '@/assets/avatar.png'
+
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
 
@@ -172,20 +171,34 @@ function stopResize() {
 }
 window.addEventListener('mouseup', stopResize)
 
-function handleCategory(menu: Menu) {
-  if (menu.id) {
-    console.log(menu.id)
-  }
-}
 const categorys = ref(category)
 
 async function getAllCategories() {
-  const ret = await getAllStore<Category>(Tables.category)
-  console.log(ret)
-  categorys.value = [...categorys.value, ...ret]
-  console.log(categorys.value)
+  const ret = await getAllMuCategory()
+  categorys.value = [...category, ...ret]
 }
 getAllCategories()
+
+async function handleDeleteMuCategory(id: number) {
+  await deleteMuCategory(id)
+  resetMenu(id)
+  message.success('删除成功')
+  await getAllCategories()
+}
+
+function resetMenu(id?: number) {
+  const currentRouter = router.currentRoute
+  const currentCategoryId = +currentRouter.value.params.categoryId
+
+  if (currentCategoryId === id) {
+    // router.push({
+    //   name: Routes.category
+    // })
+    router.back()
+  } else {
+    return
+  }
+}
 
 const { NtChart: TodayCharts } = useEcharts({
   height: '60px',
@@ -271,32 +284,3 @@ const { NtChart: TodayCharts } = useEcharts({
   }
 })
 </script>
-
-<!-- <style scoped>
-/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-/*定义滚动条轨道 内阴影+圆角*/
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
-    /*轨道阴影*/
-    border-radius: 0px;
-    /*轨道背景区域的圆角*/
-    background-color: transparent;
-    /*轨道的背景颜色*/
-}
-
-/*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb {
-    height: 10px;
-    border-radius: 2px;
-    /*滑块圆角*/
-    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-    /*滑块外阴影*/
-    background-color: rgba(136, 219, 255, 1);
-    /*滑块背景颜色*/
-}
-</style> -->

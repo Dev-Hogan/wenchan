@@ -1,4 +1,4 @@
-import { Menu, Routes, Category } from '@/models'
+import { Menu, Routes, MuCategory } from '@/models'
 export const menus: Menu[] = [
   {
     title: '全部',
@@ -32,7 +32,7 @@ export const menus: Menu[] = [
   }
 ]
 
-export const category: Category[] = [
+export const category: MuCategory[] = [
   {
     title: '新分类',
     icon: 'ask1',

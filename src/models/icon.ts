@@ -46,6 +46,7 @@ export type Icon =
   | 'fullScreen2'
   | 'publish'
   | 'pdf'
+  | 'pdf3'
   | 'DownOutlined'
   | 'arrowLeft3'
   | 'link3'

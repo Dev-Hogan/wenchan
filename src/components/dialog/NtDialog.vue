@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model:open="open" :title :centered :closable="false" :width="finalWidth">
+  <Modal :key="shortid.generate()" v-model:open="open" :title :centered :closable="false" :width="finalWidth">
     <div>
       <slot></slot>
     </div>
@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { Modal } from 'ant-design-vue'
+import shortid from 'shortid'
 const open = defineModel<boolean>('open', { default: false })
 const props = withDefaults(
   defineProps<{

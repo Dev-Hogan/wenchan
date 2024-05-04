@@ -14,11 +14,4 @@ withDefaults(defineProps<{ icon?: Icon; iconClass?: string }>(), {
 })
 </script>
 <style lang="scss">
-// ._svg {
-//   path,
-//   rect,
-//   circle {
-//     fill: currentColor !important;
-//   }
-// }
 </style>

@@ -1,17 +1,28 @@
 import { db } from './db'
 import { Tables } from '../model'
 
-export async function batchSaveStore<T>(tableName: Tables, datas: T[]) {
-  const ret = await db.table(tableName).bulkAdd(datas)
+export async function saveStore<T extends object>(tableName: Tables, datas: T, id?: number) {
+  if (id) {
+    const ret = await db.table(tableName).update(id, datas)
+    return ret
+  } else {
+    const ret = await db.table(tableName).add(datas)
+    return ret
+  }
+}
+
+export async function deleteStore(tableName: Tables, id: number) {
+  const ret = await db.table(tableName).delete(id)
   return ret
 }
 
-export async function getStore<T>(tableName: Tables, keys: number[]) {
-  const ret = await db.table(tableName).bulkGet(keys)
-  return ret as T[]
+
+export async function getStore<T>(tableName: Tables, key: number) {
+  const ret = await db.table(tableName).get(key)
+  return ret as T
 }
 
 export async function getAllStore<T>(tableName: Tables) {
-    const ret = await db.table(tableName).toArray()
-    return ret as T[]
+  const ret = await db.table(tableName).toArray()
+  return ret as T[]
 }

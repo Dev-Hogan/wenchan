@@ -46,6 +46,7 @@ import linkTag from '$/linkTag.svg'
 import fullScreen2 from '$/fullScreen2.svg'
 import publish from '$/publish.svg'
 import pdf from '$/pdf.svg'
+import pdf3 from '$/pdf3.svg'
 import arrowLeft3 from '$/arrow-left3.svg'
 import link3 from '$/link3.svg'
 import focusTheme from '$/focusTheme.svg'
@@ -105,6 +106,7 @@ export const iconMap: IconMap = {
   fullScreen2: [fullScreen2],
   publish: [publish],
   pdf: [pdf],
+  pdf3: [pdf3],
   link3: [link3],
   focusTheme: [focusTheme],
   editTheme: [editTheme],
