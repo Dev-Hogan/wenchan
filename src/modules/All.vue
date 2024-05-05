@@ -1,5 +1,5 @@
 <template>
-  <NtHeader title="全部">
+  <NtHeader title="全部" @add="() => (hasNewNote = true)">
     <NtTag
       v-for="tag in tagList"
       :key="tag.id"
@@ -34,13 +34,40 @@
     </NtTag>
   </NtHeader>
   <NtContent class="!mt-[120px]" content-class="space-y-5">
-    <!-- <NtCard v-for="i in 5" :key="i"></NtCard> -->
-    <NtEditorCard v-for="i in 5" :key="i"></NtEditorCard>
+    <NtEditorCard
+      @publish="
+        (d) =>
+          handleSaveNote({
+            count: d,
+            content: NoteEntity.content
+          })
+      "
+      :can-edit="true"
+      v-if="hasNewNote"
+      v-model:content="NoteEntity.content"
+    ></NtEditorCard>
+    <NtEditorCard
+      @publish="
+        (d) =>
+          handleSaveNote({
+            count: d,
+            content: item.content,
+            id: item.id
+          })
+      "
+      @delete="(d) => d && handleDeleteNote(d)"
+      v-for="item in Notes"
+      :key="item.id"
+      v-model:content="item.content"
+      :model-value="item"
+    ></NtEditorCard>
   </NtContent>
 </template>
 
 <script setup lang="ts">
-// const text = ref('')
+import { useAsyncState } from '@vueuse/core'
+import { searchNote, saveNote, deleteNote } from '@/api'
+import { Note } from '@/models'
 type Tag = {
   link?: string
   name?: string
@@ -60,13 +87,39 @@ const tagList = ref<Tag[]>([
     id: Math.random()
   }
 ])
-// categoryStore.open().then(() => {
-//   categoryStore.category.add({ name: '分类2' }).then((id) => {
-//     console.log(id, '数据id')
-//   })
+const { state: Notes, execute: refreshNotes } = useAsyncState(
+  async () => await searchNote({}),
+  [],
+  {
+    immediate: false
+  }
+)
+refreshNotes()
+const NoteEntity = ref<Note>({
+  content: ''
+})
+const hasNewNote = ref(false)
 
-//   categoryStore.category.get(1).then((val) => {
-//     console.log(val, '值')
-//   })
-// })
+async function handleSaveNote({
+  count = 0,
+  content = '',
+  id
+}: {
+  count?: number
+  content?: string
+  id?: number
+}) {
+  const defaultContent = '未命名笔记'
+  await saveNote({ content: count ? content : defaultContent, id })
+  if (!id) {
+    hasNewNote.value = false
+    NoteEntity.value.content = ''
+  }
+  refreshNotes()
+}
+
+async function handleDeleteNote(id: number) {
+  await deleteNote(id)
+  refreshNotes()
+}
 </script>

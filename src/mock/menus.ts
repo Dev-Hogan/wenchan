@@ -23,7 +23,7 @@ export const menus: Menu[] = [
   {
     title: '标签',
     name: Routes.tags,
-    icon: 'tag'
+    icon: 'tag2'
   },
   {
     title: '废纸篓',

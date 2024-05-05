@@ -56,6 +56,7 @@ import fullscreen1Theme from '$/fullscreen1Theme.svg'
 import shareTheme from '$/shareTheme.svg'
 import trashTheme from '$/trashTheme.svg'
 import tagTheme from '$/tagTheme.svg'
+import tag2 from '$/tag2.svg'
 
 export const iconMap: IconMap = {
   addTag: [addTag],
@@ -93,6 +94,7 @@ export const iconMap: IconMap = {
   share: [share],
   sort: [sort],
   tag: [tag],
+  tag2: [tag2],
   trash: [trash],
   unfocus: [unfocus],
   random: [random],

@@ -7,7 +7,7 @@
   >
     <div class="space-y-[9px]">
       <NtScrollbar class="max-h-[120px]">
-        <NtEditor2 ref="editorRef" :model-value class="cursor-default"></NtEditor2>
+        <NtEditor2 ref="editorRef" v-model:model-value="content" class="cursor-default"></NtEditor2>
       </NtScrollbar>
       <div class="flex space-x-2 absolute top-[4px] right-[20px]">
         <NtIconButton icon="link3" class="!text-light-3 text-[12px] font-medium">5</NtIconButton>
@@ -40,7 +40,8 @@
             },
             {
               name: '删除',
-              icon: 'trashTheme'
+              icon: 'trashTheme',
+              action: () => emit('delete', modelValue.id)
             }
           ]"
         >
@@ -80,13 +81,33 @@
 
 <script setup lang="ts">
 import NtEditor2 from './NtEditor2.vue'
+import { Note } from '@/models'
 const editorRef = ref<InstanceType<typeof NtEditor2>>()
-const modelValue = defineModel<string>({ default: '<h1>这是标题</h1>' })
+const content = defineModel<string>('content', { default: '<h1>这是标题</h1>' })
+const modelValue = defineModel<Note>({
+  default: {
+    id: undefined,
+    content: undefined,
+    categoryId: undefined,
+    tagId: undefined
+  }
+})
+
 const editor = computed(() => editorRef.value?.editor)
+const props = withDefaults(
+  defineProps<{
+    canEdit?: boolean
+  }>(),
+  {
+    canEdit: false
+  }
+)
 nextTick(() => {
   editor.value?.setEditable(false)
 })
 const isEdit = ref(false)
+props.canEdit && edit()
+
 function edit() {
   if (!editor.value?.isEditable) {
     editor.value?.setEditable(true)
@@ -101,7 +122,13 @@ function publish() {
   editor.value?.setEditable(false)
   isEdit.value = false
   editor.value?.commands?.blur()
+  emit('publish', editorRef?.value?.editor?.getText()?.length || 0)
 }
+
+const emit = defineEmits<{
+  publish: [val: number]
+  delete: [val?: number]
+}>()
 </script>
 <style lang="scss" scoped>
 ._editor-card {

@@ -57,5 +57,6 @@ export type Icon =
   | 'shareTheme'
   | 'trashTheme'
   | 'tagTheme'
+  | 'tag2'
 
 export type IconMap = Partial<Record<Icon, [string, boolean?]>>

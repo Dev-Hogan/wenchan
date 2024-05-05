@@ -1,9 +1,9 @@
 <template>
   <div
     :class="[
-      'cursor-pointer text-light-6 min-w-[40px] py-7 px-4 rounded-3 bg-light font-medium',
-      'flex items-center justify-center',
-      isActivated ? 'bg-theme-15 text-theme' : ''
+      'cursor-pointer text-[15px] text-light-5 py-5 px-4 rounded-3 bg-default font-medium',
+      'flex items-center justify-center shrink-0 shadow-[0px_3px_8px_0px_rgba(0,0,0,0.04)]',
+      isActivated ? 'text-theme' : ''
     ]"
     @click="toggle"
   >

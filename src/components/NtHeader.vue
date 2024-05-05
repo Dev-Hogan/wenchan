@@ -8,7 +8,7 @@
       <div v-if="!noEdit" class="flex items-center justify-center space-x-8 [&>svg]:cursor-pointer">
         <slot name="edit">
           <NtIcon icon="collapse"></NtIcon>
-          <NtIcon icon="addQuestion"></NtIcon>
+          <NtIcon icon="addQuestion" @click="() => emit('add', true)"></NtIcon>
         </slot>
       </div>
     </div>
@@ -30,4 +30,8 @@ withDefaults(
     noEdit: false
   }
 )
+const emit = defineEmits<{
+  add: [val: boolean]
+  toggle: [val: boolean]
+}>()
 </script>
