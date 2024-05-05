@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      '_editor-card relative overflow-hidden transition-[height] duration-[2s] ease-linear cursor-pointer',
+      '_editor-card relative overflow-hidden transition-[height] duration-[2s] ease-linear',
       isEdit ? 'is-active max-h-[246px]' : 'max-h-[53px]'
     ]"
   >
@@ -104,29 +104,26 @@ const props = withDefaults(
 )
 nextTick(() => {
   editor.value?.setEditable(false)
+  props.canEdit && edit()
 })
 const isEdit = ref(false)
-props.canEdit && edit()
 
 function edit() {
-  if (!editor.value?.isEditable) {
-    editor.value?.setEditable(true)
-    isEdit.value = true
-    editor.value?.commands?.focus()
-  } else {
-    editor.value?.commands?.focus()
-  }
+  editor.value?.setEditable(true)
+  isEdit.value = true
+  editor.value?.commands?.focus()
 }
 
 function publish() {
   editor.value?.setEditable(false)
   isEdit.value = false
   editor.value?.commands?.blur()
-  emit('publish', editorRef?.value?.editor?.getText()?.length || 0)
+  // emit('publish', editorRef?.value?.editor?.getText()?.length || 0)
+  emit('publish', editorRef?.value?.editor?.isEmpty)
 }
 
 const emit = defineEmits<{
-  publish: [val: number]
+  publish: [isEmpty?: boolean]
   delete: [val?: number]
 }>()
 </script>

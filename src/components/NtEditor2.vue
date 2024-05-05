@@ -34,6 +34,7 @@ onMounted(() => {
     onUpdate: () => {
       // HTML
       modelValue.value = editor.value?.getHTML()
+      
     }
   })
 })

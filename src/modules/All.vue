@@ -38,19 +38,20 @@
       @publish="
         (d) =>
           handleSaveNote({
-            count: d,
+            isEmpty: d,
             content: NoteEntity.content
           })
       "
-      :can-edit="true"
+      can-edit
       v-if="hasNewNote"
       v-model:content="NoteEntity.content"
+      :model-value="NoteEntity"
     ></NtEditorCard>
     <NtEditorCard
       @publish="
         (d) =>
           handleSaveNote({
-            count: d,
+            isEmpty: d,
             content: item.content,
             id: item.id
           })
@@ -101,16 +102,18 @@ const NoteEntity = ref<Note>({
 const hasNewNote = ref(false)
 
 async function handleSaveNote({
-  count = 0,
+  isEmpty = false,
   content = '',
   id
 }: {
-  count?: number
+  isEmpty?: boolean
   content?: string
   id?: number
 }) {
+  console.log(isEmpty, '是否为空', content)
+
   const defaultContent = '未命名笔记'
-  await saveNote({ content: count ? content : defaultContent, id })
+  await saveNote({ content: isEmpty ? defaultContent : content, id })
   if (!id) {
     hasNewNote.value = false
     NoteEntity.value.content = ''
