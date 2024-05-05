@@ -1,4 +1,5 @@
 export enum Tables {
   category = 'category',
-  note = 'note'
+  note = 'note',
+  tag = 'tag'
 }

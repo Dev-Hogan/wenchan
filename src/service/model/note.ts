@@ -3,4 +3,6 @@ export interface Note {
   content?: string
   categoryId?: number
   tagId?: number
+  isFocused?: boolean
+  isDeleted?: boolean
 }
