@@ -7,7 +7,15 @@
       <div class="text-light-7 text-[28px] font-semibold">{{ title }}</div>
       <div v-if="!noEdit" class="flex items-center justify-center space-x-8 [&>svg]:cursor-pointer">
         <slot name="edit">
-          <NtIcon icon="collapse"></NtIcon>
+          <NtIcon
+            :icon="isFold ? 'fold' : 'unfold'"
+            @click="
+              () => {
+                isFold = !isFold
+                emit('toggle', isFold)
+              }
+            "
+          ></NtIcon>
           <NtIcon icon="addQuestion" @click="() => emit('add', true)"></NtIcon>
         </slot>
       </div>
@@ -30,6 +38,9 @@ withDefaults(
     noEdit: false
   }
 )
+const isFold = defineModel<boolean>('fold', {
+  default: false
+})
 const emit = defineEmits<{
   add: [val: boolean]
   toggle: [val: boolean]

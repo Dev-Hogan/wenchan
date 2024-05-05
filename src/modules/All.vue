@@ -1,5 +1,5 @@
 <template>
-  <NtHeader title="全部" @add="() => (hasNewNote = true)">
+  <NtHeader title="全部" @add="() => (hasNewNote = true)" @toggle="(d) => (isFold = d)">
     <NtTag
       v-for="tag in tagList"
       :key="tag.id"
@@ -33,6 +33,7 @@
       </NtDropdown>
     </NtTag>
   </NtHeader>
+
   <NtContent class="!mt-[120px]" content-class="space-y-5">
     <NtEditorCard
       @publish="
@@ -56,6 +57,7 @@
             id: item.id
           })
       "
+      :can-edit="isFold"
       @delete="(d) => d && handleDeleteNote(d)"
       v-for="item in Notes"
       :key="item.id"
@@ -110,19 +112,19 @@ async function handleSaveNote({
   content?: string
   id?: number
 }) {
-  console.log(isEmpty, '是否为空', content)
-
   const defaultContent = '未命名笔记'
   await saveNote({ content: isEmpty ? defaultContent : content, id })
   if (!id) {
     hasNewNote.value = false
     NoteEntity.value.content = ''
+    refreshNotes()
   }
-  refreshNotes()
 }
 
 async function handleDeleteNote(id: number) {
   await deleteNote(id)
   refreshNotes()
 }
+
+const isFold = ref(false)
 </script>

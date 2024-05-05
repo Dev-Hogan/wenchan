@@ -113,11 +113,14 @@ function edit() {
   isEdit.value = true
   editor.value?.commands?.focus()
 }
-
-function publish() {
+function noEdit() {
   editor.value?.setEditable(false)
   isEdit.value = false
   editor.value?.commands?.blur()
+}
+
+function publish() {
+  noEdit()
   // emit('publish', editorRef?.value?.editor?.getText()?.length || 0)
   emit('publish', editorRef?.value?.editor?.isEmpty)
 }
@@ -126,6 +129,13 @@ const emit = defineEmits<{
   publish: [isEmpty?: boolean]
   delete: [val?: number]
 }>()
+
+watch(
+  () => props.canEdit,
+  (val) => {
+    val ? edit() : noEdit()
+  }
+)
 </script>
 <style lang="scss" scoped>
 ._editor-card {
