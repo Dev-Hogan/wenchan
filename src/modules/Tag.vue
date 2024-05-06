@@ -1,17 +1,55 @@
 <template>
   <NtHeader title="标签">
     <template #edit>
-      <div
-        class="flex items-center space-x-3 [&>button]:border [&>button]:border-light-2 [&>button]:rounded-4"
-      >
-        <NtButton @click="handleAddTag">测试新增标签</NtButton>
-        <NtButton @click="handelGo2tag">前往</NtButton>
-        <NtButton @click="handleMerge">合并</NtButton>
-        <NtButton @click="handleRename">重命名</NtButton>
-        <NtButton>删除</NtButton>
-        <NtButton @click="handleOrder" class="h-[36px]">
-          <NtIcon icon="sort2"></NtIcon>
-        </NtButton>
+      <div class="flex items-center space-x-3">
+        <NtButton @click="handleAddTag" class="_button">测试新增</NtButton>
+        <NtButton @click="handelGo2tag" class="_button">前往</NtButton>
+        <NtButton @click="handleMerge" class="_button">合并</NtButton>
+        <NtButton @click="handleRename" class="_button">重命名</NtButton>
+        <NtButton class="_button" @click="handleDeleteTag(selectKeys)">删除</NtButton>
+        <NtDropdown overlay-class="min-h-[140px]" :show-count="false">
+          <NtIconButton
+            icon="sort2"
+            class="_button flex-1 items-center justify-center"
+          ></NtIconButton>
+          <template #overlay>
+            <div
+              class="text-[14px] font-medium"
+              v-for="item in [
+                {
+                  id: 1,
+                  name: '标签名称',
+                  split: true,
+                  action: sortOrderByName
+                },
+                {
+                  id: 2,
+                  name: '笔记数量',
+                  split: true,
+                  action: sortOrderByCount
+                },
+                {
+                  id: 3,
+                  name: '创建日期',
+                  action: sortOrderByTime
+                }
+              ]"
+              :key="item.name"
+            >
+              <div
+                :class="[
+                  'flex py-5 cursor-pointer space-x-2 px-5',
+                  isSortKeySelected(item.id) ? 'text-theme' : ''
+                ]"
+                @click="handleSortSelected(item.id, item.action)"
+              >
+                <NtIcon :icon="isSortKeySelected(item.id) ? 'checkedTheme' : 'checked'"></NtIcon>
+                <div>{{ item.name }}</div>
+              </div>
+              <div v-if="item.split" class="w-full h-[1px] bg-light-2"></div>
+            </div>
+          </template>
+        </NtDropdown>
       </div>
     </template>
   </NtHeader>
@@ -35,15 +73,15 @@
 
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
-import { getAllTags, saveTag } from '@/api'
+import { deleteTag, getAllTags, saveTag } from '@/api'
 import { useAsyncState } from '@vueuse/core'
 import { Tag } from '@/models'
 const categoryOpen = ref(false)
 const categoryId = ref<number>()
 
 const selectKeys = ref<number[]>([])
-
-const { state: tags, execute: refreshTags } = useAsyncState(async () => await getAllTags(), [], {
+const tags = ref<Tag[]>([])
+const { execute: refreshTags } = useAsyncState(async () => (tags.value = await getAllTags()), [], {
   immediate: false
 })
 refreshTags()
@@ -84,13 +122,41 @@ function handelGo2tag() {
     return
   }
 }
-
-function handleOrder() {
+const sortKey = ref<number>()
+function isSortKeySelected(id: number) {
+  return id === sortKey.value
+}
+function handleSortSelected(id: number, cb?: () => any) {
+  sortKey.value = id
+  cb?.()
+}
+function sortOrderByCount() {
   tags.value.sort((a, b) => (b?.charsCount || 0) - (a?.charsCount || 0))
+}
+function sortOrderByName() {
+  tags.value.sort((a, b) =>
+    (a.name || '')?.toLocaleLowerCase().localeCompare((b.name || '')?.toLocaleLowerCase())
+  )
+}
+function sortOrderByTime() {
+  tags.value.sort((a, b) => {
+    const dateA = a.createTime ? new Date(a.createTime) : new Date(0)
+    const dateB = b.createTime ? new Date(b.createTime) : new Date(0)
+    return dateA.getTime() - dateB.getTime()
+  })
 }
 
 async function handleAddTag() {
-  await saveTag({ name: '测试新增标签' })
+  await saveTag({ name: '测试新增标签', charsCount: Math.round(Math.random() * 20) })
+  refreshTags()
+}
+async function handleDeleteTag(ids: number[]) {
+  await deleteTag(ids)
   refreshTags()
 }
 </script>
+<style lang="scss" scoped>
+._button {
+  @apply border border-light-2 rounded-4 w-[64px] h-[34px] text-[13px] px-0;
+}
+</style>

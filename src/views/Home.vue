@@ -42,7 +42,7 @@
                   name: '删除分类',
                   icon: 'trashTheme',
                   split: true,
-                  action: () => menu.id && handleDeleteMuCategory(menu.id)
+                  action: () => menu.id && handleDeleteMuCategory([menu.id])
                 }
               ]"
             >
@@ -179,9 +179,9 @@ async function getAllCategories() {
 }
 getAllCategories()
 
-async function handleDeleteMuCategory(id: number) {
-  await deleteMuCategory(id)
-  resetMenu(id)
+async function handleDeleteMuCategory(ids: number[]) {
+  await deleteMuCategory(ids)
+  resetMenu(ids?.[0])
   message.success('删除成功')
   await getAllCategories()
 }

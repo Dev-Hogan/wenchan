@@ -10,9 +10,9 @@ class DataBase extends Dexie {
   constructor() {
     super(dbName)
     this.version(1).stores({
-      [Tables.category]: '++id,title',
-      [Tables.note]: '++id,content,categoryId,tagId,isFocused,isDeleted',
-      [Tables.tag]: '++id,categoryId,tagId,isFocused,name'
+      [Tables.category]: '++id,title,createTime,updateTime',
+      [Tables.note]: '++id,content,categoryId,tagId,isFocused,isDeleted,createTime,updateTime',
+      [Tables.tag]: '++id,categoryId,tagId,isFocused,name,charsCount,createTime,updateTime'
     })
   }
 }

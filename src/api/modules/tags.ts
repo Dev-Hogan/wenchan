@@ -11,8 +11,8 @@ export async function getTag(id: number) {
   return ret
 }
 
-export async function deleteTag(id: number) {
-  const ret = await deleteStore(Tables.tag, id)
+export async function deleteTag(ids: number[]) {
+  const ret = await deleteStore(Tables.tag, ids)
   return ret
 }
 

@@ -58,7 +58,7 @@
           })
       "
       :can-edit="isFold"
-      @delete="(d) => d && handleDeleteNote(d)"
+      @delete="(d) => d && handleDeleteNote([d])"
       v-for="item in Notes"
       :key="item.id"
       v-model:content="item.content"
@@ -121,8 +121,8 @@ async function handleSaveNote({
   }
 }
 
-async function handleDeleteNote(id: number) {
-  await deleteNote(id)
+async function handleDeleteNote(ids: number[]) {
+  await deleteNote(ids)
   refreshNotes()
 }
 

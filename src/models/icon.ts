@@ -13,6 +13,7 @@ export type Icon =
   | 'ask3'
   | 'ask4'
   | 'checked'
+  | 'checkedTheme'
   | 'close'
   | 'fold'
   | 'unfold'

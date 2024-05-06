@@ -27,7 +27,7 @@ export async function saveNote(option: SaveNote) {
   await saveStore<Note>(Tables.note, option, option?.id)
 }
 
-export async function deleteNote(id: number) {
-  const ret = await deleteStore(Tables.note, id)
+export async function deleteNote(ids: number[]) {
+  const ret = await deleteStore(Tables.note, ids)
   return ret
 }

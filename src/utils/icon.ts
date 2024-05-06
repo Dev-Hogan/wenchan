@@ -14,6 +14,7 @@ import ask2 from '$/ask2.svg'
 import ask3 from '$/ask3.svg'
 import ask4 from '$/ask4.svg'
 import checked from '$/checked.svg'
+import checkedTheme from '$/checkedTheme.svg'
 import close from '$/close.svg'
 import fold from '$/fold.svg'
 import unfold from '$/unfold.svg'
@@ -75,9 +76,10 @@ export const iconMap: IconMap = {
   ask3: [ask3],
   ask4: [ask4],
   checked: [checked],
+  checkedTheme: [checkedTheme],
   close: [close],
   fold: [fold],
-  unfold:[unfold],
+  unfold: [unfold],
   copy: [copy],
   edit: [edit],
   focus: [focus],

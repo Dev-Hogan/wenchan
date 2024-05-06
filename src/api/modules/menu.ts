@@ -21,7 +21,7 @@ export async function getAllMuCategory() {
   return ret
 }
 
-export async function deleteMuCategory(id: number) {
-  const ret = await deleteStore(Tables.category, id)
+export async function deleteMuCategory(ids: number[]) {
+  const ret = await deleteStore(Tables.category, ids)
   return ret
 }

@@ -16,7 +16,6 @@
       <div
         :class="[
           'w-[158px] min-h-[170px] rounded-5 border-[0.5px] bg-default py-3 space-y-2 text-light-7',
-          `rounded-[${10}]`,
           overlayClass
         ]"
       >
@@ -34,9 +33,11 @@
               @click="exitAction(item)"
             >
               <NtIcon v-if="item.icon" :icon="item.icon" :icon-class="item.iconClass"> </NtIcon>
-              <div>
-                {{ item.name }}
-              </div>
+              <slot name="item">
+                <div>
+                  {{ item.name }}
+                </div>
+              </slot>
               <NtIcon
                 class="absolute right-7 top-[50%] translate-y-[-50%]"
                 v-if="item.appendIcon"

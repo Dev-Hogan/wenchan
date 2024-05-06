@@ -3,5 +3,6 @@ export interface Tag {
   isFocused?: boolean
   categoryId?: number
   charsCount?: number
-  name?:string
+  name?: string
+  createTime?: string
 }
