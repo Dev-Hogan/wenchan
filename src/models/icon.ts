@@ -60,5 +60,6 @@ export type Icon =
   | 'trashTheme'
   | 'tagTheme'
   | 'tag2'
+  | 'add'
 
 export type IconMap = Partial<Record<Icon, [string, boolean?]>>

@@ -53,7 +53,9 @@
       </div>
       <div class="flex justify-between">
         <div class="flex">
-          <NtIconButton icon="tag"></NtIconButton>
+          <TagDropdownCard>
+            <NtIconButton icon="tag"></NtIconButton>
+          </TagDropdownCard>
           <NtIconButton icon="picture"></NtIconButton>
           <NtIconButton
             icon="bold"

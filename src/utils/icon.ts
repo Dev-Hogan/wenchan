@@ -59,6 +59,7 @@ import shareTheme from '$/shareTheme.svg'
 import trashTheme from '$/trashTheme.svg'
 import tagTheme from '$/tagTheme.svg'
 import tag2 from '$/tag2.svg'
+import add from '$/add.svg'
 
 export const iconMap: IconMap = {
   addTag: [addTag],
@@ -75,6 +76,7 @@ export const iconMap: IconMap = {
   ask2: [ask2],
   ask3: [ask3],
   ask4: [ask4],
+  add: [add],
   checked: [checked],
   checkedTheme: [checkedTheme],
   close: [close],
