@@ -1,5 +1,6 @@
 import { db } from './db'
-import { Tables } from '../model'
+import { Tables, SearchParameters } from '../model'
+import dayjs from 'dayjs'
 
 export async function saveStore<
   T extends {
@@ -7,7 +8,7 @@ export async function saveStore<
     updateTime?: string
   }
 >(tableName: Tables, datas: T, id?: number) {
-  const now = new Date().toISOString()
+  const now = dayjs().format('YYYY-MM-DD HH:mm:ss')
   if (id) {
     const ret = await db.table(tableName).update(id, { ...datas, updateTime: now })
     return ret
@@ -35,15 +36,48 @@ export async function getAllStore<T>(tableName: Tables) {
 export async function filterStore<T>(
   tableName: Tables,
   filterHelper: (val?: T) => boolean = () => true,
-  offset = 0,
-  limit = 10
+  pageNo = 0,
+  pageSize = 10
 ) {
   const ret = await db
     .table(tableName)
     .orderBy('id')
     .filter(filterHelper)
-    .offset(offset)
-    .limit(limit)
+    .offset(pageNo * pageSize)
+    .limit(pageSize)
     .toArray()
   return ret as T[]
+}
+export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>) {
+  const fuzzyQuery = (d: any, KV: [string, any][]) => {
+    for (const [key, value] of KV) {
+      const reg = new RegExp(value)
+      return reg.test(d[key])
+    }
+    return false
+  }
+  // let rootEntries: [string, any][] = []
+  let entityEntries: [string, any][] = []
+  if (p?.entity) {
+    entityEntries = Object.entries(p.entity)
+  }
+  // if (p?.root) {
+  //   rootEntries = Object.entries(p.root)
+  // }
+  const equalCollection = await db
+    .table(tableName)
+    .filter((d) => {
+      // if (rootEntries.length > 0) {
+      //   return fuzzyQuery(d, rootEntries)
+      // }
+      if (entityEntries.length > 0) {
+        return fuzzyQuery(d, entityEntries)
+      }
+      return true
+    })
+
+  return (await equalCollection
+    .offset(p?.pageNo || 0 * (p?.pageSize || 10))
+    .limit(p?.pageSize || 10)
+    .toArray()) as T[]
 }

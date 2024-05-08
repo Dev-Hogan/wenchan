@@ -1,40 +1,42 @@
 <template>
   <NtHeader title="全部" @add="() => (hasNewNote = true)" @toggle="(d) => (isFold = d)">
-    <NtTag
-      v-for="tag in tagList"
-      :key="tag.id"
-      :value="tag.id"
-      @activated="
-        (d) => {
-          console.log(d, '激活')
-        }
-      "
-    >
-      <NtDropdown
-        :trigger="'contextmenu'"
-        :options="[
-          {
-            name: '前往该标签',
-            icon: 'tagTheme',
-            split: true
-          },
-          {
-            name: '重命名',
-            icon: 'editTheme'
-          },
-          {
-            name: '删除标签',
-            icon: 'trashTheme',
-            split: true
+    <NtScrollbar view-class="flex py-3 space-x-2">
+      <NtTag
+        v-for="tag in tags"
+        :key="tag.id"
+        :value="tag.id"
+        @activated="
+          (d) => {
+            console.log(d, '激活')
           }
-        ]"
+        "
       >
-        {{ tag.name }}
-      </NtDropdown>
-    </NtTag>
+        <NtDropdown
+          :trigger="'contextmenu'"
+          :options="[
+            {
+              name: '前往该标签',
+              icon: 'tagTheme',
+              split: true
+            },
+            {
+              name: '重命名',
+              icon: 'editTheme'
+            },
+            {
+              name: '删除标签',
+              icon: 'trashTheme',
+              split: true
+            }
+          ]"
+        >
+          {{ tag.name }}
+        </NtDropdown>
+      </NtTag>
+    </NtScrollbar>
   </NtHeader>
 
-  <NtContent class="!mt-[120px]" content-class="space-y-5">
+  <NtContent class="!mt-[130px]" content-class="space-y-5">
     <NtEditorCard
       @publish="
         (d) =>
@@ -68,8 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncState } from '@vueuse/core'
-import { searchNote, saveNote, deleteNote } from '@/api'
+import { useAsyncState, asyncComputed } from '@vueuse/core'
+import { searchNote, saveNote, deleteNote, getAllTags } from '@/api'
 import { Note } from '@/models'
 type Tag = {
   link?: string
@@ -90,6 +92,7 @@ const tagList = ref<Tag[]>([
     id: Math.random()
   }
 ])
+const tags = asyncComputed(async () => await getAllTags(), [])
 const { state: Notes, execute: refreshNotes } = useAsyncState(
   async () => await searchNote({}),
   [],

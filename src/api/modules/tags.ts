@@ -1,5 +1,5 @@
-import { Tag, Tables } from '@/service/model'
-import { saveStore, getStore, deleteStore, getAllStore } from '@/service/controller'
+import { Tag, Tables, SearchParameters } from '@/service/model'
+import { saveStore, getStore, deleteStore, getAllStore, searchStore } from '@/service/controller'
 
 export async function getAllTags() {
   const ret = await getAllStore<Tag>(Tables.tag)
@@ -18,5 +18,10 @@ export async function deleteTag(ids: number[]) {
 
 export async function saveTag(option: Tag) {
   const ret = await saveStore<Tag>(Tables.tag, option, option?.id)
+  return ret
+}
+
+export async function searchTag(option?: SearchParameters<Tag>) {
+  const ret = await searchStore<Tag>(Tables.tag, option)
   return ret
 }

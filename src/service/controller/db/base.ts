@@ -1,6 +1,7 @@
 import Dexie from 'dexie'
 import { MuCategory, Note, Tables, Tag } from '../../model'
-
+import { tagsMock } from '@/mock'
+import dayjs from 'dayjs'
 const dbName = 'wen_chan_db'
 
 class DataBase extends Dexie {
@@ -19,4 +20,23 @@ class DataBase extends Dexie {
 
 const db = new DataBase()
 
+function initDB(tableNames?: { name: Tables; data: any[] }[]) {
+  tableNames?.forEach(async (d) => {
+    const datas = await db.table(d.name).toArray()
+    if (datas && datas.length === 0) {
+      await db.table(d.name).bulkAdd(d.data)
+    }
+  })
+}
+initDB([
+  {
+    name: Tables.tag,
+    data: addCreateTime(tagsMock)
+  }
+])
+
+function addCreateTime(datas: any[]) {
+  const now = dayjs().format('YYYY-MM-DD HH:mm:ss')
+  return datas.map((d) => ({ ...d, createTime: now }))
+}
 export { Dexie, dbName, DataBase, db }
