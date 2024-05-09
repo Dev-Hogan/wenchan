@@ -48,7 +48,7 @@ export async function filterStore<T>(
     .toArray()
   return ret as T[]
 }
-export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>) {
+export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>, all = false) {
   const fuzzyQuery = (d: any, KV: [string, any][]) => {
     for (const [key, value] of KV) {
       const reg = new RegExp(value)
@@ -64,17 +64,19 @@ export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>)
   // if (p?.root) {
   //   rootEntries = Object.entries(p.root)
   // }
-  const equalCollection = await db
-    .table(tableName)
-    .filter((d) => {
-      // if (rootEntries.length > 0) {
-      //   return fuzzyQuery(d, rootEntries)
-      // }
-      if (entityEntries.length > 0) {
-        return fuzzyQuery(d, entityEntries)
-      }
-      return true
-    })
+  const equalCollection = await db.table(tableName).filter((d) => {
+    // if (rootEntries.length > 0) {
+    //   return fuzzyQuery(d, rootEntries)
+    // }
+    if (entityEntries.length > 0) {
+      return fuzzyQuery(d, entityEntries)
+    }
+    return true
+  })
+
+  if (all) {
+    return (await equalCollection.toArray()) as T[]
+  }
 
   return (await equalCollection
     .offset(p?.pageNo || 0 * (p?.pageSize || 10))

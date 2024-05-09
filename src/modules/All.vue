@@ -1,39 +1,6 @@
 <template>
   <NtHeader title="全部" @add="() => (hasNewNote = true)" @toggle="(d) => (isFold = d)">
-    <NtScrollbar view-class="flex py-3 space-x-2">
-      <NtTag
-        v-for="tag in tags"
-        :key="tag.id"
-        :value="tag.id"
-        @activated="
-          (d) => {
-            console.log(d, '激活')
-          }
-        "
-      >
-        <NtDropdown
-          :trigger="'contextmenu'"
-          :options="[
-            {
-              name: '前往该标签',
-              icon: 'tagTheme',
-              split: true
-            },
-            {
-              name: '重命名',
-              icon: 'editTheme'
-            },
-            {
-              name: '删除标签',
-              icon: 'trashTheme',
-              split: true
-            }
-          ]"
-        >
-          {{ tag.name }}
-        </NtDropdown>
-      </NtTag>
-    </NtScrollbar>
+    <NtTagGroup v-model="tagId"></NtTagGroup>
   </NtHeader>
 
   <NtContent class="!mt-[130px]" content-class="space-y-5">
@@ -70,37 +37,35 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncState, asyncComputed } from '@vueuse/core'
-import { searchNote, saveNote, deleteNote, getAllTags } from '@/api'
+import { useAsyncState, useSessionStorage } from '@vueuse/core'
+import { searchNote, saveNote, deleteNote } from '@/api'
 import { Note } from '@/models'
-type Tag = {
-  link?: string
-  name?: string
-  id?: number
-}
-const tagList = ref<Tag[]>([
-  {
-    name: '所有内容',
-    id: Math.random()
-  },
-  {
-    name: '基础知识',
-    id: Math.random()
-  },
-  {
-    name: '进阶内容',
-    id: Math.random()
+
+const tagId = useSessionStorage<number | undefined>('all-tagid', undefined, {
+  serializer: {
+    read: (raw) => {
+      return raw ? +raw : undefined
+    },
+    write: (raw) => (raw ? raw + '' : '')
   }
-])
-const tags = asyncComputed(async () => await getAllTags(), [])
+})
+
 const { state: Notes, execute: refreshNotes } = useAsyncState(
-  async () => await searchNote({}),
+  async () => await searchNote({ tagId: tagId.value }),
   [],
   {
     immediate: false
   }
 )
-refreshNotes()
+watch(
+  tagId,
+  () => {
+    refreshNotes()
+  },
+  {
+    immediate: true
+  }
+)
 const NoteEntity = ref<Note>({
   content: ''
 })
@@ -116,7 +81,7 @@ async function handleSaveNote({
   id?: number
 }) {
   const defaultContent = '未命名笔记'
-  await saveNote({ content: isEmpty ? defaultContent : content, id })
+  await saveNote({ content: isEmpty ? defaultContent : content, id, tagId: tagId.value })
   if (!id) {
     hasNewNote.value = false
     NoteEntity.value.content = ''

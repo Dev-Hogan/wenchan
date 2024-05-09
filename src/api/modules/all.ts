@@ -12,7 +12,7 @@ export async function searchNote(option: GetAllNoteOption) {
 
   const ret = await filterStore<Note>(
     Tables.note,
-    (d) => d?.tagId === tagId || d?.categoryId === categoryId,
+    (d) => d?.tagId === tagId && d?.categoryId === categoryId,
     pageNo,
     pageSize
   )

@@ -21,7 +21,7 @@ export async function saveTag(option: Tag) {
   return ret
 }
 
-export async function searchTag(option?: SearchParameters<Tag>) {
-  const ret = await searchStore<Tag>(Tables.tag, option)
-  return ret
+export async function searchTag(option?: SearchParameters<Tag>, all = false) {
+  const ret = await searchStore<Tag>(Tables.tag, option, all)
+  return ret 
 }

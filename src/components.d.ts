@@ -38,6 +38,7 @@ declare module 'vue' {
     NtTab: typeof import('./components/NtTab.vue')['default']
     NtTabs: typeof import('./components/NtTabs.vue')['default']
     NtTag: typeof import('./components/NtTag.vue')['default']
+    NtTagGroup: typeof import('./components/NtTagGroup.vue')['default']
     NtTooltip: typeof import('./components/NtTooltip.vue')['default']
     NtUpload: typeof import('./components/NtUpload.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
