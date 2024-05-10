@@ -22,6 +22,7 @@
     --aside-width: 255px;
     --banner-width: 750px;
     ---editor-px: 24px;
+    --content-top:130px;
   }
   .light {
     --color-theme: 255 172 10;

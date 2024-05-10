@@ -1,6 +1,8 @@
 <template>
-  <NtHeader :title="`${query.title || ''}`"></NtHeader>
-  <NtContent>
+  <NtHeader :title="`${query.title || ''}`">
+    <NtTagGroup v-model="currenTagId"></NtTagGroup>
+  </NtHeader>
+  <NtContent class="!mt-[--content-top]">
     分类{{ $route.params.categoryId }}
     <div>{{ currenTagId }}</div>
     <div v-for="i in 6" @click="currenTagId = i" :key="i">{{ i }}</div>
