@@ -1,10 +1,17 @@
 <template>
   <NtHeader :title="`${query.title || ''}`"></NtHeader>
-  <NtContent> 分类{{ $route.params.categoryId }} </NtContent>
+  <NtContent>
+    分类{{ $route.params.categoryId }}
+    <div>{{ currenTagId }}</div>
+    <div v-for="i in 6" @click="currenTagId = i" :key="i">{{ i }}</div>
+  </NtContent>
 </template>
 
 <script setup lang="ts">
+import { useNumberSessionRef } from '@/utils'
 import router from '@/router'
 const currentRouter = router.currentRoute
 const query = computed(() => currentRouter.value.query)
+
+const currenTagId = useNumberSessionRef(`${currentRouter.value.query.categoryId}-tagId`)
 </script>

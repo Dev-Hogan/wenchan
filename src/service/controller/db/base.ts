@@ -1,6 +1,6 @@
 import Dexie from 'dexie'
 import { MuCategory, Note, Tables, Tag } from '../../model'
-import { tagsMock } from '@/mock'
+import { tagsMock, categoryMock } from '@/mock'
 import dayjs from 'dayjs'
 const dbName = 'wen_chan_db'
 
@@ -32,6 +32,10 @@ initDB([
   {
     name: Tables.tag,
     data: addCreateTime(tagsMock)
+  },
+  {
+    name: Tables.category,
+    data: addCreateTime(categoryMock)
   }
 ])
 

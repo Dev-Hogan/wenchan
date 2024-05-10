@@ -32,51 +32,51 @@ export const menus: Menu[] = [
   }
 ]
 
-export const category: MuCategory[] = [
+export const categoryMock: MuCategory[] = [
   {
     title: '新分类',
     icon: 'ask1',
-    id: 1000
+    id: 1
   },
   {
     title: '英语',
     icon: 'ask2',
-    id: 2000
+    id: 2
   },
   {
     title: '日记',
     icon: 'ask3',
-    id: 3000
+    id: 3
   },
   {
     title: '面试题目',
     icon: 'ask4',
-    id: 4000
+    id: 4
   },
   {
     title: '厨艺',
     icon: 'ask2',
-    id: 5000
+    id: 5
   },
   {
     title: '剪辑技巧',
     icon: 'ask2',
-    id: 6000
+    id: 6
   },
   {
     title: 'Figma',
     icon: 'ask1',
-    id: 7000
+    id: 7
   },
   {
     title: '读书',
     icon: 'ask3',
-    id: 8000
+    id: 8
   },
   {
     title: '其他',
     icon: 'ask4',
-    id: 9000
+    id: 9
   }
   // {
   //   title: '剪辑技巧',

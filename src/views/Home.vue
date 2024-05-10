@@ -125,19 +125,20 @@
     <EditCategoryDialog
       v-model:open="categoryOpen"
       v-model:id="categoryId"
-      :when-save="getAllCategories"
+      :when-save="categoryRefresh"
     ></EditCategoryDialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getAllMuCategory, deleteMuCategory } from '@/api'
-import { menus, category } from '@/mock'
+import { menus } from '@/mock'
 import { sidebarWidth, useEcharts } from '@/utils'
 import { Icon, Routes } from '@/models'
 import { message } from 'ant-design-vue'
 import router from '@/router'
 import avatar from '@/assets/avatar.png'
+import { useAsyncState } from '@vueuse/core'
 
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
@@ -171,19 +172,16 @@ function stopResize() {
 }
 window.addEventListener('mouseup', stopResize)
 
-const categorys = ref(category)
-
-async function getAllCategories() {
-  const ret = await getAllMuCategory()
-  categorys.value = [...category, ...ret]
-}
-getAllCategories()
+const { state: categorys, execute: categoryRefresh } = useAsyncState(
+  async () => await await getAllMuCategory(),
+  []
+)
 
 async function handleDeleteMuCategory(ids: number[]) {
   await deleteMuCategory(ids)
   resetMenu(ids?.[0])
   message.success('删除成功')
-  await getAllCategories()
+  categoryRefresh()
 }
 
 function resetMenu(id?: number) {
