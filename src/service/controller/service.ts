@@ -64,12 +64,17 @@ export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>,
   // if (p?.root) {
   //   rootEntries = Object.entries(p.root)
   // }
+
+  const entityQuery = (d: any, KV: [string, any][]) => {
+    const map = KV.map((k) => d[k[0]] == k[1] || k[1] == null)
+    return map.some((v) => !!v)
+  }
   const equalCollection = await db.table(tableName).filter((d) => {
     // if (rootEntries.length > 0) {
     //   return fuzzyQuery(d, rootEntries)
     // }
     if (entityEntries.length > 0) {
-      return fuzzyQuery(d, entityEntries)
+      return entityQuery(d, entityEntries)
     }
     return true
   })

@@ -1,7 +1,7 @@
 <template>
   <NtScrollbar view-class="flex py-3 space-x-2">
     <NtTag
-      v-for="tag in [{ name: '所有分类', id: undefined }, ...tags]"
+      v-for="tag in [{ name: '无标签', id: undefined }, ...tags]"
       :key="tag.id"
       :value="tag.id"
       @activated="(d) => (tagId = d)"
@@ -55,10 +55,10 @@ const { state: tags } = useAsyncState(
       true
     ),
   [
-    {
-      name: '所有内容',
-      id: undefined
-    }
+    // {
+    //   name: '无标签',
+    //   id: undefined
+    // }
   ],
   {
     immediate: true

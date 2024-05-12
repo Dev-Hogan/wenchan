@@ -2,15 +2,18 @@ import { Tag } from '@/models'
 export const tagsMock: Tag[] = [
   {
     id: 1,
-    name: '基础知识'
+    name: '基础知识',
+    categoryId: 2
   },
   {
     id: 2,
-    name: '上架内容'
+    name: '上架内容',
+    categoryId: 2
   },
   {
     id: 3,
-    name: '动画内容'
+    name: '动画内容',
+    categoryId: 2
   },
   {
     id: 4,
