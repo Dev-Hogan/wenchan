@@ -53,7 +53,7 @@
       </div>
       <div class="flex justify-between">
         <div class="flex">
-          <TagDropdownCard>
+          <TagDropdownCard :categoryId="modelValue.categoryId">
             <NtIconButton icon="tag"></NtIconButton>
           </TagDropdownCard>
           <NtIconButton icon="picture"></NtIconButton>

@@ -65,6 +65,7 @@ watch(
   () => [currenTagId.value, currentCategoryId.value],
   () => {
     refreshNotes()
+    NoteEntity.value.categoryId = currentCategoryId.value
   },
   {
     immediate: true

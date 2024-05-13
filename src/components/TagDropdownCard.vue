@@ -31,7 +31,7 @@
             <div
               class="cursor-pointer flex items-center justify-center border-dashed border-light-3 py-5 px-7 border rounded-3"
             >
-              <NtIcon icon="add"></NtIcon>新的标签
+              <NtIcon icon="add" @click="handleSaveTag"></NtIcon>新的标签
             </div>
           </NtScrollbar>
         </div>
@@ -42,15 +42,17 @@
 
 <script setup lang="ts">
 import { Dropdown } from 'ant-design-vue'
-import { searchTag } from '@/api'
+import { searchTag, saveTag } from '@/api'
 import { useAsyncState, useDebounceFn } from '@vueuse/core'
 type Trigger = 'click' | 'hover' | 'contextmenu'
-withDefaults(
+const props = withDefaults(
   defineProps<{
     trigger?: Trigger
+    categoryId?: number
   }>(),
   {
-    trigger: 'click'
+    trigger: 'click',
+    categoryId: undefined
   }
 )
 const open = ref(false)
@@ -70,7 +72,8 @@ const { state: tags, execute: refresh } = useAsyncState(
   async () =>
     await searchTag({
       entity: {
-        name: name.value
+        name: name.value,
+        categoryId: props.categoryId
       },
       pageSize: 999999
     }),
@@ -88,6 +91,9 @@ watch(
     immediate: true
   }
 )
+watch(currentTab, () => {
+  refresh()
+})
 
 const selectKeys = ref<number[]>([2, 5])
 
@@ -101,5 +107,12 @@ function toggleKey(key: number) {
   } else {
     selectKeys.value.push(key)
   }
+}
+
+async function handleSaveTag() {
+  await saveTag({
+    name: name.value || '未命名标签',
+    categoryId: props.categoryId
+  })
 }
 </script>
