@@ -5,6 +5,7 @@ export interface Note {
   tagId?: number
   isFocused?: boolean
   isDeleted?: boolean
+  isWaiting?: boolean
   createTime?: string
   updateTime?: string
 }

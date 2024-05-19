@@ -31,6 +31,16 @@ const router = createRouter({
           component: () => import('@/modules/RandomLook.vue')
         },
         {
+          path: 'wastebasket',
+          name: Routes.wastebasket,
+          component: () => import('@/modules/Trash.vue')
+        },
+        {
+          path: 'waitingAnswer',
+          name: Routes.waitingAnswer,
+          component: () => import('@/modules/waitingAnswer.vue')
+        },
+        {
           path: 'tags',
           name: Routes.tags,
           component: () => import('@/modules/Tag.vue')

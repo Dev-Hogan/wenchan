@@ -19,7 +19,7 @@ export async function searchNote(option: GetAllNoteOption) {
   return ret
 }
 
-type SaveNote = NoteOption & {
+type SaveNote = Note & {
   id?: number
   content: string
 }

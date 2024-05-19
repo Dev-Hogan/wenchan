@@ -1,16 +1,10 @@
 <template>
-  <NtHeader :title="`${query.title || ''}`" @add="() => (hasNewNote = true)">
-    <NtTagGroup
-      v-model="currenTagId"
-      :category-id="currentCategoryId"
-      :key="currentCategoryId"
-    ></NtTagGroup>
+  <NtHeader title="垃圾篓" @add="() => (hasNewNote = true)" @toggle="(d) => (isFold = d)">
+    <NtTagGroup v-model="tagId"></NtTagGroup>
   </NtHeader>
-  <NtContent class="!mt-[--content-top]">
-    <!-- 分类{{ currentCategoryId }}
-    <div>{{ currenTagId }}</div>
-    {{ Notes }} -->
-    <NtEditorCard
+
+  <NtContent class="!mt-[130px]" content-class="space-y-5">
+    <!-- <NtEditorCard
       @publish="
         (d) =>
           handleSaveNote({
@@ -22,7 +16,7 @@
       v-if="hasNewNote"
       v-model:content="NoteEntity.content"
       :model-value="NoteEntity"
-    ></NtEditorCard>
+    ></NtEditorCard> -->
     <NtEditorCard
       @publish="
         (d) =>
@@ -43,38 +37,41 @@
 </template>
 
 <script setup lang="ts">
-import { useNumberSessionRef } from '@/utils'
-import router from '@/router'
-import { searchNote, saveNote, deleteNote } from '@/api'
-import { useAsyncState } from '@vueuse/core'
+import { useAsyncState, useSessionStorage } from '@vueuse/core'
+import { searchTrashNote, saveNote, deleteNote } from '@/api'
 import { Note } from '@/models'
-const currentRouter = router.currentRoute
-const query = computed(() => currentRouter.value.query)
-const currentCategoryId = computed(() => +(currentRouter.value.params.categoryId || 0))
 
-const currenTagId = useNumberSessionRef(`${currentRouter.value.params.categoryId}-tagId`)
+const tagId = useSessionStorage<number | undefined>('trash-tagid', undefined, {
+  serializer: {
+    read: (raw) => {
+      return raw ? +raw : undefined
+    },
+    write: (raw) => (raw ? raw + '' : '')
+  }
+})
 
 const { state: Notes, execute: refreshNotes } = useAsyncState(
-  async () => await searchNote({ tagId: currenTagId.value, categoryId: currentCategoryId.value }),
+  async () =>
+    await searchTrashNote({
+      tagId: tagId.value
+    }),
   [],
   {
     immediate: false
   }
 )
-const NoteEntity = ref<Note>({
-  content: ''
-})
 watch(
-  () => [currenTagId.value, currentCategoryId.value],
+  tagId,
   () => {
     refreshNotes()
-    NoteEntity.value.categoryId = currentCategoryId.value
   },
   {
     immediate: true
   }
 )
-
+const NoteEntity = ref<Note>({
+  content: ''
+})
 const hasNewNote = ref(false)
 
 async function handleSaveNote({
@@ -90,8 +87,8 @@ async function handleSaveNote({
   await saveNote({
     content: isEmpty ? defaultContent : content,
     id,
-    tagId: currenTagId.value,
-    categoryId: currentCategoryId.value
+    tagId: tagId.value,
+    isFocused: true
   })
   if (!id) {
     hasNewNote.value = false
