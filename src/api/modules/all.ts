@@ -12,7 +12,7 @@ export async function searchNote(option: GetAllNoteOption) {
 
   const ret = await filterStore<Note>(
     Tables.note,
-    (d) => d?.tagId === tagId && d?.categoryId === categoryId,
+    (d) => d?.tagId === tagId && d?.categoryId === categoryId && !d?.isDeleted,
     pageNo,
     pageSize
   )
@@ -21,13 +21,20 @@ export async function searchNote(option: GetAllNoteOption) {
 
 type SaveNote = Note & {
   id?: number
-  content: string
+  content?: string
 }
 export async function saveNote(option: SaveNote) {
   await saveStore<Note>(Tables.note, option, option?.id)
 }
 
-export async function deleteNote(ids: number[]) {
-  const ret = await deleteStore(Tables.note, ids)
-  return ret
+export async function deleteNote(ids: number[], isTrue = false) {
+  if (isTrue) {
+    const ret = await deleteStore(Tables.note, ids)
+    return ret
+  } else {
+    await saveNote({
+      id: ids[0],
+      isDeleted: true
+    })
+  }
 }

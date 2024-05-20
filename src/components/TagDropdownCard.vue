@@ -49,10 +49,12 @@ const props = withDefaults(
   defineProps<{
     trigger?: Trigger
     categoryId?: number
+    whenSave?: () => any
   }>(),
   {
     trigger: 'click',
-    categoryId: undefined
+    categoryId: undefined,
+    whenSave: undefined
   }
 )
 const open = ref(false)
@@ -110,9 +112,13 @@ function toggleKey(key: number) {
 }
 
 async function handleSaveTag() {
+  console.log(props.categoryId)
+
   await saveTag({
     name: name.value || '未命名标签',
     categoryId: props.categoryId
   })
+  refresh()
+  props.whenSave?.()
 }
 </script>

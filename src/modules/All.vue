@@ -6,10 +6,11 @@
   <NtContent class="!mt-[130px]" content-class="space-y-5">
     <NtEditorCard
       @publish="
-        (d) =>
+        (d, count) =>
           handleSaveNote({
             isEmpty: d,
-            content: NoteEntity.content
+            content: NoteEntity.content,
+            count
           })
       "
       can-edit
@@ -19,11 +20,12 @@
     ></NtEditorCard>
     <NtEditorCard
       @publish="
-        (d) =>
+        (d, count) =>
           handleSaveNote({
             isEmpty: d,
             content: item.content,
-            id: item.id
+            id: item.id,
+            count
           })
       "
       :can-edit="isFold"
@@ -74,14 +76,16 @@ const hasNewNote = ref(false)
 async function handleSaveNote({
   isEmpty = false,
   content = '',
-  id
+  id,
+  count
 }: {
   isEmpty?: boolean
   content?: string
   id?: number
+  count?: number
 }) {
   const defaultContent = '未命名笔记'
-  await saveNote({ content: isEmpty ? defaultContent : content, id, tagId: tagId.value })
+  await saveNote({ content: isEmpty ? defaultContent : content, id, tagId: tagId.value, count })
   if (!id) {
     hasNewNote.value = false
     NoteEntity.value.content = ''

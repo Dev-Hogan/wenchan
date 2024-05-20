@@ -8,4 +8,5 @@ export interface Note {
   isWaiting?: boolean
   createTime?: string
   updateTime?: string
+  count?: number
 }

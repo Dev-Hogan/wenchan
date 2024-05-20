@@ -48,12 +48,18 @@
           <NtIconButton icon="more"></NtIconButton>
         </NtDropdown>
       </div>
-      <div class="inline-block text-tag text-[12px] font-medium bg-light rounded-3 p-3">
-        <div class="flex items-center space-x-1"><NtIcon icon="link"></NtIcon> 基础知识</div>
+      <div class="space-x-2 flex">
+        <div
+          v-for="item in tags"
+          :key="item.id"
+          class="flex items-center space-x-1 text-tag text-[12px] font-medium bg-light rounded-3 p-3"
+        >
+          <NtIcon icon="link"></NtIcon> {{ item.name }}
+        </div>
       </div>
       <div class="flex justify-between">
         <div class="flex">
-          <TagDropdownCard :categoryId="modelValue.categoryId">
+          <TagDropdownCard :categoryId="modelValue.categoryId" :when-save="refresh">
             <NtIconButton icon="tag"></NtIconButton>
           </TagDropdownCard>
           <NtIconButton icon="picture"></NtIconButton>
@@ -84,6 +90,8 @@
 <script setup lang="ts">
 import NtEditor2 from './NtEditor2.vue'
 import { Note } from '@/models'
+import { useAsyncState } from '@vueuse/core'
+import { searchTag } from '@/api'
 const editorRef = ref<InstanceType<typeof NtEditor2>>()
 const content = defineModel<string>('content', { default: '<h1>这是标题</h1>' })
 const modelValue = defineModel<Note>({
@@ -123,12 +131,15 @@ function noEdit() {
 
 function publish() {
   noEdit()
-  // emit('publish', editorRef?.value?.editor?.getText()?.length || 0)
-  emit('publish', editorRef?.value?.editor?.isEmpty)
+  emit(
+    'publish',
+    editorRef?.value?.editor?.isEmpty,
+    editorRef?.value?.editor?.getText()?.length || 0
+  )
 }
 
 const emit = defineEmits<{
-  publish: [isEmpty?: boolean]
+  publish: [isEmpty?: boolean, val?: number]
   delete: [val?: number]
 }>()
 
@@ -138,6 +149,24 @@ watch(
     val ? edit() : noEdit()
   }
 )
+
+const { state: tags, execute: refresh } = useAsyncState(
+  async () =>
+    await searchTag({
+      entity: {
+        categoryId: modelValue.value?.categoryId,
+        id: modelValue.value?.tagId
+      },
+      pageSize: 999999
+    }),
+  [],
+  {
+    immediate: false
+  }
+)
+watch(isEdit, (val) => {
+  val === true && refresh()
+})
 </script>
 <style lang="scss" scoped>
 ._editor-card {
