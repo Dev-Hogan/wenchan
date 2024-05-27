@@ -4,9 +4,9 @@
     <div class="flex space-x-3 [&>div]:flex-1">
       <NtStatistic
         v-for="item in statistics"
-        :key="item.title"
-        :title="item.title"
-        :number="item.number"
+        :key="item.name"
+        :title="item.name"
+        :number="item.count"
       ></NtStatistic>
     </div>
     <div class="flex [&>div]:flex-1">
@@ -45,24 +45,9 @@
 <script setup lang="ts">
 import { useEcharts } from '@/utils'
 import echarts from '@/utils/lib/echart'
-const statistics = [
-  {
-    title: '总字符',
-    number: 1000
-  },
-  {
-    title: '问题',
-    number: 1000
-  },
-  {
-    title: '分类',
-    number: 1000
-  },
-  {
-    title: '标签',
-    number: 1000
-  }
-]
+import { getStatistics } from '@/api'
+import { asyncComputed } from '@vueuse/core'
+const statistics = asyncComputed(async () => await getStatistics(), [])
 
 const { NtChart: Records } = useEcharts({
   height: '160px',
