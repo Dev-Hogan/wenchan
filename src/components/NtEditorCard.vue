@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="el"
     :class="[
       '_editor-card relative overflow-hidden transition-[height] duration-[2s] ease-linear',
       isEdit ? 'is-active max-h-[246px]' : 'max-h-[53px]'
@@ -16,12 +17,14 @@
           :options="[
             {
               name: '沉浸模式',
-              icon: 'fullscreen1Theme'
+              icon: 'fullscreen1Theme',
+              action: () => toggle()
             },
             {
-              name: '取消聚焦',
+              name: modelValue.isFocused ? '取消聚焦' : '聚焦',
               icon: 'focusTheme',
-              split: true
+              split: true,
+              action: () => toggleFocus(modelValue.id!, modelValue.isFocused)
             },
             {
               name: '编辑',
@@ -31,12 +34,14 @@
             {
               name: '标签',
               icon: 'linkTheme',
-              split: true
+              split: true,
+              action: () => openLink()
             },
 
             {
               name: '分享',
-              icon: 'shareTheme'
+              icon: 'shareTheme',
+              action: () => emit('share', modelValue.id)
             },
             {
               name: '删除',
@@ -59,7 +64,7 @@
       </div>
       <div class="flex justify-between">
         <div class="flex">
-          <TagDropdownCard :categoryId="modelValue.categoryId" :when-save="refresh">
+          <TagDropdownCard :categoryId="modelValue.categoryId" :when-save="refresh" :open>
             <NtIconButton icon="tag"></NtIconButton>
           </TagDropdownCard>
           <NtIconButton icon="picture"></NtIconButton>
@@ -90,8 +95,8 @@
 <script setup lang="ts">
 import NtEditor2 from './NtEditor2.vue'
 import { Note } from '@/models'
-import { useAsyncState } from '@vueuse/core'
-import { searchTag } from '@/api'
+import { useAsyncState, useFullscreen } from '@vueuse/core'
+import { searchTag, saveNote } from '@/api'
 const editorRef = ref<InstanceType<typeof NtEditor2>>()
 const content = defineModel<string>('content', { default: '<h1>这是标题</h1>' })
 const modelValue = defineModel<Note>({
@@ -99,7 +104,8 @@ const modelValue = defineModel<Note>({
     id: undefined,
     content: undefined,
     categoryId: undefined,
-    tagId: undefined
+    tagId: undefined,
+    isFocused: false
   }
 })
 
@@ -141,6 +147,7 @@ function publish() {
 const emit = defineEmits<{
   publish: [isEmpty?: boolean, val?: number]
   delete: [val?: number]
+  share: [val?: number]
 }>()
 
 watch(
@@ -167,6 +174,21 @@ const { state: tags, execute: refresh } = useAsyncState(
 watch(isEdit, (val) => {
   val === true && refresh()
 })
+
+const open = ref(false)
+function openLink() {
+  open.value = true
+}
+
+const el = ref<HTMLElement | null>(null)
+const { toggle } = useFullscreen(el)
+
+async function toggleFocus(id: number, isFocused = false) {
+  await saveNote({
+    id,
+    isFocused: !isFocused
+  })
+}
 </script>
 <style lang="scss" scoped>
 ._editor-card {

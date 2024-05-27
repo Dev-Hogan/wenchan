@@ -88,3 +88,12 @@ export async function searchStore<T>(tableName: Tables, p?: SearchParameters<T>,
     .limit(p?.pageSize || 10)
     .toArray()) as T[]
 }
+/**获取字符数量 */
+export async function getCount(tableName: Tables) {
+  const ret = await db.table(tableName).get('count')
+  const ret2 = await db.table(tableName).get('updateTime')
+  return {
+    countNum: ret,
+    countNumDay: ret2
+  }
+}

@@ -57,7 +57,8 @@ const props = withDefaults(
     whenSave: undefined
   }
 )
-const open = ref(false)
+// const open = ref(false)
+const open = defineModel<boolean>('open', { default: false })
 const tabs = [
   {
     id: 1,
