@@ -4,7 +4,7 @@
       :style="{ width: sidebarWidth + 'px' }"
       class="relative w-[--aside-width] pt-[48px] pb-[54px] bg-light flex flex-col border-r-[1px]"
     >
-      <NtInput class="mx-6 bg-light-2" placeholder="搜索">
+      <NtInput class="mx-6 bg-light-2" placeholder="搜索" v-model="searchName">
         <template #prefix>
           <NtIcon icon="search"></NtIcon>
         </template>
@@ -114,12 +114,14 @@
     </aside>
     <main class="relative flex flex-1 overflow-auto bg-default text-light-7">
       <NtScrollbar
+        v-if="!searchName"
         class="flex-1"
         :wrap-class="'flex flex-1 flex-col'"
         :view-class="['flex flex-1 flex-col']"
       >
         <RouterView></RouterView>
       </NtScrollbar>
+      <SearchNotes v-else :model-value="searchNotes"></SearchNotes>
     </main>
     <!-- 新增分类弹窗 -->
     <EditCategoryDialog
@@ -131,17 +133,28 @@
 </template>
 
 <script setup lang="ts">
-import { getAllMuCategory, deleteMuCategory } from '@/api'
+import { getAllMuCategory, deleteMuCategory, searchAllNotesByName } from '@/api'
 import { menus } from '@/mock'
 import { sidebarWidth, useEcharts } from '@/utils'
 import { Icon, Routes } from '@/models'
 import { message } from 'ant-design-vue'
 import router from '@/router'
 import avatar from '@/assets/avatar.png'
-import { useAsyncState } from '@vueuse/core'
+import { useAsyncState, debouncedWatch } from '@vueuse/core'
+import SearchNotes from './SearchNotes.vue'
+
+const searchName = ref<string | undefined>('')
 
 const categoryOpen = ref<boolean>(false)
 const categoryId = ref<number>()
+
+const { state: searchNotes, execute: refreshSearch } = useAsyncState(
+  async () => await searchAllNotesByName(searchName.value),
+  []
+)
+debouncedWatch(searchName, () => {
+  refreshSearch()
+})
 
 let isResizing = false
 let startX = 0

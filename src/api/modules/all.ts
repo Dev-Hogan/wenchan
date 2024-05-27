@@ -1,5 +1,5 @@
 import { Note, Tables } from '@/service/model'
-import { saveStore, deleteStore, filterStore } from '@/service/controller'
+import { saveStore, deleteStore, filterStore, getAllStore } from '@/service/controller'
 import { Pagination } from './utils'
 
 type NoteOption = {
@@ -37,4 +37,8 @@ export async function deleteNote(ids: number[], isTrue = false) {
       isDeleted: true
     })
   }
+}
+
+export async function getAllNote() {
+  return await getAllStore<Note>(Tables.note)
 }

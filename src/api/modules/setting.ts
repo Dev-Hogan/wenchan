@@ -1,3 +1,6 @@
+import { getAllTags } from './tags'
+import { getAllNote } from './all'
+import { getAllMuCategory } from './menu'
 /**近日字符 */
 export async function getDayChar() {
   return 1
@@ -14,7 +17,9 @@ export async function getAccount() {
 
 /**全局搜索 */
 export async function searchAllNotesByName(name?: string) {
-  return name
+  if (!name) return []
+  const notes = await getAllNote()
+  return notes.filter((n) => n.content?.toLocaleUpperCase().includes(name.toLocaleUpperCase()))
 }
 
 /**获取总字符、问题、分类、标签 */
@@ -23,21 +28,24 @@ type Statistics = {
   count: number
 }
 export async function getStatistics() {
+  const tags = await getAllTags()
+  const notes = await getAllNote()
+  const categories = await getAllMuCategory()
   const chars: Statistics = {
     name: '总字符',
-    count: 1000
+    count: notes.reduce((p, c) => (p += c.count || 0), 0)
   }
   const question: Statistics = {
     name: '问题',
-    count: 1000
+    count: notes.length
   }
   const category: Statistics = {
     name: '分类',
-    count: 1000
+    count: categories.length
   }
   const tag: Statistics = {
     name: '标签',
-    count: 1000
+    count: tags?.length
   }
   return [chars, question, category, tag]
 }
