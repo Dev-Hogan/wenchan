@@ -75,6 +75,8 @@
     <NtTest></NtTest>
 
     <NtChart></NtChart>
+    <button @click="getTag">点击获取所有分类</button>
+    {{tags}}
   </NtContent>
 </template>
 
@@ -89,7 +91,13 @@ import { Dialog } from '@/components/NtDialog2'
 import { Tooltip } from 'ant-design-vue'
 import { useTest } from '@/components/test'
 import { useEcharts } from '@/components/NtChart'
+import { getAllTag } from '@/api'
+const tags = ref<any[]>([])
 
+async function getTag() {
+  const ret = await getAllTag()
+  tags.value = ret.data||[]
+}
 const { NtTest } = useTest({ count: 12 })
 const { NtChart } = useEcharts({
   height: '400px',
